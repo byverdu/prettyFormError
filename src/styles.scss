@@ -1,0 +1,33 @@
+
+/*.formError {
+position: relative;
+z-index: 1;
+padding: 10px;
+border-radius: 10px;
+color: white;
+width: 235px;
+text-align: center;
+font-size: 12px;
+background: RGB(194, 46, 79);
+}*/
+
+.formError:focus:invalid {
+background: RGB(194, 46, 79);
+/*border-bottom: 15px solid RGB(194, 46, 79);
+border-right: 15px solid transparent;
+border-left: 15px solid transparent;*/
+/*position: absolute;*/
+/*left: 45%;
+top: -14px;*/
+}
+
+.formError:valid {
+/*content: '';*/
+background: RGB(194, 346, 79);
+/*border-bottom: 15px solid RGB(194, 346, 79);
+border-right: 15px solid transparent;
+border-left: 15px solid transparent;*/
+/*position: absolute;*/
+/*left: 45%;
+top: -14px;*/
+}
