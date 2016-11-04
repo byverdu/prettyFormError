@@ -9,5 +9,8 @@ module.exports = {
   destSass: destDir,
   srcCss: `${destDir}/styles.css`,
   destCss: destDir,
-  cleanDir: destDir
+  cleanDir: destDir,
+  srcHtml: 'index.html',
+  destHtml: destDir,
+  srcServe: destDir
 };

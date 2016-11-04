@@ -1,4 +1,4 @@
 import gulp from 'gulp';
 require( 'require-dir' )( './build/tasks' );
 
-gulp.task( 'default', [ 'build', 'watch' ]);
+gulp.task( 'default', [ 'serve', 'watch' ]);
