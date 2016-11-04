@@ -8,5 +8,6 @@ module.exports = {
   srcSass: `${srcDir}/styles.scss`,
   destSass: destDir,
   srcCss: `${destDir}/styles.css`,
-  destCss: destDir
+  destCss: destDir,
+  cleanDir: destDir
 };
