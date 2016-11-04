@@ -12,5 +12,7 @@ module.exports = {
   cleanDir: destDir,
   srcHtml: 'index.html',
   destHtml: destDir,
-  srcServe: destDir
+  srcServe: destDir,
+  srcQunit: './qunit/index.html',
+  watchQunit: './qunit/*'
 };

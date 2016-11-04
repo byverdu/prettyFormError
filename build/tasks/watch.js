@@ -11,4 +11,5 @@ gulp.task( 'watch', () => {
   gulp.watch( paths.srcJs, [ 'minify', 'move-js', browserSync.reload ]).on( 'change', reportChange );
   gulp.watch( paths.srcSass, [ 'sass', 'css-minify', browserSync.reload ]).on( 'change', reportChange );
   gulp.watch( paths.srcHtml, [ 'move-html', browserSync.reload ]).on( 'change', reportChange );
+  gulp.watch( paths.watchQunit, [ 'qunit' ]);
 });
