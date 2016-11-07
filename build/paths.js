@@ -13,6 +13,6 @@ module.exports = {
   srcHtml: 'index.html',
   destHtml: destDir,
   srcServe: destDir,
-  srcQunit: './qunit/index.html',
-  watchQunit: './qunit/*'
+  srcMocha: [ './mocha', './' ],
+  watchMocha: './mocha/*'
 };

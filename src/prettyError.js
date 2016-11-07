@@ -1,3 +1,4 @@
+// prettyError jQuery plugin
 
 function PrettyFormError( element, options ) {
   this.$element = $( element );

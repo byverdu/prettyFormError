@@ -1,6 +1,6 @@
 const gulp = require( 'gulp' );
 const paths = require( '../paths' );
-const browserSync = require( 'browser-sync' );
+const reload = require( 'browser-sync' ).reload;
 
 // outputs changes to files to the console
 function reportChange( event ) {
@@ -8,8 +8,8 @@ function reportChange( event ) {
 }
 
 gulp.task( 'watch', () => {
-  gulp.watch( paths.srcJs, [ 'minify', 'move-js', browserSync.reload ]).on( 'change', reportChange );
-  gulp.watch( paths.srcSass, [ 'sass', 'css-minify', browserSync.reload ]).on( 'change', reportChange );
-  gulp.watch( paths.srcHtml, [ 'move-html', browserSync.reload ]).on( 'change', reportChange );
-  gulp.watch( paths.watchQunit, [ 'qunit' ]);
+  gulp.watch( paths.srcJs, [ 'minify', 'move-js', reload ]).on( 'change', reportChange );
+  gulp.watch( paths.srcSass, [ 'sass', 'css-minify', reload ]).on( 'change', reportChange );
+  gulp.watch( paths.srcHtml, [ 'move-html', reload ]).on( 'change', reportChange );
+  gulp.watch( paths.watchMocha, reload ).on( 'change', reportChange );
 });
