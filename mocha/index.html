@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>PrettyError jQuery plugin</title>
+      <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+   </head>
+   <body>
+      <div id="mocha"></div>
+      <div id="mocha-fixture">
+        <form class="prettyError">
+            <fieldset>
+              <legend>Personal Details</legend>
+
+              <label for="email">
+                <span>Email:</span>
+                <input class="formError" required type="email" id="email" name="email" placeholder="Your email" title="aa@aa.aa">
+              </label>
+
+              <label for="telephone">
+                <span>Telephone:</span>
+                <input class="formError" required type="tel" pattern='\d+' id="telephone" namer="telephone" placeholder="Your telephone" title="No spaces between">
+              </label>
+
+              <label for="name">
+                <span>Name:</span>
+                <input class="formError" required type="text" id="name" name="name" placeholder="Your name">
+              </label>
+
+              <label for="message">
+                <span>Message:</span>
+                <textarea required type="tel" id="message" name="message" placeholder="Your message"></textarea>
+              </label>
+            </fieldset>
+            <!-- /details -->
+
+            <fieldset>
+              <legend>Statistic Details</legend>
+
+              <label for="gender">
+                <span>Select Gender</span>
+                <!-- first value must be empty in order to get an error -->
+                <select id="gender" required title="Select a Gender">
+                  <option value=""></option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </label>
+
+              <p>Mac or PC?</p>
+
+              <label for="mac">
+                <span>Mac:</span>
+                <!-- input radio must have the same name attribute in order to be able to choose between them and get the error -->
+                <input id="mac" type="radio" name="group1" value="mac" required>
+              </label>
+
+              <label for="pc">
+                <span>PC:</span>
+                <input id="pc" type="radio" name="group1" value="pc" required>
+              </label>
+
+              <label for="terms">
+                <span>Terms and conditions</span>
+                <input type="checkbox" id="terms" required title="Please agree with the conditions">
+              </label>
+
+              <p>Best topping ever</p>
+
+              <!-- Multiple required checkboxes give a problem when validates. Added extra javascript in order to use it, check jsVersion.js file -->
+
+              <p class="noJS">Your Javascript is disabled, if you do not choose one of this options the form will be submitted without this information.</p>
+
+              <label for="pineapple">
+                <span>Pineapple:</span>
+                <input class="options" id="pineapple" type="checkbox" name="pineapple" value="pineapple">
+              </label>
+              <!-- Added a class="options" for all same group of checkboxes -->
+              <label for="ham">
+                <span>Ham:</span>
+                <input class="options" id="ham" type="checkbox" name="ham" value="ham">
+              </label>
+
+              <label for="olives">
+                <span>Olives:</span>
+                <input class="options" id="olives" type="checkbox" name="olives" value="olives">
+              </label>
+
+            </fieldset>
+            <!-- /statistics -->
+
+            <button>Submit</button>
+          </form>
+          <form class="prettyError"></form>
+      </div>
+      <script src="../node_modules/mocha/mocha.js"></script>
+      <script src="../node_modules/chai/chai.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/1.15.4/sinon.min.js"></script>
+      <script>
+        mocha.setup('bdd');
+      </script>
+      <script src="../node_modules/jquery/dist/jquery.js"></script>
+      <script src="../src/prettyError.js"></script>
+      <script src="tests.js"></script>
+      <script>
+      mocha.run();
+      </script>
+
+   </body>
+</html>
