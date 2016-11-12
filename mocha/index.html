@@ -19,7 +19,7 @@
 
               <label for="telephone">
                 <span>Telephone:</span>
-                <input class="formError" required type="tel" pattern='\d+' id="telephone" namer="telephone" placeholder="Your telephone" title="No spaces between">
+                <input class="formError" required type="tel" pattern='\d+' id="telephone" name="telephone" placeholder="Your telephone" title="No spaces between">
               </label>
 
               <label for="name">
@@ -29,11 +29,15 @@
 
               <label for="message">
                 <span>Message:</span>
-                <textarea required type="tel" id="message" name="message" placeholder="Your message"></textarea>
+                <textarea required type="text" id="message" name="message" placeholder="Your message"></textarea>
               </label>
             </fieldset>
             <!-- /details -->
+            <button class="prettyErrorBtn" type="submit" name="button">Submit</button>
+          </form>
 
+
+          <form class="prettyError">
             <fieldset>
               <legend>Statistic Details</legend>
 
@@ -73,25 +77,22 @@
 
               <label for="pineapple">
                 <span>Pineapple:</span>
-                <input class="options" id="pineapple" type="checkbox" name="pineapple" value="pineapple">
+                <input required class="options" id="pineapple" type="checkbox" name="pineapple" value="pineapple">
               </label>
               <!-- Added a class="options" for all same group of checkboxes -->
               <label for="ham">
                 <span>Ham:</span>
-                <input class="options" id="ham" type="checkbox" name="ham" value="ham">
+                <input required class="options" id="ham" type="checkbox" name="ham" value="ham">
               </label>
 
               <label for="olives">
                 <span>Olives:</span>
-                <input class="options" id="olives" type="checkbox" name="olives" value="olives">
+                <input required class="options" id="olives" type="checkbox" name="olives" value="olives">
               </label>
-
             </fieldset>
             <!-- /statistics -->
-
-            <button>Submit</button>
+            <button class="prettyErrorBtn" type="submit" name="button">Submit</button>
           </form>
-          <form class="prettyError"></form>
       </div>
       <script src="../node_modules/mocha/mocha.js"></script>
       <script src="../node_modules/chai/chai.js"></script>

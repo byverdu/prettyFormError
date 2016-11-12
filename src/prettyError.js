@@ -9,12 +9,17 @@ function PrettyError( element ) {
   $.fn.prettyError = function () {
     $.extend({}, new PrettyError( this ));
     return this.each(function() {
-        // Do something to each element here.
+      const elem = $( this );
+      const btn = elem.find( '.prettyErrorBtn' );
+      console.log(elem);
+      btn.on( 'submit', function ( event ) {
+        // event.preventDefault();
+        var invalid = elem.find('label > :invalid');
+        console.log(invalid)
+      });
     });;
   };
-
 }( jQuery ));
-
 
 // function PrettyError( element, options ) {
 //   this.$element = $( element );
