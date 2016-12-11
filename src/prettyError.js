@@ -12,10 +12,18 @@ function PrettyError( element ) {
       const elem = $( this );
       const btn = elem.find( '.prettyErrorBtn' );
       console.log(elem);
-      btn.on( 'submit', function ( event ) {
-        // event.preventDefault();
+      btn.on( 'click', function ( event ) {
+        event.preventDefault();
         var invalid = elem.find('label > :invalid');
-        console.log(invalid)
+        // console.log(invalid)
+        $('.error2').remove();
+        $.each( invalid, function(index, value) {
+          var errors = $('<div>').addClass('error2').text(value.validationMessage);
+          // console.log(value);
+
+          $(value).after(errors);
+
+        });
       });
     });;
   };

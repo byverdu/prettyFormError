@@ -4,6 +4,7 @@
       <meta charset="utf-8">
       <title>PrettyError jQuery plugin</title>
       <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+      <link rel="stylesheet" href="../dist/styles.min.css">
    </head>
    <body>
       <div id="mocha"></div>
@@ -19,7 +20,7 @@
 
               <label for="telephone">
                 <span>Telephone:</span>
-                <input class="formError" required type="tel" pattern='\d+' id="telephone" name="telephone" placeholder="Your telephone" title="No spaces between">
+                <input class="formError" required type="tel" pattern='\d+' id="telephone" name="telephone" placeholder="Your telephone" title="Only digits">
               </label>
 
               <label for="name">
@@ -96,7 +97,7 @@
       </div>
       <script src="../node_modules/mocha/mocha.js"></script>
       <script src="../node_modules/chai/chai.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/1.15.4/sinon.min.js"></script>
+      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/1.15.4/sinon.min.js"></script> -->
       <script>
         mocha.setup('bdd');
       </script>
