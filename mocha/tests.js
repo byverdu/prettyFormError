@@ -15,10 +15,13 @@
     it( 'has a jQuery element property', () => {
       expect( prettyError ).to.have.property( '$element' ).and.is.an.instanceOf( $ );
     });
+    it( 'has a options property', () => {
+      expect( prettyError ).to.have.property( 'options' ).and.is.an( 'Object' );
+    });
   });
   describe( 'prettyError jQuery plugin', () => {
     before(() => {
-      jQueryMock = $( '.prettyError' ).prettyError();
+      jQueryMock = $( '.prettyErrorForm' ).prettyError();
     });
     it( 'is defined', () => {
       expect( jQueryMock ).to.have.property( 'prettyError' );
@@ -36,16 +39,23 @@
         $('.prettyErrorBtn')[0].click();
       });
       it( 'retrieves the invalid inputs field when the form is submited', () => {
-        expect( $('.prettyError:first-child label > :invalid') ).to.have.length( 3 );
-        jQueryMock.find('#email').val('');
+        expect( $('.prettyErrorForm:first-child label > :invalid') ).to.have.length( 3 );
       });
       it( 'appends a div to each error', () => {
-        expect( $('.prettyError:first-child .error2') ).to.have.length( 3 );
+        expect( $('.prettyErrorForm:first-child .prettyError') ).to.have.length( 3 );
       });
       it( 'with the corresponding text error', () => {
         jQueryMock.find('#telephone').val('lol!');
         $('.prettyErrorBtn')[0].click();
-        expect( $('.error2')[0].textContent ).to.be.eq( 'Please match the requested format.' );
+        expect( $('.prettyError')[0].textContent ).to.be.eq( 'Please match the requested format.' );
+      });
+    });
+    describe( 'Plugin configuration', () => {
+      it( 'has a settings property with the configurable props', () => {
+        expect($.fn.prettyError.settings).not.eq(undefined);
+      });
+      it( 'has a prop classError with default value of prettyError', () => {
+        expect($.fn.prettyError.settings).to.have.property('classError').and.eq( 'prettyError' );
       });
     });
   });

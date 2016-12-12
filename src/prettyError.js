@@ -1,24 +1,27 @@
 /* eslint-disable no-param-reassign */
 // prettyError jQuery plugin
 
-function PrettyError( element ) {
+function PrettyError( element, options ) {
   this.$element = $( element );
+  this.options = options || {};
 }
 
 ( function ( $ ) {
-  $.fn.prettyError = function () {
-    $.extend({}, new PrettyError( this ));
-    return this.each(function() {
+  $.fn.prettyError = function ( options ) {
+    const opts = options || $.fn.prettyError.settings;
+    $.extend({}, new PrettyError( this, opts ));
+    return this.each( function() {
       const elem = $( this );
+      const classError = opts.classError;
       const btn = elem.find( '.prettyErrorBtn' );
-      console.log(elem);
+
       btn.on( 'click', function ( event ) {
         event.preventDefault();
-        var invalid = elem.find('label > :invalid');
-        // console.log(invalid)
-        $('.error2').remove();
-        $.each( invalid, function(index, value) {
-          var errors = $('<div>').addClass('error2').text(value.validationMessage);
+        const invalid = elem.find( 'label > :invalid' );
+        console.log(invalid)
+        $( '.'+classError ).remove();
+        $.each( invalid, function( index, value ) {
+          const errors = $('<div>').addClass(classError).text(value.validationMessage);
           // console.log(value);
 
           $(value).after(errors);
@@ -26,6 +29,11 @@ function PrettyError( element ) {
         });
       });
     });;
+  };
+
+  // Initial plugin settings
+  $.fn.prettyError.settings = {
+    classError: 'prettyError'
   };
 }( jQuery ));
 
