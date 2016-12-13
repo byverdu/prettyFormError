@@ -6,34 +6,51 @@ function PrettyError( element, options ) {
   this.options = options || {};
 }
 
+function setDefaultMissingOpts(userOpts, defaultOpts) {
+  var userOptsProps = Object.getOwnPropertyNames(userOpts);
+  var defaultOptsProps = Object.getOwnPropertyNames(defaultOpts);
+
+  defaultOptsProps.map(function(item, index){
+    if (userOptsProps.indexOf(item) === -1) {
+      userOpts[item] = defaultOpts[item];
+    }
+  });
+  return userOpts;
+}
+
 ( function ( $ ) {
   $.fn.prettyError = function ( options ) {
-    const opts = options || $.fn.prettyError.settings;
+    var defaultOpts = $.fn.prettyError.defaultOpts;
+    var userOpts = options || defaultOpts;
+    var opts = setDefaultMissingOpts(userOpts, defaultOpts);
+
     $.extend({}, new PrettyError( this, opts ));
     return this.each( function() {
-      const elem = $( this );
-      const classError = opts.classError;
-      const btn = elem.find( '.prettyErrorBtn' );
+      var elem = $( this );
+      var classError = opts.classError;
+      var btn = elem.find( '.prettyErrorBtn' );
 
       btn.on( 'click', function ( event ) {
         event.preventDefault();
-        const invalid = elem.find( 'label > :invalid' );
-        console.log(invalid)
+        var invalid = elem.find( 'label > :invalid' );
+
         $( '.'+classError ).remove();
         $.each( invalid, function( index, value ) {
-          const errors = $('<div>').addClass(classError).text(value.validationMessage);
-          // console.log(value);
-
-          $(value).after(errors);
-
+          var errors = $('<div>').addClass(classError).text(value.validationMessage);
+          // position -> before or after
+          $(value)[opts.position](errors);
         });
+        if (invalid.length > 1) {
+          invalid[0].focus();
+        }
       });
     });;
   };
 
-  // Initial plugin settings
-  $.fn.prettyError.settings = {
-    classError: 'prettyError'
+  // default plugin settings
+  $.fn.prettyError.defaultOpts = {
+    classError: 'prettyError',
+    position: 'after'
   };
 }( jQuery ));
 

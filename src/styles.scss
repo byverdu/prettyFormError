@@ -32,8 +32,10 @@ border-left: 15px solid transparent;*/
 top: -14px;*/
 }
 
-.error2 {
-  // width: 100px;
-  // height: 50px;
+.prettyError {
+  max-width: 200px;
   background: red;
+  color: white;
+  text-align: center;
+  padding: 5px;
 }
