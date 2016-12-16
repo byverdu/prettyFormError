@@ -4,7 +4,7 @@
   "description": "jQuery plugin that makes pretty your form errors in all browsers",
   "main": "index.html",
   "scripts": {
-    "test": "lol"
+    "test": "gulp tests"
   },
   "babel": {
     "presets": [
@@ -31,6 +31,8 @@
     "browser-sync": "^2.17.5",
     "chai": "^3.5.0",
     "del": "^2.2.2",
+    "eslint": "^3.12.2",
+    "eslint-config-es5": "^0.5.0",
     "gulp": "^3.9.1",
     "gulp-cssnano": "^2.1.2",
     "gulp-rename": "^1.2.2",

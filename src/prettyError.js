@@ -1,136 +1,58 @@
-/* eslint-disable no-param-reassign */
 // prettyError jQuery plugin
 
-function PrettyError( element, options ) {
-  this.$element = $( element );
-  this.options = options || {};
-}
+;( function( $, window, document, undefined ) { // eslint-disable-line
+  var pluginName = 'prettyError';
+  var dataKey = 'plugin_' + pluginName;
 
-function setDefaultMissingOpts(userOpts, defaultOpts) {
-  var userOptsProps = Object.getOwnPropertyNames(userOpts);
-  var defaultOptsProps = Object.getOwnPropertyNames(defaultOpts);
+  // Plugin constructor
+  var Plugin = function( element, options ) {
+    this.element = $(element);
+    this.options = {
+      classError: 'prettyError',
+      position: 'after'
+    };
 
-  defaultOptsProps.map(function(item, index){
-    if (userOptsProps.indexOf(item) === -1) {
-      userOpts[item] = defaultOpts[item];
-    }
-  });
-  return userOpts;
-}
+    this.init( options );
+  };
 
-( function ( $ ) {
-  $.fn.prettyError = function ( options ) {
-    var defaultOpts = $.fn.prettyError.defaultOpts;
-    var userOpts = options || defaultOpts;
-    var opts = setDefaultMissingOpts(userOpts, defaultOpts);
+  Plugin.prototype = {
+    init: function( options ) {
+      $.extend( this.options, options);
 
-    $.extend({}, new PrettyError( this, opts ));
-    return this.each( function() {
-      var elem = $( this );
-      var classError = opts.classError;
-      var btn = elem.find( '.prettyErrorBtn' );
+      var elem = this.element;
+      var opts = this.options;
 
+      this.handleClickFormBtn(elem, opts);
+    },
+
+    // button click handler
+    handleClickFormBtn: function( element, options ) {
+      var classError = options.classError;
+      var btn = element.find( '.prettyErrorBtn' );
+      console.log(btn,element);
       btn.on( 'click', function ( event ) {
+        console.log('click');
         event.preventDefault();
-        var invalid = elem.find( 'label > :invalid' );
+        var invalid = element.find( 'label > :invalid' );
 
-        $( '.'+classError ).remove();
+        $( '.' + classError ).remove();
         $.each( invalid, function( index, value ) {
           var errors = $('<div>').addClass(classError).text(value.validationMessage);
           // position -> before or after
-          $(value)[opts.position](errors);
+          $(value)[options.position](errors);
         });
         if (invalid.length > 1) {
           invalid[0].focus();
         }
       });
-    });;
-  };
-
-  // default plugin settings
-  $.fn.prettyError.defaultOpts = {
-    classError: 'prettyError',
-    position: 'after'
-  };
-}( jQuery ));
-
-// function PrettyError( element, options ) {
-//   this.$element = $( element );
-//   this.options = options || {};
-//   this.setSettings( options );
-// }
-
-// PrettyError.prototype.setSettings = function () {
-//   this.$element.css({
-//     color: this.options.color,
-//     background: this.options.background
-//   });
-// };
-
-// ( function ( $ ) {
-//   $.fn.prettyFormError = function ( options ) {
-//     const opts = options || $.fn.prettyFormError.settings;
-//     $.extend({}, new PrettyError( this, opts ));
-//     return this;
-//   };
-//
-//   // Ability to set settings prior the plugin is initialized
-//   $.fn.prettyFormError.settings = {
-//     color: '',
-//     background: ''
-//   };
-//   $.fn.prettyFormError.settings.color = 'red';
-//   $.fn.prettyFormError.settings.background = 'purple';
-//
-//
-// }( jQuery ));
-
-/*
-
-$(document).ready(function() {
-  // adding the required attribute for multiple check boxes
-  var allCheckBox = $('.options');
-
-  allCheckBox.attr('required', 'required');
-
-  allCheckBox.change(function() {
-    if (allCheckBox.is(':checked')) {
-      allCheckBox.removeAttr('required');
-    } else {
-      allCheckBox.attr('required', 'required');
     }
-  });
+  };
 
-  // end multiple check boxes setting
-
-  // Custom form validation
-
-  $('form').each(function(el) {
-    changeFormUI(el);
-  });
-
-  function changeFormUI() {
-
-    $('button').on('click', function(event) {
-
-      event.preventDefault();
-
-      var invalid = $('label > :invalid');
-
-      $('.error').fadeOut('fast');
-
-      invalid.each(function(el) {
-        var errors = $('<div>').addClass('error').text(el.validationMessage);
-
-        $(el).after(errors);
-
-      });
-
-      if (invalid.length > 1) {
-        invalid[0].focus();
+  $.fn[ pluginName ] = function( options ) {
+    return this.each( function() {
+      if ( !$.data( this, dataKey ) ) {
+        $.data( this, dataKey, new Plugin( this, options ) );
       }
     });
-  }
-});
-
-*/
+  };
+}( jQuery, window, document ));
