@@ -25,19 +25,22 @@
       var elem = this.element;
       var opts = this.options;
 
-      this.handleClickFormBtn(elem, opts);
+      this.handleClickCallToAction( elem, opts );
     },
 
     // button click handler
-    handleClickFormBtn: function( element, options ) {
-      console.log(element);
+    handleClickCallToAction: function( element, options ) {
       var btn = element.find( options.callToAction );
 
       btn.on( 'click', function( event ) {
         event.preventDefault();
-        var invalid = element.find( 'label > :invalid' );
+        // targeting all invalid errors,
+        // fieldset elements also receive the validity pseudo-selector
+        var invalid = element.find( ':invalid' ).not( 'fieldset' );
 
+        // removing the old errors
         $( '.' + options.classError ).remove();
+        // adding new styles to each invalid field
         $.each( invalid, function( index, value ) {
           var errors = $('<' + options.elementError + '>')
             .addClass( options.classError )
