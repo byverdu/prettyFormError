@@ -9,7 +9,10 @@
     this.element = $(element);
     this.options = {
       classError: 'prettyError',
-      position: 'after'
+      positionMethod: 'after',
+      elementError: 'div',
+      callToAction: 'button',
+      focusErrorOnClick: true
     };
 
     this.init( options );
@@ -17,7 +20,7 @@
 
   Plugin.prototype = {
     init: function( options ) {
-      $.extend( this.options, options);
+      $.extend( this.options, options );
 
       var elem = this.element;
       var opts = this.options;
@@ -27,21 +30,22 @@
 
     // button click handler
     handleClickFormBtn: function( element, options ) {
-      var classError = options.classError;
-      var btn = element.find( '.prettyErrorBtn' );
-      console.log(btn,element);
-      btn.on( 'click', function ( event ) {
-        console.log('click');
+      console.log(element);
+      var btn = element.find( options.callToAction );
+
+      btn.on( 'click', function( event ) {
         event.preventDefault();
         var invalid = element.find( 'label > :invalid' );
 
-        $( '.' + classError ).remove();
+        $( '.' + options.classError ).remove();
         $.each( invalid, function( index, value ) {
-          var errors = $('<div>').addClass(classError).text(value.validationMessage);
-          // position -> before or after
-          $(value)[options.position](errors);
+          var errors = $('<' + options.elementError + '>')
+            .addClass( options.classError )
+            .text( value.validationMessage );
+          // position for error message -> before or after
+          $( value )[options.positionMethod]( errors );
         });
-        if (invalid.length > 1) {
+        if ( options.focusErrorOnClick && invalid.length > 1 ) {
           invalid[0].focus();
         }
       });

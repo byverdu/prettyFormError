@@ -21,6 +21,10 @@ border-left: 15px solid transparent;*/
 top: -14px;*/
 }
 
+[id$='_tick'] {
+  color: RGB(194, 346, 79);
+}
+
 .formError:valid {
 /*content: '';*/
 background: RGB(194, 346, 79);
