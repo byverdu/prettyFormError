@@ -28,7 +28,7 @@
         jQueryMock.find('#email').val('');
       });
       it( 'retrieves the invalid inputs field when the form is submited', function() {
-        expect( $('.prettyErrorForm label > :invalid') )
+        expect( $('.prettyErrorForm :invalid').not('fieldset') )
           .to.have.length( 3 );
       });
       it( 'appends a div to each error', function() {
@@ -70,7 +70,7 @@
             .that.is.a( 'String' )
             .and.eq( 'after' );
         });
-        it( 'contains a elementError property', function() {
+        it( 'contains an elementError property', function() {
           expect( defaultOptions.options )
             .to.have.property( 'elementError' )
             .that.is.a( 'String' )
@@ -88,13 +88,20 @@
             .that.is.a( 'Boolean' )
             .and.eq( true );
         });
+        it( 'contains a fadeOutError property', function() {
+          expect( defaultOptions.options )
+            .to.have.property( 'fadeOutError' )
+            .that.is.an( 'Object' )
+            .and.eql( {fadeout: false} );
+        });
       });
       it( 'can be configured', function() {
         $('.prettyErrorForm-2').prettyError({
           classError: 'myCustomName',
           elementError: 'span',
           callToAction: '.prettyErrorBtn',
-          focusErrorOnClick: false
+          focusErrorOnClick: false,
+          fadeOutError: {fadeout: true, time: 6000}
         });
         $('.prettyErrorBtn')[1].click();
 
