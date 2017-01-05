@@ -4,12 +4,27 @@
   var pluginName = 'prettyError';
   var dataKey = 'plugin_' + pluginName;
 
+  // utils
+  function createErrorsForInvalid(invalid, options) {
+    return $.each( invalid, function( index, value ) {
+      var errors = $('<' + options.elementError + '>')
+        .addClass( options.classError )
+        .text( value.validationMessage );
+      // position for error message -> before or after
+      $( value )[options.positionMethod]( errors );
+    });
+  }
+
   // Plugin constructor
   var Plugin = function( element, options ) {
     this.element = $(element);
     this.options = {
       classError: 'prettyError',
-      position: 'after'
+      positionMethod: 'after',
+      elementError: 'div',
+      callToAction: 'button',
+      focusErrorOnClick: true,
+      fadeOutError: {fadeout: false}
     };
 
     this.init( options );
@@ -17,32 +32,39 @@
 
   Plugin.prototype = {
     init: function( options ) {
-      $.extend( this.options, options);
+      $.extend( this.options, options );
 
       var elem = this.element;
       var opts = this.options;
 
-      this.handleClickFormBtn(elem, opts);
+      this.handleClickCallToAction( elem, opts );
     },
 
     // button click handler
-    handleClickFormBtn: function( element, options ) {
-      var classError = options.classError;
-      var btn = element.find( '.prettyErrorBtn' );
-      console.log(btn,element);
-      btn.on( 'click', function ( event ) {
-        console.log('click');
-        event.preventDefault();
-        var invalid = element.find( 'label > :invalid' );
+    handleClickCallToAction: function( element, options ) {
+      var btn = element.find( options.callToAction );
 
-        $( '.' + classError ).remove();
-        $.each( invalid, function( index, value ) {
-          var errors = $('<div>').addClass(classError).text(value.validationMessage);
-          // position -> before or after
-          $(value)[options.position](errors);
-        });
-        if (invalid.length > 1) {
+      btn.on( 'click', function( event ) {
+        event.preventDefault();
+        // removing the old errors
+        $( '.' + options.classError ).remove();
+
+        // targeting all invalid errors,
+        // fieldset elements also receive the validity pseudo-selector
+        var invalid = element.find( ':invalid' ).not( 'fieldset' );
+
+        // Adding errors to :invalid elements
+        createErrorsForInvalid( invalid, options );
+
+        // focus the first element with error
+        if ( options.focusErrorOnClick && invalid.length > 1 ) {
           invalid[0].focus();
+        }
+
+        // fadeOut de errors
+        if ( options.fadeOutError.fadeout ) {
+          $( '.' + options.classError )
+            .fadeOut( options.fadeOutError.time );
         }
       });
     }

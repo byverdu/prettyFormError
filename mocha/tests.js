@@ -9,14 +9,15 @@
       jQueryMock = $( '.prettyErrorForm' ).prettyError();
     });
     it( 'is defined', function() {
-      expect( jQueryMock ).to.have.property( 'prettyError' );
+      expect( $.fn ).to.have.property( 'prettyError' );
     });
     it( 'returns an array within the selectors', function() {
       expect( jQueryMock ).to.have.length.least(1);
     });
     it( 'can be chainable', function() {
       jQueryMock.addClass( 'noMore' );
-      expect( jQueryMock.attr( 'class') ).to.contain( 'noMore' );
+      expect( jQueryMock.attr( 'class') )
+        .to.contain( 'noMore' );
     });
     describe( 'Interaction', function() {
       beforeEach(function() {
@@ -27,28 +28,85 @@
         jQueryMock.find('#email').val('');
       });
       it( 'retrieves the invalid inputs field when the form is submited', function() {
-        expect( $('.prettyErrorForm label > :invalid') ).to.have.length( 3 );
+        expect( $('.prettyErrorForm :invalid').not('fieldset') )
+          .to.have.length( 3 );
       });
       it( 'appends a div to each error', function() {
-        expect( $('.prettyErrorForm .prettyError') ).to.have.length( 3 );
+        expect( $('.prettyErrorForm .prettyError') )
+          .to.have.length( 3 );
       });
       it( 'with the corresponding text error', function() {
         jQueryMock.find('#email').val('lol@gmail.');
         $('.prettyErrorBtn')[0].click();
-        expect( $('.prettyError')[0].textContent ).to.be.eq( "'.' is used at a wrong position in 'gmail.'." );
+
+        expect( $('.prettyError')[0].textContent )
+          .to.be.eq( "'.' is used at a wrong position in 'gmail.'." );
       });
       it( 'sets focus to the first element with error', function() {
-        expect( document.activeElement ).to.have.property('name').and.eq('telephone');
+        expect( document.activeElement )
+          .to.have.property('name').and.eq('telephone');
       });
     });
     describe( 'Plugin configuration', function() {
+      describe('Default options', function() {
+        var defaultOptions;
+        before( function() {
+          defaultOptions = jQueryMock.data( 'plugin_prettyError' );
+        });
+        it( 'are defined and is an Object', function() {
+          expect( defaultOptions )
+            .to.have.property( 'options' )
+            .that.is.an( 'Object' );
+        });
+        it( 'contains a classError property', function() {
+          expect( defaultOptions.options )
+            .to.have.property( 'classError' )
+            .that.is.a( 'String' )
+            .and.eq( 'prettyError' );
+        });
+        it( 'contains a positionMethod property', function() {
+          expect( defaultOptions.options )
+            .to.have.property( 'positionMethod' )
+            .that.is.a( 'String' )
+            .and.eq( 'after' );
+        });
+        it( 'contains an elementError property', function() {
+          expect( defaultOptions.options )
+            .to.have.property( 'elementError' )
+            .that.is.a( 'String' )
+            .and.eq( 'div' );
+        });
+        it( 'contains a callToAction property', function() {
+          expect( defaultOptions.options )
+            .to.have.property( 'callToAction' )
+            .that.is.a( 'String' )
+            .and.eq( 'button' );
+        });
+        it( 'contains a focusErrorOnClick property', function() {
+          expect( defaultOptions.options )
+            .to.have.property( 'focusErrorOnClick' )
+            .that.is.a( 'Boolean' )
+            .and.eq( true );
+        });
+        it( 'contains a fadeOutError property', function() {
+          expect( defaultOptions.options )
+            .to.have.property( 'fadeOutError' )
+            .that.is.an( 'Object' )
+            .and.eql( {fadeout: false} );
+        });
+      });
       it( 'can be configured', function() {
         $('.prettyErrorForm-2').prettyError({
-          classError: 'myCustomName'
+          classError: 'myCustomName',
+          elementError: 'span',
+          callToAction: '.prettyErrorBtn',
+          focusErrorOnClick: false,
+          fadeOutError: {fadeout: true, time: 6000}
         });
         $('.prettyErrorBtn')[1].click();
 
-        expect($('.prettyErrorForm-2 .myCustomName')).to.have.length(7);
+        expect($('.prettyErrorForm-2 span.myCustomName'))
+          .to.have.length(7);
       });
     });
   });

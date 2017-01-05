@@ -1,42 +1,23 @@
 
-/*.formError {
-position: relative;
-z-index: 1;
-padding: 10px;
-border-radius: 10px;
-color: white;
-width: 235px;
-text-align: center;
-font-size: 12px;
-background: RGB(194, 46, 79);
-}*/
-
-.formError:focus:invalid {
-background: RGB(194, 46, 79);
-/*border-bottom: 15px solid RGB(194, 46, 79);
-border-right: 15px solid transparent;
-border-left: 15px solid transparent;*/
-/*position: absolute;*/
-/*left: 45%;
-top: -14px;*/
+[id$='_tick'] {
+  color: RGB(194, 346, 79);
 }
 
-.formError:valid {
-/*content: '';*/
-background: RGB(194, 346, 79);
-/*border-bottom: 15px solid RGB(194, 346, 79);
-border-right: 15px solid transparent;
-border-left: 15px solid transparent;*/
-/*position: absolute;*/
-/*left: 45%;
-top: -14px;*/
-}
-
-.prettyError,
-.myCustomName {
-  max-width: 200px;
-  background: red;
-  color: white;
+.prettyError {
+  background: #EA5B5B;
+  border-radius: 15px;
+  box-shadow: 1px 2px 1px #232b2b, -1px -1px 2px #232b2b;
+  color: #fff;
+  display: block;
+  font: 15px monospace;
+  font-weight: 500;
+  max-width: 280px;
   text-align: center;
   padding: 5px;
+
+  &:before {
+    content: "\2718";
+    font-size: 13px;
+    margin: 0 5px;
+  }
 }
