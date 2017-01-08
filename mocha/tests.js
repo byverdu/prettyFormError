@@ -94,6 +94,12 @@
             .that.is.an( 'Object' )
             .and.eql( {fadeout: false} );
         });
+        it( 'contains a fadeOutError property', function() {
+          expect( defaultOptions.options )
+            .to.have.property( 'fadeOutError' )
+            .that.is.an( 'Object' )
+            .and.eql( {fadeout: false} );
+        });
       });
       it( 'can be configured', function() {
         $('.prettyErrorForm-2').prettyError({
