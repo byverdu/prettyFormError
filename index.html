@@ -12,6 +12,7 @@
   </style>
 </head>
 <body>
+  <!-- Form for user options -->
   <div class="container">
     <div class="row">
       <div class="col-md-2"></div>
@@ -37,6 +38,7 @@
         </form>
       </div>
     </div>
+    <!-- First form example, only input['text'] -->
     <div class="row">
       <div class="col-md-2"></div>
       <div class="col-sm-12 col-md-8">
@@ -61,10 +63,11 @@
         </form>
       </div>
     </div>
+    <!-- Second form example, other input types -->
     <div class="row">
       <div class="col-md-2"></div>
       <div class="col-sm-12 col-md-8">
-        <form class="prettyErrorForm-2">
+        <form class="prettyErrorForm">
           <fieldset>
             <legend>Statistic Details</legend>
 
@@ -99,7 +102,6 @@
 
             <!-- Multiple required checkboxes give a problem when validates. Added extra javascript in order to use it, check jsVersion.js file -->
 
-
             <label for="pineapple">
               <span>Pineapple:</span>
               <input required class="options" id="pineapple" type="checkbox" name="topping" value="pineapple">
@@ -131,10 +133,6 @@
   <script src="prettyError.min.js"></script>
   <script>
     $( document ).ready(function() {
-
-      var userOptions;
-      var result = {};
-
       $( '#fadeOutError' ).on('change', function() {
         if ( $(event.currentTarget ).is( ':checked' )) {
          $( '#timeFadeOut').show();
@@ -144,15 +142,47 @@
       })
 
       $( '#optionsForm' ).on( 'submit', function(event) {
+        var userOptions = {};
+        var oldOptions = $('.prettyErrorForm')
+          .data( 'plugin_prettyError' )
+          .options;
+
+        event.preventDefault();
+
+        // $.serializeArray returns form fields in format [{name: '', value: ''}]
+        // filter the fields with data
+        // prepare user options
         $( event.target )
           .serializeArray()
-          .forEach( function(item) {
-            result[item['name']] = item.value
+          .filter(function(formField) {
+            return formField.value !== '';
+          })
+          .forEach( function(formField) {
+            if (formField.value === 'on') {
+              userOptions[formField['name']] = true;
+            } else {
+              userOptions[formField['name']] = formField.value;
+            }
           });
-        event.preventDefault();
-        result;
+
+          // check if userOptions contains fadeOutError
+          if (userOptions.hasOwnProperty('fadeOutError')) {
+            var timeOption = userOptions['time'];
+            var timeValue = isNaN(timeOption) ? timeOption : Number(timeOption);
+
+            userOptions['fadeOutError'] = {
+              fadeOut: true,
+              time: timeValue
+            };
+            delete userOptions['time'];
+          }
+
+          // extending previous options with submited ones
+          $.extend(oldOptions, userOptions);
+          $( '.prettyErrorForm' ).prettyError(userOptions);
       });
-      $( 'form' ).prettyError({result['positionMethod']: positionMethod});
+
+      $( '.prettyErrorForm' ).prettyError();
     });
 
   </script>
