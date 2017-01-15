@@ -24,7 +24,8 @@
       elementError: 'div',
       callToAction: 'button',
       focusErrorOnClick: true,
-      fadeOutError: {fadeout: false}
+      // check out how fadeOut works!
+      fadeOutError: {fadeOut: false}
     };
 
     this.init( options );
@@ -62,7 +63,7 @@
         }
 
         // fadeOut de errors
-        if ( options.fadeOutError.fadeout ) {
+        if ( options.fadeOutError.fadeOut ) {
           $( '.' + options.classError )
             .fadeOut( options.fadeOutError.time );
         }

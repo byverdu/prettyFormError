@@ -92,7 +92,7 @@
           expect( defaultOptions.options )
             .to.have.property( 'fadeOutError' )
             .that.is.an( 'Object' )
-            .and.eql( {fadeout: false} );
+            .and.eql( {fadeOut: false} );
         });
       });
       it( 'can be configured', function() {
@@ -101,7 +101,7 @@
           elementError: 'span',
           callToAction: '.prettyErrorBtn',
           focusErrorOnClick: false,
-          fadeOutError: {fadeout: true, time: 6000}
+          fadeOutError: {fadeOut: true, time: 6000}
         });
         $('.prettyErrorBtn')[1].click();
 
