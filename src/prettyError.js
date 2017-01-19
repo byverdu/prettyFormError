@@ -65,7 +65,7 @@
         // fadeOut de errors
         if ( options.fadeOutError.fadeOut ) {
           $( '.' + options.classError )
-            .fadeOut( options.fadeOutError.time );
+            .fadeOut( options.fadeOutError.options );
         }
       });
     }
