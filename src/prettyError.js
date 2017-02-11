@@ -51,10 +51,21 @@
         text: 'positionMethod prop values should be "after" or "before", a default "after" value has been assigned'
       };
 
+      var focusErrorOnClick = {
+        opts: options.focusErrorOnClick,
+        text: 'focusErrorOnClick prop value should be a Boolean'
+      };
+
       // options.positionMethod
       if (positionMethod.opts !== 'after' && positionMethod.opts !== 'before' && positionMethod.opts !== undefined ) {
         console.warn(positionMethod.text);
-        positionMethod = 'after';
+        positionMethod.opts = 'after';
+      }
+
+      // options.focusErrorOnClick
+      if ( typeof focusErrorOnClick.opts !== 'boolean') {
+        console.warn(focusErrorOnClick.text);
+        focusErrorOnClick.opts = true;
       }
 
       return options;
