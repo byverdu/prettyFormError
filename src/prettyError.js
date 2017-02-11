@@ -24,7 +24,6 @@
       elementError: 'div',
       callToAction: 'button',
       focusErrorOnClick: true,
-      // check out how fadeOut works!
       fadeOutError: {fadeOut: false}
     };
 
@@ -33,12 +32,32 @@
 
   Plugin.prototype = {
     init: function( options ) {
+      if (options !== undefined) {
+        options = this.handleErrorsInOpts(options);
+      }
+
       $.extend( this.options, options );
 
       var elem = this.element;
       var opts = this.options;
 
       this.handleClickCallToAction( elem, opts );
+    },
+
+    // user options checker to avoid breaking the plugin initialization
+    handleErrorsInOpts: function(options) {
+      var positionMethod = {
+        opts: options.positionMethod,
+        text: 'positionMethod prop values should be "after" or "before", a default "after" value has been assigned'
+      };
+
+      // options.positionMethod
+      if (positionMethod.opts !== 'after' && positionMethod.opts !== 'before' && positionMethod.opts !== undefined ) {
+        console.warn(positionMethod.text);
+        positionMethod = 'after';
+      }
+
+      return options;
     },
 
     // button click handler

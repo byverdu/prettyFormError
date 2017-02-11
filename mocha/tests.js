@@ -99,11 +99,11 @@
         $('.prettyErrorForm-2').prettyError({
           classError: 'myCustomName',
           elementError: 'span',
-          callToAction: '.prettyErrorBtn',
+          callToAction: '.prettyErrorBtn-2',
           focusErrorOnClick: false,
           fadeOutError: {fadeOut: true, time: 6000}
         });
-        $('.prettyErrorBtn')[1].click();
+        $('.prettyErrorBtn-2').click();
 
         expect($('.prettyErrorForm-2 span.myCustomName'))
           .to.have.length(7);
