@@ -20,7 +20,7 @@
     this.element = $(element);
     this.options = {
       multiCheckbox: {
-        enabled: false,
+        enabled: true,
         selector: '.multiCheckbox'
       },
       classError: 'prettyError',
@@ -119,11 +119,7 @@
         // fadeOut de errors
         if ( options.fadeOutError.fadeOut ) {
           $( '.' + options.classError )
-<<<<<<< HEAD
-            .fadeOut( options.fadeOutError.options );
-=======
             .fadeOut( options.fadeOutError.fadeOutOpts );
->>>>>>> development
         }
       });
     }

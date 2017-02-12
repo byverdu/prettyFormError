@@ -59,7 +59,7 @@
             <textarea required class="form-control" type="text" id="message" name="message" placeholder="Your message"></textarea>
           </fieldset>
           <!-- /details -->
-          <button type="button" class="btn btn-outline-primary">Submit</button>
+          <button type="submit" class="btn btn-outline-primary">Submit</button>
         </form>
       </div>
     </div>
@@ -118,7 +118,7 @@
             </label>
           </fieldset>
           <!-- /statistics -->
-          <button type="button" class="btn btn-outline-primary">Submit</button>
+          <button type="submit" class="btn btn-outline-primary">Submit</button>
         </form>
       </div>
     </div>
@@ -179,7 +179,7 @@
 
           // extending previous options with submited ones
           $.extend(oldOptions, userOptions);
-          $( '.prettyErrorForm' ).prettyError(userOptions);
+          // $( '.prettyErrorForm' ).prettyError(userOptions);
       });
 
       $( '.prettyErrorForm' ).prettyError();
