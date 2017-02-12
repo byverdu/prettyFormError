@@ -19,6 +19,10 @@
   var Plugin = function( element, options ) {
     this.element = $(element);
     this.options = {
+      multiCheckbox: {
+        enabled: false,
+        selector: '.multiCheckbox'
+      },
       classError: 'prettyError',
       positionMethod: 'after',
       elementError: 'div',
@@ -32,16 +36,33 @@
 
   Plugin.prototype = {
     init: function( options ) {
+      // handleling errors
       if (options !== undefined) {
         options = this.handleErrorsInOpts(options);
       }
 
       $.extend( this.options, options );
 
-      var elem = this.element;
-      var opts = this.options;
+      // multiCheckbox configuration
+      if (this.options.multiCheckbox.enabled) {
+        this.multiCheckboxConfig(this.options);
+      }
 
-      this.handleClickCallToAction( elem, opts );
+      this.handleClickCallToAction( this.element, this.options );
+    },
+
+    // workaround to validate the multiple
+    // checkboxes that at least one value is required
+    multiCheckboxConfig: function(options) {
+      var allCheckboxes = $( options.multiCheckbox.selector );
+      allCheckboxes
+        .change(function() {
+          if (allCheckboxes.is(':checked')) {
+            allCheckboxes.removeAttr('required');
+          } else {
+            allCheckboxes.attr('required', 'required');
+          }
+        });
     },
 
     // user options checker to avoid breaking the plugin initialization

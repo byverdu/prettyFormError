@@ -104,17 +104,17 @@
 
             <label for="pineapple">
               <span>Pineapple:</span>
-              <input required class="options" id="pineapple" type="checkbox" name="topping" value="pineapple">
+              <input required class="multiCheckbox" id="pineapple" type="checkbox" name="topping" value="pineapple">
             </label>
-            <!-- Added a class="options" for all same group of checkboxes -->
+            <!-- Added a class="multiCheckbox" for all same group of checkboxes -->
             <label for="ham">
               <span>Ham:</span>
-              <input required class="options" id="ham" type="checkbox" name="topping" value="ham">
+              <input required class="multiCheckbox" id="ham" type="checkbox" name="topping" value="ham">
             </label>
 
             <label for="olives">
               <span>Olives:</span>
-              <input required class="options" id="olives" type="checkbox" name="olives" value="olives">
+              <input required class="multiCheckbox" id="olives" type="checkbox" name="olives" value="olives">
             </label>
           </fieldset>
           <!-- /statistics -->
@@ -172,7 +172,7 @@
 
             userOptions['fadeOutError'] = {
               fadeOut: true,
-              time: timeValue
+              fadeOutOpts: timeValue
             };
             delete userOptions['time'];
           }
