@@ -101,7 +101,7 @@
           elementError: 'span',
           callToAction: '.prettyErrorBtn-2',
           focusErrorOnClick: false,
-          fadeOutError: {fadeOut: true, time: 6000}
+          fadeOutError: {fadeOut: true, fadeOutOpts: 6000}
         });
         $('.prettyErrorBtn-2').click();
 

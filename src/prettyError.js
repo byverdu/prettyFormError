@@ -57,7 +57,10 @@
       };
 
       // options.positionMethod
-      if (positionMethod.opts !== 'after' && positionMethod.opts !== 'before' && positionMethod.opts !== undefined ) {
+      if (positionMethod.opts !== 'after' &&
+          positionMethod.opts !== 'before' &&
+          positionMethod.opts !== undefined
+        ) {
         console.warn(positionMethod.text);
         positionMethod.opts = 'after';
       }
@@ -95,7 +98,7 @@
         // fadeOut de errors
         if ( options.fadeOutError.fadeOut ) {
           $( '.' + options.classError )
-            .fadeOut( options.fadeOutError.time );
+            .fadeOut( options.fadeOutError.fadeOutOpts );
         }
       });
     }
