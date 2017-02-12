@@ -58,6 +58,13 @@
             .to.have.property( 'options' )
             .that.is.an( 'Object' );
         });
+        it( 'contains a multiCheckbox property', function() {
+          var multiCheckbox = defaultOptions.options.multiCheckbox;
+          expect( multiCheckbox )
+            .to.be.an( 'Object' );
+          expect( multiCheckbox ).to.have.deep.property( 'enabled' ).and.is.a('Boolean');
+          expect( multiCheckbox ).to.have.deep.property( 'selector', '.multiCheckbox');
+        });
         it( 'contains a classError property', function() {
           expect( defaultOptions.options )
             .to.have.property( 'classError' )
@@ -99,11 +106,15 @@
         $('.prettyErrorForm-2').prettyError({
           classError: 'myCustomName',
           elementError: 'span',
-          callToAction: '.prettyErrorBtn',
+          callToAction: '.prettyErrorBtn-2',
           focusErrorOnClick: false,
-          fadeOutError: {fadeOut: true, options: 6000}
+          fadeOutError: {fadeOut: true, fadeOutOpts: 6000},
+          multiCheckbox: {
+            enabled: true,
+            selector: '.multiCheckbox'
+          }
         });
-        $('.prettyErrorBtn')[1].click();
+        $('.prettyErrorBtn-2').click();
 
         expect($('.prettyErrorForm-2 span.myCustomName'))
           .to.have.length(7);
