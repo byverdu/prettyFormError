@@ -42,53 +42,41 @@
                 <fieldset>
                   <legend>Statistic Details</legend>
 
-                  <label for="gender">
-                    <span>Select Gender</span>
+                  <label for="gender">Select Gender</label>
                     <!-- first value must be empty in order to get an error -->
                     <select id="gender" required title="Select a Gender">
                       <option value=""></option>
                       <option value="male">Male</option>
                       <option value="female">Female</option>
                     </select>
-                  </label>
 
                   <p>Mac or PC?</p>
 
-                  <label for="mac">
-                    <span>Mac:</span>
+                  <label for="mac">Mac:</label>
                     <!-- input radio must have the same name attribute in order to be able to choose between them and get the error -->
-                    <input id="mac" type="radio" name="group1" value="mac" required>
-                  </label>
+                    <input id="mac" type="radio" name="group1" value="mac" required class="form-control">
 
-                  <label for="pc">
-                    <span>PC:</span>
-                    <input id="pc" type="radio" name="group1" value="pc" required>
-                  </label>
+                  <label for="pc">PC:</label>
+                    <input id="pc" type="radio" name="group1" value="pc" required class="form-control">
 
-                  <label for="terms">
-                    <span>Terms and conditions</span>
-                    <input type="checkbox" id="terms" required title="Please agree with the conditions">
-                  </label>
+
+                  <label for="terms">Terms and conditions</label>
+                    <input type="checkbox" id="terms" required title="Please agree with the conditions" class="form-control">
 
                   <p>Best topping ever</p>
 
                   <!-- Multiple required checkboxes give a problem when validates. Added extra javascript in order to use it, check jsVersion.js file -->
 
+                  <label for="pineapple">Pineapple:</label>
+                    <input required class="multiCheckbox" id="pineapple" type="checkbox" name="topping" value="pineapple" class="form-control">
 
-                  <label for="pineapple">
-                    <span>Pineapple:</span>
-                    <input required class="multiCheckbox" id="pineapple" type="checkbox" name="topping" value="pineapple">
-                  </label>
                   <!-- Added a class="options" for all same group of checkboxes -->
-                  <label for="ham">
-                    <span>Ham:</span>
-                    <input required class="multiCheckbox" id="ham" type="checkbox" name="topping" value="ham">
-                  </label>
+                  <label for="ham">Ham:</label>
+                    <input required class="multiCheckbox" id="ham" type="checkbox" name="topping" value="ham" class="form-control">
 
-                  <label for="olives">
-                    <span>Olives:</span>
-                    <input required class="multiCheckbox" id="olives" type="checkbox" name="olives" value="olives">
-                  </label>
+                  <label for="olives">Olives:</label>
+                    <input required class="multiCheckbox" id="olives" type="checkbox" name="olives" value="olives" class="form-control">
+
                 </fieldset>
                 <!-- /statistics -->
                 <button class="prettyErrorBtn-2" type="submit" name="button">Submit</button>
