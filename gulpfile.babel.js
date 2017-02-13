@@ -3,3 +3,4 @@ require( 'require-dir' )( './build/tasks' );
 
 gulp.task( 'default', [ 'serve', 'watch' ]);
 gulp.task( 'tests', [ 'serve-test', 'watch' ]);
+gulp.task( 'docs', [ 'serve-docs', 'watch' ]);

@@ -15,3 +15,17 @@ gulp.task( 'serve', [ 'build' ], ( done ) => {
     }
   }, done );
 });
+
+gulp.task( 'serve-docs', [ 'build-docs' ], ( done ) => {
+  browserSync({
+    open: false,
+    port: 9000,
+    server: {
+      baseDir: [ paths.srcDocs ],
+      middleware( req, res, next ) {
+        res.setHeader( 'Access-Control-Allow-Origin', '*' );
+        next();
+      }
+    }
+  }, done );
+});

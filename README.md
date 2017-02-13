@@ -14,7 +14,7 @@ The `required` attribute is a must in all the elements that you need to validate
 
 When you have to validate a group of `<input type="radio" name="group-1">` they must have the same attribute `name`
 
-> WIP, select and empty first option
+The `select` element needs to have an empty `option` element as the first element so it can get an error if none of the other options are selected
 
 Within HTML5 you can add an extra layer of validation by using the appropiate value for the `type` attribute used in the `input` [tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input).
 
@@ -27,7 +27,7 @@ To solve this issue you need to add/remove the `required` attribute programmatic
 This is how your error messages will look after using this plugin.
 
 <p align="center">
-  <img src="demo.png" alt="demo image" width="500">
+  <img src="/docs/demo.png" alt="demo image" width="500">
 </p>
 
 ### Dependencies

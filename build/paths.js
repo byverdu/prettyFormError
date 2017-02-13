@@ -12,7 +12,9 @@ module.exports = {
   cleanDir: destDir,
   srcHtml: 'index.html',
   destHtml: destDir,
-  srcServe: './docs',
+  srcServe: destDir,
+  srcDocs: './docs',
+  watchDocs: './docs/*',
   srcMocha: [ './mocha', './' ],
   watchMocha: './mocha/*'
 };
