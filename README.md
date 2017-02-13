@@ -71,13 +71,49 @@ Use this option if you need to validate a group of checkboxes.
     }
 }
 ```
-```html
-<>
+```xml
+<p>Best topping ever</p>
+
+<label for="pineapple">Pineapple:</label>
+  <input required class="commonClassForGroup" type="checkbox" value="pineapple">
+
+<label for="ham">Ham:</label>
+  <input required class="commonClassForGroup" type="checkbox" value="ham">
+
+<label for="olives">Olives:</label>
+  <input required class="commonClassForGroup" type="checkbox" value="olives">
 ```
 
- > WIP
+#### classError[String]
+Name for the css class used for the error messages.
+
+#### positionMethod[String]
+JQuery method used for positioning the error, `.after()` or `.before()`.
+
+#### elementError[String]
+HTML element that you want to use for wrap the errors.
+
+#### callToAction[String]
+HTML selector used to submit the form.
+
+#### focusErrorOnClick[Boolean]
+Use `false` if you want to disable this otpion.
+
+#### fadeOutError[Object]
+By default the error message will persist on the screen, if you want to fadeout the error enable this option.
+
+`fadeOutOpts` accepts same options than the default `fadeOut()` [jQuery method](http://api.jquery.com/fadeout/)
+
+```javascript
+{
+  fadeOutError: {
+    fadeOut: true,
+    fadeOutOpts: [string, number or Object]
+  }
+}
+```
 
 ## ToDo
 
 1. [ ] Add more ways to display the error messages.
-1. [ ] Add more styles
+1. [ ] Add more styles / themes
