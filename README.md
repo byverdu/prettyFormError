@@ -6,7 +6,7 @@ With this jQuery plugin you can show identical styles for the errors in all majo
 
 In order to have a custom look for the bubbles across all supporting browsers the only option is to suppress the default bubble and implement your own.
 
-[Tyi it @ https://byverdu.github.io/prettyError/](https://byverdu.github.io/prettyError/)
+[Try it @ https://byverdu.github.io/prettyError/](https://byverdu.github.io/prettyError/)
 
 ### Good to know
 
