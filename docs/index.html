@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>prettyError</title>
-  <link rel="stylesheet" href="styles.min.css" media="screen">
+  <link rel="stylesheet" href="prettyError.min.css" media="screen">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-dark.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
   <style media="screen">
     #timeFadeOut {
       display: none;
@@ -12,6 +15,10 @@
   </style>
 </head>
 <body>
+
+  <pre class="snippet"><code class="html">
+    <html>xoxo</html>
+  </code></pre>
   <!-- Form for user options -->
   <div class="container">
     <div class="row">
@@ -150,8 +157,10 @@
           .forEach( function(formField) {
             if (formField.value === 'on') {
               userOptions[formField['name']] = true;
+              $("input[name="+ formField.name + "]").prop('checked', false);
             } else {
               userOptions[formField['name']] = formField.value;
+              $("input[name="+ formField.name + "]").val("");
             }
           });
 

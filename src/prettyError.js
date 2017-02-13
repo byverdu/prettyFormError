@@ -87,7 +87,8 @@
       }
 
       // options.focusErrorOnClick
-      if ( typeof focusErrorOnClick.opts !== 'boolean') {
+      if ( typeof focusErrorOnClick.opts !== 'boolean' &&
+      focusErrorOnClick.opts !== undefined) {
         console.warn(focusErrorOnClick.text);
         focusErrorOnClick.opts = true;
       }
