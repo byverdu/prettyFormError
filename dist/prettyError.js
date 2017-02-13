@@ -20,7 +20,7 @@
     this.element = $(element);
     this.options = {
       multiCheckbox: {
-        enabled: true,
+        enabled: false,
         selector: '.multiCheckbox'
       },
       classError: 'prettyError',

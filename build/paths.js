@@ -5,9 +5,9 @@ const destDir = './dist';
 module.exports = {
   srcJs: `${srcDir}/prettyError.js`,
   destJs: destDir,
-  srcSass: `${srcDir}/styles.scss`,
+  srcSass: `${srcDir}/prettyError.scss`,
   destSass: destDir,
-  srcCss: `${destDir}/styles.css`,
+  srcCss: `${destDir}/prettyError.css`,
   destCss: destDir,
   cleanDir: destDir,
   srcHtml: 'index.html',
