@@ -25,7 +25,7 @@ To solve this issue you need to add/remove the `required` attribute programmatic
 This is how your error messages will look after using this plugin.
 
 <p align="center">
-  <img src="demo.png" alt="demo image" style="max-width: 50%">
+  <img src="demo.png" alt="demo image" width="500">
 </p>
 
 ### Dependencies
