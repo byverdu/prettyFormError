@@ -14,23 +14,47 @@ body {
 p {
   margin-bottom: 20px; }
 
-.prettyErrorDemo {
-  margin-top: 20px; }
-
-.prettyErrorDemo__intro--title {
-  font-family: 'Nova Mono', monospace;
-  font-size: 6rem;
-  font-weight: 600;
-  text-align: center; }
-
-.prettyErrorDemo__intro--title span {
+code, strong {
   color: #BD3649; }
 
-.prettyErrorDemo__toKonow--title {
-  font-size: 3rem; }
+a {
+  color: #045BE8;
+  text-decoration: underline; }
+  a:hover {
+    color: #045BE8;
+    text-decoration: none; }
+
+.prettyErrorDemo {
+  margin-top: 20px; }
+  .prettyErrorDemo__intro--title {
+    font-family: 'Nova Mono', monospace;
+    font-size: 6rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 2.5rem; }
+    .prettyErrorDemo__intro--title span {
+      color: #BD3649; }
+  .prettyErrorDemo__toKnow--title {
+    font-size: 3rem;
+    margin-bottom: 2rem; }
+  .prettyErrorDemo__usage--title {
+    font-size: 3rem;
+    margin-bottom: 2rem; }
+  .prettyErrorDemo__usage--subtitle {
+    color: #F15025; }
+    .prettyErrorDemo__usage--subtitle:before {
+      content: "\2713";
+      font-size: 1.3rem;
+      margin: 0 5px; }
+  .prettyErrorDemo__usage--option {
+    margin: 2rem 0; }
 
 #timeFadeOut {
   display: none; }
 
 .hljs-tag {
   display: block; }
+
+@media screen and (max-width: 57.5rem) {
+  .prettyErrorDemo__intro--title {
+    font-size: 5rem; } }
