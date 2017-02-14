@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Nova+Mono');
+@import url('https://fonts.googleapis.com/css?family=Droid+Sans');
+
+html {
+  font-size: 62.5%; /* 10px */
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: 'Droid Sans', sans-serif;
+  letter-spacing: 1px;
+  line-height: 24px;
+  background: #EFEFEF;
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+
+
+.prettyErrorDemo {
+  margin-top: 20px;
+}
+
+.prettyErrorDemo__intro--title {
+  font-family: 'Nova Mono', monospace;
+  font-size: 6rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.prettyErrorDemo__intro--title span {
+  color: #BD3649;
+}
+
+.prettyErrorDemo__toKonow--title {
+  font-size: 3rem;
+}
+
+
+#timeFadeOut {
+  display: none;
+}
+
+.hljs-tag {
+  display: block;
+}
+
+@media screen and (max-width: 575px) {
+
+}
