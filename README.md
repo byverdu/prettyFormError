@@ -116,7 +116,7 @@ By default the error message will persist on the screen, if you want to fadeout 
 {
   fadeOutError: {
     fadeOut: true,
-    fadeOutOpts: [string, number or Object]
+    fadeOutOpts: [String, Number or Object]
   }
 }
 ```
