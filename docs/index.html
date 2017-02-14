@@ -35,7 +35,7 @@
     <div class="row">
       <div class="col-md-1"></div>
       <div class="col-sm-12 col-md-10">
-        <div class="prettyErrorDemo__toKonow">
+        <div class="prettyErrorDemo__toKnow">
           <h2 class="prettyErrorDemo__toKonow--title">Good to Know</h2>
           <p class="text-justify">
             The <code>required</code> attribute is a must in all the elements that you need to validate.
@@ -50,13 +50,13 @@
             The <code>&lt;select&gt;</code> element needs to have an empty <code>&lt;option&gt;</code> element as the first element so it can get an error if none of the other options are selected
           </p>
           <p class="text-justify">
-            Within <b>HTML5</b> you can add an extra layer of validation by using the appropiate value for the <code>type</code> attribute used in the <code>&lt;input&gt;</code> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input">tag</a>
+            Within <strong>HTML5</strong> you can add an extra layer of validation by using the appropiate value for the <code>type</code> attribute used in the <code>&lt;input&gt;</code> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input">tag</a>
           </p>
           <p class="text-justify">
             Using the <code>required</code> attribute for a group of check boxes fails because when you submit the form the error message pops up for the unchecked boxes.
           </p>
           <p>
-            To solve this issue you need to add/remove the <code>required</code> attribute programmatically. <b>This plugin provides an option that lets you pass the problem.</b> <a href="https://www.google.co.uk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=required+attribute+multiple+checkbox">Google knows everything, checkbox issue</a>
+            To solve this issue you need to add/remove the <code>required</code> attribute programmatically. <strong>This plugin provides an option that lets you pass the problem.</strong> <a href="https://www.google.co.uk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=required+attribute+multiple+checkbox">Google knows everything, checkbox issue</a>
           </p>
           <p>
             This is how your error messages will look after using this plugin.
@@ -144,7 +144,7 @@
 <pre><code class="javascript">{
 fadeOutError: {
   fadeOut: true,
-  fadeOutOpts: [string, number or Object]
+  fadeOutOpts: [String, Number or Object]
   }
 }</code></pre>
 
@@ -247,75 +247,18 @@ fadeOutError: {
       <div class="col-md-1"></div>
     </div>
     <!-- Second form example, other input types -->
-
+  </div>
+  <div class="row">
+    <footer class="fixed-bottom">
+      &copy;
+    </footer>
   </div>
   <!-- Loading Scripts -->
   <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
   <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
   <script src="prettyError.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      $('#fadeOutError').on('change', function() {
-        if ($(event.currentTarget).is(':checked')) {
-          $('#timeFadeOut').show();
-        } else {
-          $('#timeFadeOut').hide();
-        }
-      })
-
-      $('#optionsForm').on('submit', function(event) {
-        var userOptions = {};
-        var oldOptions = $('.prettyErrorForm')
-          .data('plugin_prettyError')
-          .options;
-
-        event.preventDefault();
-
-        // $.serializeArray returns form fields in format [{name: '', value: ''}]
-        // filter the fields with data
-        // prepare user options
-        $(event.target)
-          .serializeArray()
-          .filter(function(formField) {
-            return formField.value !== '';
-          })
-          .forEach(function(formField) {
-            if (formField.value === 'on') {
-              userOptions[formField['name']] = true;
-              $("input[name=" + formField.name + "]").prop('checked', false);
-            } else {
-              userOptions[formField['name']] = formField.value;
-              $("input[name=" + formField.name + "]").val("");
-            }
-          });
-
-        // check if userOptions contains fadeOutError
-        if (userOptions.hasOwnProperty('fadeOutError')) {
-          var timeOption = userOptions['time'];
-          var timeValue = isNaN(timeOption) ? timeOption : Number(timeOption);
-
-          userOptions['fadeOutError'] = {
-            fadeOut: true,
-            fadeOutOpts: timeValue
-          };
-          delete userOptions['time'];
-        }
-
-        // extending previous options with submited ones
-        $.extend(oldOptions, userOptions);
-        $('.prettyErrorForm').prettyError(userOptions);
-      });
-      var options = {
-        multiCheckbox: {
-          enabled: true,
-          selector: '.multiCheckbox'
-        }
-      };
-      $('.prettyErrorForm').prettyError(options);
-    });
-
-  </script>
-</body>
+  <script src="docs.js"></script>
+  </body>
 
 </html>
