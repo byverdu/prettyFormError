@@ -36,7 +36,13 @@ This is how your error messages will look after using this plugin.
 # How to use the plugin
 > All compiled files can be found under `/dist/**`
 
-You will need `prettyError.min.js` and `prettyError.min.css`
+You will need `prettyError.min.js` and `prettyError.min.css`.
+
+```xml
+<link rel="stylesheet" href="prettyError.min.css" media="screen">
+<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<script src="prettyError.min.js"></script>  
+```
 
 It is really simple, just get select your form with jQuery and call the prettyError method.
 
@@ -110,7 +116,7 @@ By default the error message will persist on the screen, if you want to fadeout 
 {
   fadeOutError: {
     fadeOut: true,
-    fadeOutOpts: [string, number or Object]
+    fadeOutOpts: [String, Number or Object]
   }
 }
 ```

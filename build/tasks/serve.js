@@ -21,7 +21,7 @@ gulp.task( 'serve-docs', [ 'build-docs' ], ( done ) => {
     open: false,
     port: 9000,
     server: {
-      baseDir: [ paths.srcDocs ],
+      baseDir: [ paths.destDocs ],
       middleware( req, res, next ) {
         res.setHeader( 'Access-Control-Allow-Origin', '*' );
         next();

@@ -4,35 +4,22 @@
 <head>
   <meta charset="UTF-8">
   <title>prettyError</title>
-  <link rel="stylesheet" href="prettyError.min.css" media="screen">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-dark.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+  <link rel="stylesheet" href="prettyError.min.css" media="screen">
+  <link rel="stylesheet" href="docs.css" media="screen">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
-  <script>
-    hljs.initHighlightingOnLoad();
-
-  </script>
-  <style media="screen">
-    #timeFadeOut {
-      display: none;
-    }
-
-    .hljs-tag {
-      display: block;
-    }
-
-  </style>
+  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
 <body>
-
   <!-- Form for user options -->
-  <div class="container">
+  <div class="container prettyErrorDemo">
     <div class="row">
       <div class="col-md-1"></div>
       <div class="col-sm-12 col-md-10">
-        <div class="intro">
-          <h1 class="text-center">prettyError</h1>
+        <div class="prettyErrorDemo__intro">
+          <h1 class="prettyErrorDemo__intro--title"><span>pretty</span>Error</h1>
           <p class="text-justify">
             By default all major browsers have their own CSS styles for the error messages shown when a form is submitted and some of the fields are empty or with a wrong value.
           </p>
@@ -48,56 +35,59 @@
     <div class="row">
       <div class="col-md-1"></div>
       <div class="col-sm-12 col-md-10">
-        <div class="intro">
-          <h2>Good to Know</h2>
+        <div class="prettyErrorDemo__toKnow">
+          <h2 class="prettyErrorDemo__toKnow--title">Good to Know</h2>
           <p class="text-justify">
             The <code>required</code> attribute is a must in all the elements that you need to validate.
           </p>
 
-          <p class="text-justify">
+          <p>
             When you have to validate a group of input <code>radio</code> they must have the same attribute <code>name</code>
-            <pre><code class="html">&lt;input type="radio" name="group-1" /&gt;&lt;input type="radio" name="group-1" /&gt;</code></pre>
           </p>
+          <pre><code class="html">&lt;input type="radio" name="group-1" /&gt;&lt;input type="radio" name="group-1" /&gt;</code></pre>
 
           <p class="text-justify">
             The <code>&lt;select&gt;</code> element needs to have an empty <code>&lt;option&gt;</code> element as the first element so it can get an error if none of the other options are selected
           </p>
           <p class="text-justify">
-            Within <b>HTML5</b> you can add an extra layer of validation by using the appropiate value for the <code>type</code> attribute used in the <code>&lt;input&gt;</code> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input">tag</a>
+            Within <strong>HTML5</strong> you can add an extra layer of validation by using the appropiate value for the <code>type</code> attribute used in the <code>&lt;input&gt;</code> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input">tag</a>
           </p>
           <p class="text-justify">
             Using the <code>required</code> attribute for a group of check boxes fails because when you submit the form the error message pops up for the unchecked boxes.
           </p>
           <p>
-            To solve this issue you need to add/remove the <code>required</code> attribute programmatically. <b>This plugin provides an option that lets you pass the problem.</b> <a href="https://www.google.co.uk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=required+attribute+multiple+checkbox">Google knows everything, checkbox issue</a>
+            To solve this issue you need to add/remove the <code>required</code> attribute programmatically. <strong>This plugin provides an option that lets you pass the problem.</strong> <a href="https://www.google.co.uk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=required+attribute+multiple+checkbox">Google knows everything, checkbox issue</a>
           </p>
           <p>
             This is how your error messages will look after using this plugin.
-            <figure class="figure">
-              <img src="demo.png" class="figure-img img-fluid rounded" alt="prettyError result example">
-              <figcaption class="figure-caption">
-                Default styles
-              </figcaption>
-            </figure>
           </p>
+          <figure class="figure">
+            <img src="demo.png" class="figure-img img-fluid rounded" alt="prettyError result example">
+            <figcaption class="figure-caption">
+              Default styles
+            </figcaption>
+          </figure>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-1"></div>
       <div class="col-sm-12 col-md-10">
-        <h2>
-          How to use the plugin
-        </h2>
-        <p>
-          <a href="https://github.com/byverdu/prettyError/tree/master/dist">Here you can find all the compiled files.</a> You will need to add <code>prettyError.min.js</code>, <code>prettyError.min.css</code> and <code>jQuery</code> on your html file.
+        <div class="prettyErrorDemo__usage">
+          <h2 class="prettyErrorDemo__usage--title">
+            How to use the plugin
+          </h2>
+          <div>
+            <a href="https://github.com/byverdu/prettyError/tree/master/dist">Here you can find all the compiled files.</a> You will need to add <code>prettyError.min.js</code>, <code>prettyError.min.css</code> and <code>jQuery</code> on your html file.
 
-          <pre><code class="html">&lt;html&gt;&lt;script src="https://code.jquery.com/jquery-3.1.1.js" /&gt;&lt;script src="prettyError.min.js" /&gt;&lt;link rel="stylesheet" href="prettyError.min.css" media="screen"&gt;</code
-          ></pre>
-        </p>
-        <p>
-          The plugin is initialized with the following default options:
-          <pre><code class="javascript">{
+            <pre><code class="html">&lt;html&gt;&lt;script src="https://code.jquery.com/jquery-3.1.1.js" /&gt;&lt;script src="prettyError.min.js" /&gt;&lt;link rel="stylesheet" href="prettyError.min.css" media="screen"&gt;</code
+              ></pre>
+              And then you only need to call the plugin within your jQuery selector.
+              <pre><code class="javascript">$('myFormSelector').prettyError();</code></pre>
+            </div>
+            <div>
+              The plugin is initialized with the following default options:
+              <pre><code class="javascript">{
   multiCheckbox: {
     enabled: false
   },
@@ -110,223 +100,228 @@
     fadeOut: false
   }
 }</code></pre>
-        </p>
-        <h3>multiCheckbox[Object]</h3>
-        <p>
-          Use this option if you need to validate a group of checkboxes. <code>disabled by default!!</code>
-          <pre><code class="javascript">{
-    multiCheckbox: {
-      enabled: true,
-      selector: '.commonClassForGroup'
-    }
+            </div>
+            <div class="prettyErrorDemo__usage--option">
+              <h3 class="prettyErrorDemo__usage--subtitle">multiCheckbox[Object]</h3>
+              Use this option if you need to validate a group of checkboxes. <code>disabled by default!!</code>
+              <pre><code class="javascript">{
+  multiCheckbox: {
+    enabled: true,
+    selector: '.commonClassForGroup'
+  }
 }</code></pre>
-          <pre><code class="html">&lt;input required class="commonClassForGroup" type="checkbox" value="pineapple"&gt;&lt;input required class="commonClassForGroup" type="checkbox" value="ham"&gt;&lt;input required class="commonClassForGroup" type="checkbox" value="olives"&gt;</code></pre>
-        </p>
-        <p>
-          <h3>
-            classError[String]
-          </h3> Name for the css class used for the error messages.
-        </p>
-        <p>
-          <h3>
-      positionMethod[String]
-    </h3> JQuery method used for positioning the error, <code>.after()</code> or <code>.before()</code>.
-        </p>
-        <p>
-          <h3>elementError[String]</h3> HTML element that you want to use for wrap the errors.
-        </p>
-        <p>
-          <h3>
-      callToAction[String]
-    </h3> HTML selector used to submit the form.
-        </p>
-        <p>
-          <h3>
-    focusErrorOnClick[Boolean]
-  </h3> Use <code>false</code> if you want to disable this otpion.
-        </p>
-<p>
-  <h3>
-    fadeOutError[Object]
-  </h3>
-  By default the error message will persist on the screen, if you want to fadeout the error enable this option.
-  <code>fadeOutOpts</code> accepts same options than the default <code>fadeOut()</code>
-  <a href="http://api.jquery.com/fadeout/">jQuery method</a>
-<pre><code class="javascript">{
-fadeOutError: {
-  fadeOut: true,
-  fadeOutOpts: [string, number or Object]
+              <pre><code class="html">&lt;input required class="commonClassForGroup" type="checkbox" value="pineapple"&gt;&lt;input required class="commonClassForGroup" type="checkbox" value="ham"&gt;&lt;input required class="commonClassForGroup" type="checkbox" value="olives"&gt;</code></pre>
+            </div>
+
+            <div class="prettyErrorDemo__usage--option">
+              <h3 class="prettyErrorDemo__usage--subtitle">
+                classError[String]
+              </h3>
+              <p>Name for the css class used for the error messages.</p>
+            </div>
+
+            <div class="prettyErrorDemo__usage--option">
+              <h3 class="prettyErrorDemo__usage--subtitle">
+                positionMethod[String]
+              </h3>
+              <p>
+                JQuery method used for positioning the error, <code>.after()</code> or <code>.before()</code>.
+              </p>
+            </div>
+
+            <div class="prettyErrorDemo__usage--option">
+              <h3 class="prettyErrorDemo__usage--subtitle">elementError[String]</h3>
+              <p>
+                HTML element that you want to use for wrap the errors.
+              </p>
+            </div>
+
+            <div class="prettyErrorDemo__usage--option">
+              <h3 class="prettyErrorDemo__usage--subtitle">
+                callToAction[String]
+              </h3>
+              <p>
+                HTML selector used to submit the form.
+              </p>
+            </div>
+
+            <div class="prettyErrorDemo__usage--option">
+              <h3 class="prettyErrorDemo__usage--subtitle">
+                focusErrorOnClick[Boolean]
+              </h3>
+              <p>
+                 Use <code>false</code> if you want to disable this otpion.
+              </p>
+            </div>
+
+            <div class="prettyErrorDemo__usage--option">
+              <h3 class="prettyErrorDemo__usage--subtitle">
+                fadeOutError[Object]
+              </h3>
+              <p>
+                By default the error message will persist on the screen, if you want to fadeout the error enable this option.
+                <code>fadeOutOpts</code> accepts same options than the default <code>fadeOut()</code>
+                <a href="http://api.jquery.com/fadeout/">jQuery method</a>
+              </p>
+              <pre><code class="javascript">{
+  fadeOutError: {
+    fadeOut: true,
+    fadeOutOpts: [String, Number or Object]
   }
 }</code></pre>
 
-</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-sm-12 col-md-10">
-        <form id="optionsForm">
-          <fieldset class="form-group">
-            <legend>Try settings</legend>
-            <label for="fadeOutError">fadeOutError</label>
-            <input class="form-control" type="checkbox" name="fadeOutError" id="fadeOutError">
-            <div id="timeFadeOut">
-              <label for="time">time fadeOutError</label>
-              <input class="form-control" type="text" name="time" id="time">
             </div>
-            <label for="elementError">elementError</label>
-            <input class="form-control" type="text" name="elementError" id="elementError">
-            <label for="positionMethod">positionMethod</label>
-            <input class="form-control" type="text" name="positionMethod" id="positionMethod">
-            <label for="focusErrorOnClick">focusErrorOnClick</label>
-            <input class="form-control" type="checkbox" name="focusErrorOnClick" id="focusErrorOnClick">
-          </fieldset>
-          <input class="btn btn-outline-primary" type="submit" value="Submit">
-        </form>
+        </div>
       </div>
     </div>
-
     <div class="row">
       <div class="col-md-1"></div>
       <div class="col-sm-12 col-md-5">
-        <form class="prettyErrorForm">
-          <fieldset class="form-group">
-            <legend>Personal Details</legend>
-
-            <label for="email">Email:</label>
-            <input class="form-control" required type="email" id="email" name="email" placeholder="Your email" title="aa@aa.aa">
-
-            <label>Telephone:</label>
-            <input class="form-control" required type="tel" pattern='\d+' name="telephone" placeholder="Your telephone" title="Only digits">
-
-            <label for="name">Name:</label>
-            <input class="form-control" required type="text" id="name" name="name" placeholder="Your name">
-
-            <label for="message">Message:</label>
-            <textarea required class="form-control" type="text" id="message" name="message" placeholder="Your message"></textarea>
-          </fieldset>
-          <!-- /details -->
-          <button type="submit" class="btn btn-outline-primary">Submit</button>
-        </form>
+        <div class="prettyErrorDemo__settings">
+          <form id="optionsForm" class="form-group">
+            <fieldset class="form-group">
+              <legend>Settings for demo</legend>
+              <div class="form-check">
+                <label for="fadeOutError" class="form-check-label">
+                  <input class="form-check-input" type="checkbox" name="fadeOutError" id="fadeOutError">
+                  fadeOutError
+                </label>
+              </div>
+              <div class="form-group" id="timeFadeOut">
+                <label for="time">Options fadeOutError</label>
+                <input class="form-control" type="text" name="time" id="time" placeholder="String, Number or an Objet with options...">
+              </div>
+              <div class="form-group">
+                <label for="elementError">elementError</label>
+                <input class="form-control" type="text" name="elementError" id="elementError" placeholder="HTML element...">
+              </div>
+              <div class="form-group">
+                <label for="positionMethod">positionMethod</label>
+                <input class="form-control" type="text" name="positionMethod" id="positionMethod" placeholder="before or after...">
+              </div>
+              <div class="form-check">
+                <label for="focusErrorOnClick" class="form-check-label">
+                  <input class="form-check-input" type="checkbox" name="focusErrorOnClick" id="focusErrorOnClick">
+                  Disable focusErrorOnClick
+                </label>
+              </div>
+            </fieldset>
+            <input class="btn btn-outline-success btn-block" type="submit" value="Submit">
+          </form>
+        </div>
       </div>
-      <div class="col-md-1"></div>
-      <div class="col-sm-12 col-md-4">
-        <form class="prettyErrorForm">
-          <fieldset>
-            <legend>Statistic Details</legend>
-
-            <label for="gender">Select Gender</label>
-            <!-- first value must be empty in order to get an error -->
-            <select id="gender" required title="Select a Gender">
-                <option value=""></option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
-
-            <p>Mac or PC?</p>
-
-            <label for="mac">Mac:</label>
-            <!-- input radio must have the same name attribute in order to be able to choose between them and get the error -->
-            <input id="mac" type="radio" name="group1" value="mac" required class="form-control">
-
-            <label for="pc">PC:</label>
-            <input id="pc" type="radio" name="group1" value="pc" required class="form-control">
-
-
-            <label for="terms">Terms and conditions</label>
-            <input type="checkbox" id="terms" required title="Please agree with the conditions" class="form-control">
-
-            <p>Best topping ever</p>
-
-            <!-- Multiple required checkboxes give a problem when validates. Added extra javascript in order to use it, check jsVersion.js file -->
-
-            <label for="pineapple">Pineapple:</label>
-            <input required class="multiCheckbox" id="pineapple" type="checkbox" name="topping" value="pineapple" class="form-control">
-
-            <!-- Added a class="options" for all same group of checkboxes -->
-            <label for="ham">Ham:</label>
-            <input required class="multiCheckbox" id="ham" type="checkbox" name="topping" value="ham" class="form-control">
-
-            <label for="olives">Olives:</label>
-            <input required class="multiCheckbox" id="olives" type="checkbox" name="olives" value="olives" class="form-control">
-
-          </fieldset>
-          <!-- /statistics -->
-          <button type="submit" class="btn btn-outline-primary">Submit</button>
-        </form>
-      </div>
-      <div class="col-md-1"></div>
     </div>
-    <!-- Second form example, other input types -->
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <hr>
+      </div>
+    </div>
 
+    <div class="row">
+      <div class="prettyErrorDemo__settings">
+        <div class="col-md-1"></div>
+        <div class="col-sm-12 col-md-5">
+          <form class="prettyErrorForm">
+            <fieldset class="form-group">
+              <legend>Personal Details</legend>
+
+              <label for="email">Email:</label>
+              <input class="form-control" required type="email" id="email" name="email" placeholder="Your email" title="aa@aa.aa">
+
+              <label>Telephone:</label>
+              <input class="form-control" required type="tel" pattern='\d+' name="telephone" placeholder="Your telephone" title="Only digits">
+
+              <label for="name">Name:</label>
+              <input class="form-control" required type="text" id="name" name="name" placeholder="Your name">
+
+              <label for="message">Message:</label>
+              <textarea required class="form-control" id="message" name="message" placeholder="Your message"></textarea>
+            </fieldset>
+            <!-- /details -->
+            <button type="submit" class="btn-lg btn btn-outline-primary">Submit</button>
+          </form>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-sm-12 col-md-4">
+          <form class="prettyErrorForm">
+            <fieldset>
+              <legend>Statistic Details</legend>
+
+              <!-- first value must be empty in order to get an error -->
+              <div class="form-group">
+                <label for="gender">Select Gender</label>
+                <select class="form-control" id="gender" required title="Select a Gender">
+                  <option value="">Select a option</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" id="terms" required title="Please agree with the conditions" class="form-check-input">
+                  Terms and conditions
+                </label>
+              </div>
+
+              <!-- input radio must have the same name attribute in order to be able to choose between them and get the error -->
+              <legend>Mac or PC?</legend>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input id="mac" type="radio" name="group1" value="mac" required class="form-check-input">
+                  Mac
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input id="pc" type="radio" name="group1" value="pc" required class="form-check-input">
+                  PC
+                </label>
+              </div>
+
+              <!-- Multiple required checkboxes give a problem when validates. Added extra javascript in order to use it, check jsVersion.js file -->
+              <legend>Best topping ever</legend>
+
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input required id="pineapple" type="checkbox" name="topping" value="pineapple" class="form-check-input multiCheckbox">
+                  Pineapple
+                </label>
+                <label class="form-check-label">
+                  <input required id="ham" type="checkbox" name="topping" value="ham" class="form-check-input multiCheckbox">
+                  Ham
+                </label>
+                <label class="form-check-label">
+                  <input required id="olives" type="checkbox" name="olives" value="olives" class="form-check-input multiCheckbox">
+                  Olives
+                </label>
+              </div>
+            </fieldset>
+            <!-- /statistics -->
+            <button type="submit" class="btn-lg btn btn-outline-primary">Submit</button>
+          </form>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
+      </div>
+    <!-- Second form example, other input types -->
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="fixed-bottom col-sm-12 col-md-10">
+        <footer>
+          Made with &lt;3 by <a href="https://twitter.com/byverdu" target="_blank">@Byverdu</a>
+        </footer>
+      </div>
+    </div>
   </div>
   <!-- Loading Scripts -->
   <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
   <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
   <script src="prettyError.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      $('#fadeOutError').on('change', function() {
-        if ($(event.currentTarget).is(':checked')) {
-          $('#timeFadeOut').show();
-        } else {
-          $('#timeFadeOut').hide();
-        }
-      })
-
-      $('#optionsForm').on('submit', function(event) {
-        var userOptions = {};
-        var oldOptions = $('.prettyErrorForm')
-          .data('plugin_prettyError')
-          .options;
-
-        event.preventDefault();
-
-        // $.serializeArray returns form fields in format [{name: '', value: ''}]
-        // filter the fields with data
-        // prepare user options
-        $(event.target)
-          .serializeArray()
-          .filter(function(formField) {
-            return formField.value !== '';
-          })
-          .forEach(function(formField) {
-            if (formField.value === 'on') {
-              userOptions[formField['name']] = true;
-              $("input[name=" + formField.name + "]").prop('checked', false);
-            } else {
-              userOptions[formField['name']] = formField.value;
-              $("input[name=" + formField.name + "]").val("");
-            }
-          });
-
-        // check if userOptions contains fadeOutError
-        if (userOptions.hasOwnProperty('fadeOutError')) {
-          var timeOption = userOptions['time'];
-          var timeValue = isNaN(timeOption) ? timeOption : Number(timeOption);
-
-          userOptions['fadeOutError'] = {
-            fadeOut: true,
-            fadeOutOpts: timeValue
-          };
-          delete userOptions['time'];
-        }
-
-        // extending previous options with submited ones
-        $.extend(oldOptions, userOptions);
-        $('.prettyErrorForm').prettyError(userOptions);
-      });
-      var options = {
-        multiCheckbox: {
-          enabled: true,
-          selector: '.multiCheckbox'
-        }
-      };
-      $('.prettyErrorForm').prettyError(options);
-    });
-
-  </script>
-</body>
-
+  <script src="docs.js"></script>
+  </body>
 </html>

@@ -16,5 +16,5 @@ gulp.task( 'watch', () => {
 
   gulp.watch( paths.watchMocha, reload ).on( 'change', reportChange );
 
-  gulp.watch( paths.watchDocs, reload ).on( 'change', reportChange );
+  gulp.watch( paths.watchDocs, [ 'docs-sass', reload] ).on( 'change', reportChange );
 });

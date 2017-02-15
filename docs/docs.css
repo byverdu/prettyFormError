@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css?family=Nova+Mono");
+@import url("https://fonts.googleapis.com/css?family=Droid+Sans");
+html {
+  font-size: 62.5%;
+  /* 10px */ }
+
+body {
+  font-size: 1.6rem;
+  font-family: 'Droid Sans', sans-serif;
+  letter-spacing: 1px;
+  line-height: 24px;
+  background: #EFEFEF; }
+
+p {
+  margin-bottom: 20px; }
+
+code, strong {
+  color: #BD3649; }
+
+a {
+  color: #045BE8;
+  text-decoration: underline; }
+  a:hover {
+    color: #045BE8;
+    text-decoration: none; }
+
+.figure {
+  width: 50%;
+  box-shadow: 0px 0px 1px;
+  padding: 5px; }
+
+.prettyErrorDemo {
+  margin-top: 20px; }
+  .prettyErrorDemo__intro--title {
+    font-family: 'Nova Mono', monospace;
+    font-size: 6rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 2.5rem; }
+    .prettyErrorDemo__intro--title span {
+      color: #BD3649; }
+  .prettyErrorDemo__toKnow--title {
+    font-size: 3rem;
+    margin-bottom: 2rem; }
+  .prettyErrorDemo__usage--title {
+    font-size: 3rem;
+    margin-bottom: 2rem; }
+  .prettyErrorDemo__usage--subtitle {
+    color: #F15025; }
+    .prettyErrorDemo__usage--subtitle:before {
+      content: "\2713";
+      font-size: 1.3rem;
+      margin: 0 5px; }
+  .prettyErrorDemo__usage--option {
+    margin: 2rem 0; }
+  .prettyErrorDemo__settings legend {
+    font-size: 1.8rem; }
+  .prettyErrorDemo__settings input, .prettyErrorDemo__settings textarea {
+    font-size: 1.4rem; }
+
+#timeFadeOut {
+  display: none; }
+
+.hljs-tag {
+  display: block; }
+
+footer {
+  margin-top: 2rem;
+  text-align: center;
+  padding: 1rem 0; }
+
+@media screen and (max-width: 57.5rem) {
+  .prettyErrorDemo__intro--title {
+    font-size: 5rem; } }
