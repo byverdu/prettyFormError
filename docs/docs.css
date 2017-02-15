@@ -24,6 +24,11 @@ a {
     color: #045BE8;
     text-decoration: none; }
 
+.figure {
+  width: 50%;
+  box-shadow: 0px 0px 1px;
+  padding: 5px; }
+
 .prettyErrorDemo {
   margin-top: 20px; }
   .prettyErrorDemo__intro--title {
@@ -48,12 +53,21 @@ a {
       margin: 0 5px; }
   .prettyErrorDemo__usage--option {
     margin: 2rem 0; }
+  .prettyErrorDemo__settings legend {
+    font-size: 1.8rem; }
+  .prettyErrorDemo__settings input, .prettyErrorDemo__settings textarea {
+    font-size: 1.4rem; }
 
 #timeFadeOut {
   display: none; }
 
 .hljs-tag {
   display: block; }
+
+footer {
+  margin-top: 2rem;
+  text-align: center;
+  padding: 1rem 0; }
 
 @media screen and (max-width: 57.5rem) {
   .prettyErrorDemo__intro--title {

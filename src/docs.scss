@@ -30,6 +30,12 @@ a {
   }
 }
 
+.figure {
+    width: 50%;
+    box-shadow: 0px 0px 1px;
+    padding: 5px;
+}
+
 .prettyErrorDemo {
   margin-top: 20px;
   &__intro {
@@ -69,6 +75,15 @@ a {
       margin: 2rem 0;
     }
   }
+
+  &__settings {
+    legend {
+      font-size: 1.8rem;
+    }
+    input, textarea {
+      font-size: 1.4rem;
+    }
+  }
 }
 
 #timeFadeOut {
@@ -77,6 +92,12 @@ a {
 
 .hljs-tag {
   display: block;
+}
+
+footer {
+  margin-top: 2rem;
+  text-align: center;
+  padding: 1rem 0;
 }
 
 @media screen and (max-width: 57.5rem) {

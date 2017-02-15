@@ -176,106 +176,145 @@
     </div>
     <div class="row">
       <div class="col-md-1"></div>
-      <div class="col-sm-12 col-md-10">
-        <form id="optionsForm">
-          <fieldset class="form-group">
-            <legend>Try settings</legend>
-            <label for="fadeOutError">fadeOutError</label>
-            <input class="form-control" type="checkbox" name="fadeOutError" id="fadeOutError">
-            <div id="timeFadeOut">
-              <label for="time">time fadeOutError</label>
-              <input class="form-control" type="text" name="time" id="time">
-            </div>
-            <label for="elementError">elementError</label>
-            <input class="form-control" type="text" name="elementError" id="elementError">
-            <label for="positionMethod">positionMethod</label>
-            <input class="form-control" type="text" name="positionMethod" id="positionMethod">
-            <label for="focusErrorOnClick">focusErrorOnClick</label>
-            <input class="form-control" type="checkbox" name="focusErrorOnClick" id="focusErrorOnClick">
-          </fieldset>
-          <input class="btn btn-outline-primary" type="submit" value="Submit">
-        </form>
+      <div class="col-sm-12 col-md-5">
+        <div class="prettyErrorDemo__settings">
+          <form id="optionsForm" class="form-group">
+            <fieldset class="form-group">
+              <legend>Settings for demo</legend>
+              <div class="form-check">
+                <label for="fadeOutError" class="form-check-label">
+                  <input class="form-check-input" type="checkbox" name="fadeOutError" id="fadeOutError">
+                  fadeOutError
+                </label>
+              </div>
+              <div class="form-group" id="timeFadeOut">
+                <label for="time">Options fadeOutError</label>
+                <input class="form-control" type="text" name="time" id="time" placeholder="String, Number or an Objet with options...">
+              </div>
+              <div class="form-group">
+                <label for="elementError">elementError</label>
+                <input class="form-control" type="text" name="elementError" id="elementError" placeholder="HTML element...">
+              </div>
+              <div class="form-group">
+                <label for="positionMethod">positionMethod</label>
+                <input class="form-control" type="text" name="positionMethod" id="positionMethod" placeholder="before or after...">
+              </div>
+              <div class="form-check">
+                <label for="focusErrorOnClick" class="form-check-label">
+                  <input class="form-check-input" type="checkbox" name="focusErrorOnClick" id="focusErrorOnClick">
+                  Disable focusErrorOnClick
+                </label>
+              </div>
+            </fieldset>
+            <input class="btn btn-outline-success btn-block" type="submit" value="Submit">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <hr>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-sm-12 col-md-5">
-        <form class="prettyErrorForm">
-          <fieldset class="form-group">
-            <legend>Personal Details</legend>
+      <div class="prettyErrorDemo__settings">
+        <div class="col-md-1"></div>
+        <div class="col-sm-12 col-md-5">
+          <form class="prettyErrorForm">
+            <fieldset class="form-group">
+              <legend>Personal Details</legend>
 
-            <label for="email">Email:</label>
-            <input class="form-control" required type="email" id="email" name="email" placeholder="Your email" title="aa@aa.aa">
+              <label for="email">Email:</label>
+              <input class="form-control" required type="email" id="email" name="email" placeholder="Your email" title="aa@aa.aa">
 
-            <label>Telephone:</label>
-            <input class="form-control" required type="tel" pattern='\d+' name="telephone" placeholder="Your telephone" title="Only digits">
+              <label>Telephone:</label>
+              <input class="form-control" required type="tel" pattern='\d+' name="telephone" placeholder="Your telephone" title="Only digits">
 
-            <label for="name">Name:</label>
-            <input class="form-control" required type="text" id="name" name="name" placeholder="Your name">
+              <label for="name">Name:</label>
+              <input class="form-control" required type="text" id="name" name="name" placeholder="Your name">
 
-            <label for="message">Message:</label>
-            <textarea required class="form-control" id="message" name="message" placeholder="Your message"></textarea>
-          </fieldset>
-          <!-- /details -->
-          <button type="submit" class="btn btn-outline-primary">Submit</button>
-        </form>
+              <label for="message">Message:</label>
+              <textarea required class="form-control" id="message" name="message" placeholder="Your message"></textarea>
+            </fieldset>
+            <!-- /details -->
+            <button type="submit" class="btn-lg btn btn-outline-primary">Submit</button>
+          </form>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-sm-12 col-md-4">
+          <form class="prettyErrorForm">
+            <fieldset>
+              <legend>Statistic Details</legend>
+
+              <!-- first value must be empty in order to get an error -->
+              <div class="form-group">
+                <label for="gender">Select Gender</label>
+                <select class="form-control" id="gender" required title="Select a Gender">
+                  <option value="">Select a option</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" id="terms" required title="Please agree with the conditions" class="form-check-input">
+                  Terms and conditions
+                </label>
+              </div>
+
+              <!-- input radio must have the same name attribute in order to be able to choose between them and get the error -->
+              <legend>Mac or PC?</legend>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input id="mac" type="radio" name="group1" value="mac" required class="form-check-input">
+                  Mac
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input id="pc" type="radio" name="group1" value="pc" required class="form-check-input">
+                  PC
+                </label>
+              </div>
+
+              <!-- Multiple required checkboxes give a problem when validates. Added extra javascript in order to use it, check jsVersion.js file -->
+              <legend>Best topping ever</legend>
+
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input required id="pineapple" type="checkbox" name="topping" value="pineapple" class="form-check-input multiCheckbox">
+                  Pineapple
+                </label>
+                <label class="form-check-label">
+                  <input required id="ham" type="checkbox" name="topping" value="ham" class="form-check-input multiCheckbox">
+                  Ham
+                </label>
+                <label class="form-check-label">
+                  <input required id="olives" type="checkbox" name="olives" value="olives" class="form-check-input multiCheckbox">
+                  Olives
+                </label>
+              </div>
+            </fieldset>
+            <!-- /statistics -->
+            <button type="submit" class="btn-lg btn btn-outline-primary">Submit</button>
+          </form>
+        </div>
+        <div class="col-md-1"></div>
       </div>
-      <div class="col-md-1"></div>
-      <div class="col-sm-12 col-md-4">
-        <form class="prettyErrorForm">
-          <fieldset>
-            <legend>Statistic Details</legend>
-
-            <label for="gender">Select Gender</label>
-            <!-- first value must be empty in order to get an error -->
-            <select id="gender" required title="Select a Gender">
-                <option value="">Select a option</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
-
-            <p>Mac or PC?</p>
-
-            <label for="mac">Mac:</label>
-            <!-- input radio must have the same name attribute in order to be able to choose between them and get the error -->
-            <input id="mac" type="radio" name="group1" value="mac" required class="form-control">
-
-            <label for="pc">PC:</label>
-            <input id="pc" type="radio" name="group1" value="pc" required class="form-control">
-
-
-            <label for="terms">Terms and conditions</label>
-            <input type="checkbox" id="terms" required title="Please agree with the conditions" class="form-control">
-
-            <p>Best topping ever</p>
-
-            <!-- Multiple required checkboxes give a problem when validates. Added extra javascript in order to use it, check jsVersion.js file -->
-
-            <label for="pineapple">Pineapple:</label>
-            <input required id="pineapple" type="checkbox" name="topping" value="pineapple" class="form-control multiCheckbox">
-
-            <!-- Added a class="options" for all same group of checkboxes -->
-            <label for="ham">Ham:</label>
-            <input required id="ham" type="checkbox" name="topping" value="ham" class="form-control multiCheckbox">
-
-            <label for="olives">Olives:</label>
-            <input required id="olives" type="checkbox" name="olives" value="olives" class="form-control multiCheckbox">
-
-          </fieldset>
-          <!-- /statistics -->
-          <button type="submit" class="btn btn-outline-primary">Submit</button>
-        </form>
       </div>
-      <div class="col-md-1"></div>
-    </div>
     <!-- Second form example, other input types -->
   </div>
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
-      <footer class="fixed-bottom">
-        &copy;
-      </footer>
+      <div class="col-md-1"></div>
+      <div class="fixed-bottom col-sm-12 col-md-10">
+        <footer>
+          Made with &lt;3 by <a href="https://twitter.com/byverdu" target="_blank">@Byverdu</a>
+        </footer>
+      </div>
     </div>
   </div>
   <!-- Loading Scripts -->
@@ -285,5 +324,4 @@
   <script src="prettyError.min.js"></script>
   <script src="docs.js"></script>
   </body>
-
 </html>
