@@ -41,7 +41,7 @@ $(document).ready(function() {
     }
 
       // extending previous options with submited ones
-    $.extend(oldOptions, userOptions);
+    $.extend(true, oldOptions, userOptions);
     $('.prettyErrorForm').prettyError(userOptions);
   });
   var options = {

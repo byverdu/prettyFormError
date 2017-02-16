@@ -83,14 +83,14 @@
           positionMethod.opts !== undefined
         ) {
         console.warn(positionMethod.text);
-        positionMethod.opts = 'after';
+        options.positionMethod = 'after';
       }
 
       // options.focusErrorOnClick
       if ( typeof focusErrorOnClick.opts !== 'boolean' &&
       focusErrorOnClick.opts !== undefined) {
         console.warn(focusErrorOnClick.text);
-        focusErrorOnClick.opts = true;
+        options.focusErrorOnClick = true;
       }
 
       return options;
