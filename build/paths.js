@@ -13,7 +13,7 @@ module.exports = {
   srcServe: destDir,
   srcSassDocs: `${srcDir}/docs.scss`,
   destSassDocs: './docs',
-  srcDocs: `${destDir}/*`,
+  srcDocs: `${destDir}/*.min.*`,
   destDocs: './docs/',
   watchDocs: ['./docs/*', './src/docs.scss'],
   srcMocha: [ './mocha', './' ],
