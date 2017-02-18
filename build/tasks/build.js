@@ -5,6 +5,5 @@ gulp.task( 'build', [
   'minify',
   'move-js',
   'sass',
-  'css-minify',
-  'move-html'
+  'css-minify'
 ]);

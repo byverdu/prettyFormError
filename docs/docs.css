@@ -24,6 +24,12 @@ a {
     color: #045BE8;
     text-decoration: none; }
 
+.github-corner {
+  position: fixed;
+  top: 0;
+  right: 0;
+  opacity: .8; }
+
 .figure {
   width: 50%;
   box-shadow: 0px 0px 1px;

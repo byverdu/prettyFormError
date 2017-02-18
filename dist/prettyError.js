@@ -36,9 +36,17 @@
 
   Plugin.prototype = {
     init: function( options ) {
-      // handleling errors
-      if (options !== undefined) {
-        options = this.handleErrorsInOpts(options);
+      // user options checker for positionMethod
+      // to avoid breaking the plugin initialization
+      if (options !== undefined &&
+          options.positionMethod !== undefined &&
+          options.positionMethod !== 'after' &&
+          options.positionMethod !== 'before'
+        ) {
+        console.warn(
+          'positionMethod prop values should be "after" or "before", a default "after" value has been assigned'
+        );
+        options.positionMethod = 'after';
       }
 
       $.extend( this.options, options );
@@ -63,37 +71,6 @@
             allCheckboxes.attr('required', 'required');
           }
         });
-    },
-
-    // user options checker to avoid breaking the plugin initialization
-    handleErrorsInOpts: function(options) {
-      var positionMethod = {
-        opts: options.positionMethod,
-        text: 'positionMethod prop values should be "after" or "before", a default "after" value has been assigned'
-      };
-
-      var focusErrorOnClick = {
-        opts: options.focusErrorOnClick,
-        text: 'focusErrorOnClick prop value should be a Boolean'
-      };
-
-      // options.positionMethod
-      if (positionMethod.opts !== 'after' &&
-          positionMethod.opts !== 'before' &&
-          positionMethod.opts !== undefined
-        ) {
-        console.warn(positionMethod.text);
-        positionMethod.opts = 'after';
-      }
-
-      // options.focusErrorOnClick
-      if ( typeof focusErrorOnClick.opts !== 'boolean' &&
-      focusErrorOnClick.opts !== undefined) {
-        console.warn(focusErrorOnClick.text);
-        focusErrorOnClick.opts = true;
-      }
-
-      return options;
     },
 
     // button click handler

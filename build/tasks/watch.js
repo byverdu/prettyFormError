@@ -8,13 +8,11 @@ function reportChange( event ) {
 }
 
 gulp.task( 'watch', () => {
-  gulp.watch( paths.srcJs, [ 'minify', 'move-js', reload ]).on( 'change', reportChange );
+  gulp.watch( paths.srcJs, [ 'minify', 'move-js', 'move-docs',reload ]).on( 'change', reportChange );
 
   gulp.watch( paths.srcSass, [ 'sass', 'css-minify', reload ]).on( 'change', reportChange );
 
-  gulp.watch( paths.srcHtml, [ 'move-html', reload ]).on( 'change', reportChange );
-
   gulp.watch( paths.watchMocha, reload ).on( 'change', reportChange );
 
-  gulp.watch( paths.watchDocs, [ 'docs-sass', reload] ).on( 'change', reportChange );
+  gulp.watch( paths.watchDocs, [ 'move-docs', 'docs-sass', reload] ).on( 'change', reportChange );
 });
