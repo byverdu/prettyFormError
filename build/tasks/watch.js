@@ -8,7 +8,7 @@ function reportChange( event ) {
 }
 
 gulp.task( 'watch', () => {
-  gulp.watch( paths.srcJs, [ 'minify', 'move-js', reload ]).on( 'change', reportChange );
+  gulp.watch( paths.srcJs, [ 'minify', 'move-js', 'move-docs',reload ]).on( 'change', reportChange );
 
   gulp.watch( paths.srcSass, [ 'sass', 'css-minify', reload ]).on( 'change', reportChange );
 
