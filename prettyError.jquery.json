@@ -1,0 +1,33 @@
+{
+  "name": "prettyError",
+  "title": "prettyError",
+  "description": "jQuery plugin that makes pretty your form errors in all browsers.",
+  "keywords": [
+    "jquery-plugins",
+    "form errors"
+  ],
+  "version": "1.0.0",
+  "author": {
+    "name": "Albert Vallverdu",
+    "url": "https://github.com/byverdu"
+  },
+  "maintainers": [
+    {
+      "name": "Albert Vallverdu",
+      "url": "https://github.com/byverdu"
+    }
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/byverdu/prettyError/blob/master/LICENSE"
+    }
+  ],
+  "bugs": "https://github.com/byverdu/prettyError/issues",
+  "homepage": "https://byverdu.github.io/prettyError/",
+  "docs": "https://byverdu.github.io/prettyError/#settings",
+  "download": "https://github.com/byverdu/prettyError/archive/master.zip",
+  "dependencies": {
+    "jquery": ">=1.7"
+  }
+}
