@@ -1,7 +1,7 @@
 {
-  "name": "prettyerror",
+  "name": "pretty-form-error",
   "version": "1.0.0",
-  "description": "jQuery plugin that makes pretty your form errors in all browsers",
+  "description": "jQuery plugin that makes pretty the form errors in all browsers by applying same styles",
   "main": "index.html",
   "scripts": {
     "test": "gulp tests"
@@ -18,7 +18,7 @@
   "keywords": [
     "jquery-plugin",
     "ecosystem:jquery",
-    "form",
+    "unified form errors",
     "errors"
   ],
   "author": "@byverdu <byverdu@gmail.com>",
