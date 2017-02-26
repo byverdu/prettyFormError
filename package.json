@@ -1,5 +1,5 @@
 {
-  "name": "pretty-error",
+  "name": "prettyerror",
   "version": "1.0.0",
   "description": "jQuery plugin that makes pretty your form errors in all browsers",
   "main": "index.html",
@@ -16,13 +16,13 @@
     "url": "git+https://github.com/byverdu/prettyFormError.git"
   },
   "keywords": [
-    "jquery",
-    "plugin",
+    "jquery-plugin",
+    "ecosystem:jquery",
     "form",
     "errors"
   ],
   "author": "@byverdu <byverdu@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/byverdu/prettyFormError/issues"
   },
@@ -46,5 +46,8 @@
     "jquery": "^3.1.1",
     "mocha": "^3.1.2",
     "require-dir": "^0.3.1"
+  },
+  "dependencies": {
+    "jquery": ">=1.7"
   }
 }
