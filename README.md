@@ -1,4 +1,4 @@
-# prettyError
+# prettyFormError
 
 By default all major browsers have their own CSS styles for the error messages shown when a form is submitted and some of the fields are empty or with a wrong value.
 
@@ -6,7 +6,7 @@ With this jQuery plugin you can show identical styles for the errors in all majo
 
 In order to have a custom look for the bubbles across all supporting browsers the only option is to suppress the default bubble and implement your own.
 
-[Try it @ https://byverdu.github.io/prettyError/](https://byverdu.github.io/prettyError/)
+[Try it @ https://byverdu.github.io/prettyFormError/](https://byverdu.github.io/prettyFormError/)
 
 ### Good to know
 
@@ -36,17 +36,17 @@ This is how your error messages will look after using this plugin.
 # How to use the plugin
 > All compiled files can be found under `/dist/**`
 
-You will need `prettyError.min.js` and `prettyError.min.css`.
+You will need `prettyFormError.min.js` and `prettyFormError.min.css`.
 
 ```xml
-<link rel="stylesheet" href="prettyError.min.css" media="screen">
+<link rel="stylesheet" href="prettyFormError.min.css" media="screen">
 <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
-<script src="prettyError.min.js"></script>  
+<script src="prettyFormError.min.js"></script>  
 ```
 
-It is really simple, just get select your form with jQuery and call the prettyError method.
+It is really simple, just get select your form with jQuery and call the prettyFormError method.
 
-`$('myFormSelector').prettyError();`
+`$('myFormSelector').prettyFormError();`
 
 # Plugin Options.
 
@@ -57,7 +57,7 @@ The plugin is initialized with the following default options:
   multiCheckbox: {
     enabled: false
   },
-  classError: 'prettyError',
+  classError: 'prettyFormError',
   positionMethod: 'after',
   elementError: 'div',
   callToAction: 'button',
