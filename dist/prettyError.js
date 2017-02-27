@@ -1,7 +1,7 @@
 // prettyError jQuery plugin
 
 ;( function( $, window, document, undefined ) { // eslint-disable-line
-  var pluginName = 'prettyError';
+  var pluginName = 'prettyFormError';
   var dataKey = 'plugin_' + pluginName;
 
   // utils
