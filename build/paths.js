@@ -3,11 +3,11 @@ const srcDir = './src';
 const destDir = './dist';
 
 module.exports = {
-  srcJs: `${srcDir}/prettyError.js`,
+  srcJs: `${srcDir}/prettyFormError.js`,
   destJs: destDir,
-  srcSass: `${srcDir}/prettyError.scss`,
+  srcSass: `${srcDir}/prettyFormError.scss`,
   destSass: destDir,
-  srcCss: `${destDir}/prettyError.css`,
+  srcCss: `${destDir}/prettyFormError.css`,
   destCss: destDir,
   cleanDir: destDir,
   srcServe: destDir,

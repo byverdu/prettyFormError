@@ -23,7 +23,7 @@
         enabled: false,
         selector: '.multiCheckbox'
       },
-      classError: 'prettyError',
+      classError: 'prettyFormError',
       positionMethod: 'after',
       elementError: 'div',
       callToAction: 'button',

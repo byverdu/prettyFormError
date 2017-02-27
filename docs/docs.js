@@ -51,7 +51,7 @@ $(document).ready(function() {
   $('#optionsForm').on('submit', function(event) {
     $('#timeFadeOut').hide();
     var userOptions = {};
-    var oldOptions = $('.prettyErrorForm').data('plugin_prettyError').options;
+    var oldOptions = $('.prettyErrorForm').data('plugin_prettyFormError').options;
 
     event.preventDefault();
 
@@ -72,7 +72,7 @@ $(document).ready(function() {
     optsChecker.positionMethod(userOptions);
       // extending previous options with submited ones
     $.extend(true, oldOptions, userOptions);
-    $('.prettyErrorForm').prettyError(userOptions);
+    $('.prettyErrorForm').prettyFormError(userOptions);
   });
   var options = {
     multiCheckbox: {
@@ -80,5 +80,5 @@ $(document).ready(function() {
       selector: '.multiCheckbox'
     }
   };
-  $('.prettyErrorForm').prettyError(options);
+  $('.prettyErrorForm').prettyFormError(options);
 });
