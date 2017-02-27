@@ -123,5 +123,6 @@ By default the error message will persist on the screen, if you want to fadeout 
 
 ## ToDo
 
+1. [ ] Make package compatible with CommmoJS
 1. [ ] Add more ways to display the error messages.
 1. [ ] Add more styles / themes
