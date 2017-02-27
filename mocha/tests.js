@@ -4,12 +4,12 @@
   var expect = chai.expect;
   var jQueryMock;
 
-  describe( 'prettyError jQuery plugin', function() {
+  describe( 'prettyFormError jQuery plugin', function() {
     before(function() {
-      jQueryMock = $( '.prettyErrorForm' ).prettyError();
+      jQueryMock = $( '.errored-form' ).prettyFormError();
     });
     it( 'is defined', function() {
-      expect( $.fn ).to.have.property( 'prettyError' );
+      expect( $.fn ).to.have.property( 'prettyFormError' );
     });
     it( 'returns an array within the selectors', function() {
       expect( jQueryMock ).to.have.length.least(1);
@@ -28,18 +28,18 @@
         jQueryMock.find('#email').val('');
       });
       it( 'retrieves the invalid inputs field when the form is submited', function() {
-        expect( $('.prettyErrorForm :invalid').not('fieldset') )
+        expect( $('.errored-form :invalid').not('fieldset') )
           .to.have.length( 3 );
       });
       it( 'appends a div to each error', function() {
-        expect( $('.prettyErrorForm .prettyError') )
+        expect( $('.errored-form .prettyFormError') )
           .to.have.length( 3 );
       });
       it( 'with the corresponding text error', function() {
         jQueryMock.find('#email').val('lol@gmail.');
         $('.prettyErrorBtn')[0].click();
 
-        expect( $('.prettyError')[0].textContent )
+        expect( $('.prettyFormError')[0].textContent )
           .to.be.eq( "'.' is used at a wrong position in 'gmail.'." );
       });
       it( 'sets focus to the first element with error', function() {
@@ -51,7 +51,7 @@
       describe('Default options', function() {
         var defaultOptions;
         before( function() {
-          defaultOptions = jQueryMock.data( 'plugin_prettyError' );
+          defaultOptions = jQueryMock.data( 'plugin_prettyFormError' );
         });
         it( 'are defined and is an Object', function() {
           expect( defaultOptions )
@@ -69,7 +69,7 @@
           expect( defaultOptions.options )
             .to.have.property( 'classError' )
             .that.is.a( 'String' )
-            .and.eq( 'prettyError' );
+            .and.eq( 'prettyFormError' );
         });
         it( 'contains a positionMethod property', function() {
           expect( defaultOptions.options )
@@ -103,7 +103,7 @@
         });
       });
       it( 'can be configured', function() {
-        $('.prettyErrorForm-2').prettyError({
+        $('.errored-form-2').prettyFormError({
           classError: 'myCustomName',
           elementError: 'span',
           callToAction: '.prettyErrorBtn-2',
@@ -116,7 +116,7 @@
         });
         $('.prettyErrorBtn-2').click();
 
-        expect($('.prettyErrorForm-2 span.myCustomName'))
+        expect($('.errored-form-2 span.myCustomName'))
           .to.have.length(7);
       });
     });
