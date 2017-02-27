@@ -27,7 +27,7 @@ To solve this issue you need to add/remove the `required` attribute programmatic
 This is how your error messages will look after using this plugin.
 
 <p align="center">
-  <img src="https://github.com/byverdu/prettyFormError/blob/master/docs/demo.png" alt="demo image" width="500">
+  <img src="https://github.com/byverdu/prettyFormError/raw/master/docs/demo.png" alt="demo image" width="500">
 </p>
 
 ### Dependencies
