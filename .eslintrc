@@ -1,5 +1,12 @@
 {
   "extends": ["eslint:recommended", "eslint-config-es5"],
+	"parser": "babel-eslint",
+	"plugins": [
+		"flowtype-errors"
+	],
+	"rules": {
+		"flowtype-errors/show-errors": 2
+	},
   "env": {
     "browser": true,
     "jquery": true,
