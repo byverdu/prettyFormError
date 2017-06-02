@@ -1,14 +1,26 @@
 // @flow
 // prettyError jQuery plugin
-
-// var xoxo: number = 0 + '4';
+interface PrettyFormError {
+	classError: string;
+	elementError: string;
+	positionMethod: string;
+	multiCheckbox: {
+		enabled: boolean;
+		selector: string;
+	};
+	callToAction: string;
+	fadeOutError: {
+		fadeOut: boolean;
+		fadeOutOpts: string
+	};
+}
 
 ;( function( $, window, document, undefined ) { // eslint-disable-line
   var pluginName = 'prettyFormError';
   var dataKey = 'plugin_' + pluginName;
 
   // utils
-  function createErrorsForInvalid(invalid, options) {
+  function createErrorsForInvalid(invalid, options: PrettyFormError) {
     return $.each( invalid, function( index, value ) {
       var errors = $('<' + options.elementError + '>')
         .addClass( options.classError )
@@ -19,7 +31,7 @@
   }
 
   // Plugin constructor
-  var Plugin = function( element, options ) {
+  var Plugin = function( element, options: PrettyFormError ) {
     this.element = $(element);
     this.options = {
       multiCheckbox: {
@@ -38,7 +50,7 @@
   };
 
   Plugin.prototype = {
-    init: function( options ) {
+    init: function( options: PrettyFormError ) {
       // user options checker for positionMethod
       // to avoid breaking the plugin initialization
       if (options !== undefined &&
@@ -77,15 +89,13 @@
     },
 
     // button click handler
-    handleClickCallToAction: function( element, options ) {
+    handleClickCallToAction: function( element, options: PrettyFormError ) {
       var btn = element.find( options.callToAction );
 
       btn.on( 'click', function( event ) {
         event.preventDefault();
         // removing the old errors
-				$( '.xoxo' ).addClass('');
         $( '.' + options.classError ).remove();
-
         // targeting all invalid errors,
         // fieldset elements also receive the validity pseudo-selector
         var invalid = element.find( ':invalid' ).not( 'fieldset' );

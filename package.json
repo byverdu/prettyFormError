@@ -4,7 +4,7 @@
   "description": "jQuery plugin that makes pretty the form errors in all browsers by applying same styles",
   "main": "index.html",
   "scripts": {
-    "build": "babel src-dev/ -d src/",
+    "build": "./node_modules/.bin/flow-remove-types src-dev/ -p -d src/",
     "flow": "flow",
     "prepublish": "npm run build",
     "test": "gulp tests"
@@ -44,9 +44,9 @@
     "eslint-config-es5": "^0.5.0",
     "eslint-plugin-flowtype-errors": "^3.3.0",
     "flow-bin": "^0.47.0",
+    "flow-remove-types": "^1.2.1",
     "gulp": "^3.9.1",
     "gulp-cssnano": "^2.1.2",
-    "gulp-flowtype": "^1.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^2.2.0",
