@@ -1,19 +1,7 @@
 // @flow
 // prettyError jQuery plugin
-interface PrettyFormError {
-	classError: string;
-	elementError: string;
-	positionMethod: string;
-	multiCheckbox: {
-		enabled: boolean;
-		selector: string;
-	};
-	callToAction: string;
-	fadeOutError: {
-		fadeOut: boolean;
-		fadeOutOpts: string
-	};
-}
+
+import type PrettyFormError from '../interfaces/prettyFormErros.js'
 
 ;( function( $, window, document, undefined ) { // eslint-disable-line
   var pluginName = 'prettyFormError';

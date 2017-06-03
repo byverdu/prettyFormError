@@ -1,14 +1,14 @@
-//      
+// @flow
 // prettyError jQuery plugin
 
-                                                                   
+import type PrettyFormError from '../interfaces/prettyFormErros.js'
 
- ( function( $, window, document, undefined ) { // eslint-disable-line
+;( function( $, window, document, undefined ) { // eslint-disable-line
   var pluginName = 'prettyFormError';
   var dataKey = 'plugin_' + pluginName;
 
   // utils
-  function createErrorsForInvalid(invalid, options                 ) {
+  function createErrorsForInvalid(invalid, options: PrettyFormError) {
     return $.each( invalid, function( index, value ) {
       var errors = $('<' + options.elementError + '>')
         .addClass( options.classError )
@@ -19,7 +19,7 @@
   }
 
   // Plugin constructor
-  var Plugin = function( element, options                  ) {
+  var Plugin = function( element, options: PrettyFormError ) {
     this.element = $(element);
     this.options = {
       multiCheckbox: {
@@ -38,7 +38,7 @@
   };
 
   Plugin.prototype = {
-    init: function( options                  ) {
+    init: function( options: PrettyFormError ) {
       // user options checker for positionMethod
       // to avoid breaking the plugin initialization
       if (options !== undefined &&
@@ -77,7 +77,7 @@
     },
 
     // button click handler
-    handleClickCallToAction: function( element, options                  ) {
+    handleClickCallToAction: function( element, options: PrettyFormError ) {
       var btn = element.find( options.callToAction );
 
       btn.on( 'click', function( event ) {
