@@ -16,6 +16,6 @@ module.exports = {
   srcDocs: `${destDir}/*.min.*`,
   destDocs: './docs/',
   watchDocs: ['./docs/*', './src/docs.scss'],
-  srcMocha: [ './mocha', './' ],
-  watchMocha: './mocha/*'
+  srcMocha: [ './test', './' ],
+  watchMocha: './test/*'
 };

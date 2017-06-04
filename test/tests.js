@@ -99,7 +99,7 @@
           expect( defaultOptions.options )
             .to.have.property( 'fadeOutError' )
             .that.is.an( 'Object' )
-            .and.eql( {fadeOut: false} );
+            .and.eql( {fadeOut: false, fadeOutOpts: ''} );
         });
       });
       it( 'can be configured', function() {
