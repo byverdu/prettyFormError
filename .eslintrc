@@ -5,7 +5,11 @@
 		"flowtype-errors"
 	],
 	"rules": {
-		"flowtype-errors/show-errors": 2
+		"flowtype-errors/show-errors": 2,
+    "no-mixed-spaces-and-tabs": 2,
+    "comma-dangle": [2, "never"],
+    "space-in-parens": [2, "always", { "exceptions": ["()","{}","[]"] } ],
+    "computed-property-spacing": [2, "always"]
 	},
   "env": {
     "browser": true,

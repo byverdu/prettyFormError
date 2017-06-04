@@ -7,19 +7,19 @@
   var dataKey = 'plugin_' + pluginName;
 
   // utils
-  function createErrorsForInvalid(invalid, options: PrettyFormError) {
+  function createErrorsForInvalid( invalid, options: PrettyFormError ) {
     return $.each( invalid, function( index, value ) {
-      var errors = $('<' + options.elementError + '>')
+      var errors = $( '<' + options.elementError + '>' )
         .addClass( options.classError )
         .text( value.validationMessage );
       // position for error message -> before or after
-      $( value )[options.positionMethod]( errors );
+      $( value )[ options.positionMethod ]( errors );
     });
   }
 
   // Plugin constructor
   var Plugin = function( element, options: PrettyFormError ) {
-    this.element = $(element);
+    this.element = $( element );
     this.options = {
       multiCheckbox: {
         enabled: false,
@@ -40,7 +40,7 @@
     init: function( options: PrettyFormError ) {
       // user options checker for positionMethod
       // to avoid breaking the plugin initialization
-      if (options !== undefined &&
+      if ( options !== undefined &&
           options.positionMethod !== undefined &&
           options.positionMethod !== 'after' &&
           options.positionMethod !== 'before'
@@ -54,8 +54,8 @@
       $.extend( this.options, options );
 
       // multiCheckbox configuration
-      if (this.options.multiCheckbox.enabled) {
-        this.multiCheckboxConfig(this.options);
+      if ( this.options.multiCheckbox.enabled ) {
+        this.multiCheckboxConfig( this.options );
       }
 
       this.handleClickCallToAction( this.element, this.options );
@@ -63,14 +63,14 @@
 
     // workaround to validate the multiple
     // checkboxes that at least one value is required
-    multiCheckboxConfig: function(options) {
+    multiCheckboxConfig: function( options: PrettyFormError ) {
       var allCheckboxes = $( options.multiCheckbox.selector );
       allCheckboxes
-        .change(function() {
-          if (allCheckboxes.is(':checked')) {
-            allCheckboxes.removeAttr('required');
+        .change( function() {
+          if ( allCheckboxes.is( ':checked' )) {
+            allCheckboxes.removeAttr( 'required' );
           } else {
-            allCheckboxes.attr('required', 'required');
+            allCheckboxes.attr( 'required', 'required' );
           }
         });
     },
@@ -92,7 +92,7 @@
 
         // focus the first element with error
         if ( options.focusErrorOnClick && invalid.length > 1 ) {
-          invalid[0].focus();
+          invalid[ 0 ].focus();
         }
 
         // fadeOut de errors
@@ -106,8 +106,8 @@
 
   $.fn[ pluginName ] = function( options ) {
     return this.each( function() {
-      if ( !$.data( this, dataKey ) ) {
-        $.data( this, dataKey, new Plugin( this, options ) );
+      if ( !$.data( this, dataKey )) {
+        $.data( this, dataKey, new Plugin( this, options ));
       }
     });
   };
