@@ -2,6 +2,7 @@ const gulp = require( 'gulp' );
 const sourcemaps = require( 'gulp-sourcemaps' );
 const rename = require( 'gulp-rename' );
 const minify = require( 'gulp-uglify' );
+const stripLine  = require( 'gulp-strip-line' );
 const paths = require( '../paths' );
 
 gulp.task( 'minify', () => {
@@ -15,5 +16,11 @@ gulp.task( 'minify', () => {
 
 gulp.task( 'move-js', [ 'minify' ], () => {
   gulp.src( paths.srcJs )
+  .pipe( stripLine([
+    /^\/\*\s*global PrettyFormError \*\//,
+    /^\/\*\s* \*\//
+  ]))
     .pipe( gulp.dest( paths.destJs ));
 });
+
+gulp.task( 'build-js', ['minify', 'move-js']);
