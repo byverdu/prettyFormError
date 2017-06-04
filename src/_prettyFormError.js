@@ -1,7 +1,6 @@
-// @flow
+/* global PrettyFormError */
+/* @flow */
 // prettyError jQuery plugin
-
-import type PrettyFormError from '../interfaces/prettyFormErros.js'
 
 ;( function( $, window, document, undefined ) { // eslint-disable-line
   var pluginName = 'prettyFormError';

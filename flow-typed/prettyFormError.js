@@ -1,4 +1,4 @@
-export interface PrettyFormError {
+interface PrettyFormError {
 	classError: string;
 	elementError: string;
 	positionMethod: string;
@@ -12,3 +12,5 @@ export interface PrettyFormError {
 		fadeOutOpts: string
 	};
 }
+
+export type { PrettyFormError };

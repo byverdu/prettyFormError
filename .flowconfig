@@ -4,4 +4,5 @@
 
 [libs]
 jquery_v3.x.x
+prettyFormError
 [options]
