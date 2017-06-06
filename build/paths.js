@@ -23,6 +23,7 @@ module.exports = {
   watchDocs: [`./${srcDocs}/*`, `./${srcDir}/docs.scss`],
   srcMocha: [ `./${srcTest}`, './' ],
   watchMocha: [`./${srcTest}/*`, `./${srcDev}/*.js`],
+  watchEs: [`./${srcTest}/*`, `./${srcDir}/index.html`],
   watchDev: [`${srcDev}/*.js`, `${srcDir}/prettyFormError.scss`],
   processCommand: './node_modules/.bin/flow-remove-types src-dev/ -d src/'
 };

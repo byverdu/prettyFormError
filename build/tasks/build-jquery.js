@@ -23,4 +23,4 @@ gulp.task( 'move-js', [ 'minify' ], () => {
     .pipe( gulp.dest( paths.destJs ));
 });
 
-gulp.task( 'build-js', ['minify', 'move-js']);
+gulp.task( 'build-jquery', ['minify', 'move-js']);
