@@ -1,5 +1,5 @@
 /* global PrettyFormError */
-/*       */
+/*  */
 // prettyError jQuery plugin
 
 ;( function( $, window, document, undefined ) { // eslint-disable-line
@@ -7,7 +7,7 @@
   var dataKey = 'plugin_' + pluginName;
 
   // utils
-  function createErrorsForInvalid( invalid, options                  ) {
+  function createErrorsForInvalid( invalid, options ) {
     return $.each( invalid, function( index, value ) {
       var errors = $( '<' + options.elementError + '>' )
         .addClass( options.classError )
@@ -18,7 +18,7 @@
   }
 
   // Plugin constructor
-  var Plugin = function( element, options                  ) {
+  var Plugin = function( element, options ) {
     this.element = $( element );
     this.options = {
       multiCheckbox: {
@@ -37,7 +37,7 @@
   };
 
   Plugin.prototype = {
-    init: function( options                  ) {
+    init: function( options ) {
       // user options checker for positionMethod
       // to avoid breaking the plugin initialization
       if ( options !== undefined &&
@@ -63,7 +63,7 @@
 
     // workaround to validate the multiple
     // checkboxes that at least one value is required
-    multiCheckboxConfig: function( options                  ) {
+    multiCheckboxConfig: function( options ) {
       var allCheckboxes = $( options.multiCheckbox.selector );
       allCheckboxes
         .change( function() {
@@ -76,29 +76,32 @@
     },
 
     // button click handler
-    handleClickCallToAction: function( element, options                  ) {
+    handleClickCallToAction: function( element, options ) {
       var btn = element.find( options.callToAction );
 
       btn.on( 'click', function( event ) {
-        event.preventDefault();
-        // removing the old errors
-        $( '.' + options.classError ).remove();
-        // targeting all invalid errors,
-        // fieldset elements also receive the validity pseudo-selector
         var invalid = element.find( ':invalid' ).not( 'fieldset' );
 
-        // Adding errors to :invalid elements
-        createErrorsForInvalid( invalid, options );
+        if ( invalid.length > 0 ) {
+          event.preventDefault();
+          // removing the old errors
+          $( '.' + options.classError ).remove();
+          // targeting all invalid errors,
+          // fieldset elements also receive the validity pseudo-selector
 
-        // focus the first element with error
-        if ( options.focusErrorOnClick && invalid.length > 1 ) {
-          invalid[ 0 ].focus();
-        }
+          // Adding errors to :invalid elements
+          createErrorsForInvalid( invalid, options );
 
-        // fadeOut de errors
-        if ( options.fadeOutError.fadeOut ) {
-          $( '.' + options.classError )
-            .fadeOut( options.fadeOutError.fadeOutOpts );
+          // focus the first element with error
+          if ( options.focusErrorOnClick && invalid.length > 1 ) {
+            invalid[ 0 ].focus();
+          }
+
+          // fadeOut de errors
+          if ( options.fadeOutError.fadeOut ) {
+            $( '.' + options.classError )
+              .fadeOut( options.fadeOutError.fadeOutOpts );
+          }
         }
       });
     }
