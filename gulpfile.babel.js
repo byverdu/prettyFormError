@@ -9,6 +9,6 @@ gulp.task( 'build', [
 
 gulp.task( 'default', [ 'build' ]);
 gulp.task( 'tests', [ 'serve-test', 'watch-test' ]);
-gulp.task( 'dev', [ 'clean', 'serve-jquery', 'watch-dev' ]);
+gulp.task( 'jquery', [ 'clean', 'serve-jquery', 'watch-dev' ]);
 gulp.task( 'docs', [ 'serve-docs', 'watch-docs' ]);
 gulp.task( 'es', [ 'serve-es', 'watch-es' ]);
