@@ -44,3 +44,17 @@ gulp.task( 'serve-docs', ['docs-sass', 'move-docs'], ( done ) => {
     }
   }, done );
 });
+
+gulp.task( 'serve-es', [ 'type-check' ], ( done ) => {
+  browserSync({
+    open: false,
+    port: 9000,
+    server: {
+      baseDir: paths.srcDir,
+      middleware( req, res, next ) {
+        res.setHeader( 'Access-Control-Allow-Origin', '*' );
+        next();
+      }
+    }
+  }, done );
+});
