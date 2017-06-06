@@ -80,25 +80,28 @@
       var btn = element.find( options.callToAction );
 
       btn.on( 'click', function( event ) {
-        event.preventDefault();
-        // removing the old errors
-        $( '.' + options.classError ).remove();
-        // targeting all invalid errors,
-        // fieldset elements also receive the validity pseudo-selector
         var invalid = element.find( ':invalid' ).not( 'fieldset' );
 
-        // Adding errors to :invalid elements
-        createErrorsForInvalid( invalid, options );
+        if ( invalid.length > 0 ) {
+          event.preventDefault();
+          // removing the old errors
+          $( '.' + options.classError ).remove();
+          // targeting all invalid errors,
+          // fieldset elements also receive the validity pseudo-selector
 
-        // focus the first element with error
-        if ( options.focusErrorOnClick && invalid.length > 1 ) {
-          invalid[ 0 ].focus();
-        }
+          // Adding errors to :invalid elements
+          createErrorsForInvalid( invalid, options );
 
-        // fadeOut de errors
-        if ( options.fadeOutError.fadeOut ) {
-          $( '.' + options.classError )
-            .fadeOut( options.fadeOutError.fadeOutOpts );
+          // focus the first element with error
+          if ( options.focusErrorOnClick && invalid.length > 1 ) {
+            invalid[ 0 ].focus();
+          }
+
+          // fadeOut de errors
+          if ( options.fadeOutError.fadeOut ) {
+            $( '.' + options.classError )
+              .fadeOut( options.fadeOutError.fadeOutOpts );
+          }
         }
       });
     }
