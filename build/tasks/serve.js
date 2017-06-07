@@ -49,8 +49,9 @@ gulp.task( 'serve-es', [ 'type-check' ], ( done ) => {
   browserSync({
     open: false,
     port: 9000,
+    reloadDelay: 2000,
     server: {
-      baseDir: paths.srcDir,
+      baseDir: [paths.srcDir,  paths.srcServe],
       middleware( req, res, next ) {
         res.setHeader( 'Access-Control-Allow-Origin', '*' );
         next();

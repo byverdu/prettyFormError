@@ -5,20 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link rel="stylesheet" href="prettyFormError.css">
 </head>
 <body>
   <form>
     <label for="name">Name</label>
     <input id="name" type="text" required />
-    <label for="surname">surname</label>
-    <input id="surname" type="text" required />
+    <label for="mail">mail</label>
+    <input id="mail" type="email" required />
     <button>Click me!</button>
   </form>
   <script src="./module.prettyFormError.js"></script>
   <script>
     document.addEventListener( 'DOMContentLoaded', (event) => {
-      const x = new PrettyFormErrorFactory(document.querySelector('form'), {callToAction: 'button'});
-      x.onClickHandler();
+      const x = new PrettyError(document.querySelector('form'));
+      x.init();
     });
   </script>
 </body>
