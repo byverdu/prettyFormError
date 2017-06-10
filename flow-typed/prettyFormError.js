@@ -1,4 +1,4 @@
-interface PrettyFormError {
+interface IprettyError {
   classError: string;
   elementError: string;
   positionMethod: string;
@@ -13,4 +13,4 @@ interface PrettyFormError {
   };
 }
 
-export type { PrettyFormError };
+export type { IprettyError };

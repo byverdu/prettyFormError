@@ -1,4 +1,4 @@
-/* global PrettyFormError */
+/* global IprettyError */
 /* @flow */
 // prettyError jQuery plugin
 
@@ -7,7 +7,7 @@
   var dataKey = 'plugin_' + pluginName;
 
   // utils
-  function createErrorsForInvalid( invalid, options: PrettyFormError ) {
+  function createErrorsForInvalid( invalid, options: IprettyError ) {
     return $.each( invalid, function( index, value ) {
       var errors = $( '<' + options.elementError + '>' )
         .addClass( options.classError )
@@ -18,14 +18,14 @@
   }
 
   // Plugin constructor
-  var Plugin = function( element, options: PrettyFormError ) {
+  var Plugin = function( element, options: IprettyError ) {
     this.element = $( element );
     this.options = {
       multiCheckbox: {
         enabled: false,
         selector: '.multiCheckbox'
       },
-      classError: 'prettyFormError',
+      classError: 'IprettyError',
       positionMethod: 'after',
       elementError: 'div',
       callToAction: 'button',
@@ -37,7 +37,7 @@
   };
 
   Plugin.prototype = {
-    init: function( options: PrettyFormError ) {
+    init: function( options: IprettyError ) {
       // user options checker for positionMethod
       // to avoid breaking the plugin initialization
       if ( options !== undefined &&
@@ -63,7 +63,7 @@
 
     // workaround to validate the multiple
     // checkboxes that at least one value is required
-    multiCheckboxConfig: function( options: PrettyFormError ) {
+    multiCheckboxConfig: function( options: IprettyError ) {
       var allCheckboxes = $( options.multiCheckbox.selector );
       allCheckboxes
         .change( function() {
@@ -76,7 +76,7 @@
     },
 
     // button click handler
-    handleClickCallToAction: function( element, options: PrettyFormError ) {
+    handleClickCallToAction: function( element, options: IprettyError ) {
       var btn = element.find( options.callToAction );
 
       btn.on( 'click', function( event ) {
