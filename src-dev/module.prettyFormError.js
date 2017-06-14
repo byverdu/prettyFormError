@@ -18,11 +18,14 @@ function PrettyFormError() {
     const elementError = options.elementError || 'div';
     const classError = options.classError || 'prettyFormError';
     const positionMethod = options.positionMethod || 'beforebegin';
+    const focusErrorOnClick = options.focusErrorOnClick || true;
     return {
       callToAction,
       elementError,
       classError,
-      positionMethod
+      positionMethod,
+      focusErrorOnClick
+      
     };
   }
 
@@ -128,6 +131,11 @@ function PrettyFormError() {
         // clearing valid inputs
         if ( invalids.length === 0 && valids.length > 0 ) {
           _clearValidInputs( valids );
+        }
+
+        // focusing on first errrored input
+        if ( invalids.length > 0 && innerOpts.focusErrorOnClick ) {
+          invalids[ 0 ].focus();
         }
       });
     }
