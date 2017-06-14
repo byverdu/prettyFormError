@@ -1,7 +1,7 @@
 interface IprettyError {
   classError: string;
   elementError: string;
-  positionMethod: string;
+  positionMethod: string | 'beforebegin' | 'afterbegin' | 'beforeend' | 'afterend';
   multiCheckbox: {
     enabled: boolean;
     selector: string;

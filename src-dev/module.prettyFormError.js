@@ -17,10 +17,12 @@ function PrettyFormError() {
     const callToAction = options.callToAction || 'button';
     const elementError = options.elementError || 'div';
     const classError = options.classError || 'prettyFormError';
+    const positionMethod = options.positionMethod || 'beforebegin';
     return {
       callToAction,
       elementError,
-      classError
+      classError,
+      positionMethod
     };
   }
 
@@ -54,18 +56,20 @@ function PrettyFormError() {
    * @param {NodeList<HTMLElement>} invalids Invalid inputs for actual submited form
    * @param {string} element User or default element defined for error
    * @param {string} classError User or default css class for error
+   * @param {string} positionMethod User or default css class for error
    * @return {void}
    */
   function _createErrorElement(
     invalids: NodeList<HTMLElement>,
     element: string,
-    classError: string
+    classError: string,
+    positionMethod: 'beforebegin' | 'afterbegin' | 'beforeend' | 'afterend'
   ): void {
     [].forEach.call( invalids, ( invalid: HTMLInputElement ) => {
       const tempElem = document.createElement( element );
       tempElem.textContent = invalid.validationMessage;
       tempElem.classList.add( `${classError}` );
-      invalid.insertAdjacentElement( 'afterend', tempElem );
+      invalid.insertAdjacentElement( positionMethod, tempElem );
     });
   }
 
@@ -115,7 +119,9 @@ function PrettyFormError() {
           _createErrorElement(
             invalids,
             innerOpts.elementError,
-            innerOpts.classError
+            innerOpts.classError,
+            // $FlowFixMe
+            innerOpts.positionMethod
           );
         }
 
