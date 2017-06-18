@@ -13,9 +13,23 @@ $errorColor: #EA5B5B;
   padding: 5px;
   position: relative;
 
+  &-fade {
+    opacity: 0;
+    animation: fadeOut 5s ease-in-out 0s 1 normal none;
+  }
+
   &:before {
     content: "\2718";
     font-size: 13px;
     margin: 0 5px;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }

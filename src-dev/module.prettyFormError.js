@@ -30,18 +30,21 @@ function PrettyFormError() {
    * @returns {void}
    */
   function _setOpts( options: IprettyError ) {
+    const tempFadeOpt = {fadeOut: true, fadeOutOpts: ''};
     const callToAction = options.callToAction || 'button';
     const elementError = options.elementError || 'div';
     const classError = options.classError || 'prettyFormError';
     const positionMethod = _valuePositonChecker( options.positionMethod );
     const focusErrorOnClick = options.focusErrorOnClick || true;
+    const fadeOutError = options.fadeOutError || tempFadeOpt;
 
     return {
       callToAction,
       elementError,
       classError,
       positionMethod,
-      focusErrorOnClick
+      focusErrorOnClick,
+      fadeOutError
     };
   }
 
@@ -57,12 +60,13 @@ function PrettyFormError() {
 
 
   /** Romoves old errors displayed in screen
-   * @param {EventTarget} event Current form that is validated
+   * @param {EventTarget} element Current form that is validated
+   * @param {string} cssSelector css class name to serach and delete
    * @return {void}
    */
-  function _removeOldErrors( event: EventTarget ): void {
-    if ( event ) {
-      const oldErrors = ( event: window.HTMLElement ).parentElement.querySelectorAll( `.${innerOpts.classError}` );
+  function _removeOldErrors( element: HTMLElement, cssSelector: string ): void {
+    if ( element ) {
+      const oldErrors = element.querySelectorAll( `.${cssSelector}` );
       [].forEach.call( oldErrors, ( error: HTMLElement ) => {
         error.remove();
       });
@@ -94,11 +98,12 @@ function PrettyFormError() {
   /**
    * Applies click handler for collection
    * @param {*} elements Array of HTMLElements
+   * @param {*} options User options or defaults
    * @return {void}
    */
-  function _clickHandlerNodeList( elements: any ): void {
+  function _clickHandlerNodeList( elements: any, options: any ): void {
     for ( let i = 0; i < elements.length; i++ ) {
-      _onClickHandler( elements[ i ]);
+      _onClickHandler( elements[ i ], options );
     }
   }
 
@@ -116,30 +121,52 @@ function PrettyFormError() {
   /**
    * Append click event for element within the form
    * @param {HTMLElement} element form element to apply
+   * @param {*} options User options or defaults
    * @return {void}
    */
-  function _onClickHandler( element: HTMLElement ): void {
-    const button: ?HTMLElement = element.querySelector( `${innerOpts.callToAction}` );
+  function _onClickHandler( element: HTMLElement, options: any ): void {
+    const button: ?HTMLElement = element.querySelector( `${options.callToAction}` );
 
     if ( button ) {
       button.addEventListener( 'click', ( event: MouseEvent ) => {
         event.preventDefault();
         const invalids = element.querySelectorAll( ':invalid' );
         const valids = element.querySelectorAll( ':valid' );
+        let observer;
 
         // removing old errors
-        if ( document.querySelector( `.${innerOpts.classError}` )) {
-          _removeOldErrors( event.currentTarget );
+        if ( !options.fadeOutError.fadeOut && document.querySelector( `.${options.classError}` )) {
+          _removeOldErrors( element,  options.classError );
+        }
+        // fading old errors
+        if ( options.fadeOutError.fadeOut ) {
+          observer = new MutationObserver( mutations => {
+            mutations.forEach( mutation => {
+              if ( mutation.addedNodes.length > 0 ) {
+                ( mutation.addedNodes[ 0 ]: any ).classList.add( 'prettyFormError-fade' );
+                setTimeout(() => {
+                  _removeOldErrors( element,  options.classError );
+                }, 5500 );
+              }
+            });
+          });
+          const config = { attributes: true, childList: true, characterData: true };
+          observer.observe( element, config );
+
+          // clearing observer
+          if ( invalids.length === 0 && valids.length > 0 ) {
+            observer.disconnect();
+            observer = null;
+          }
         }
 
         // adding new errors
         if ( invalids.length > 0 ) {
           _createErrorElement(
             invalids,
-            innerOpts.elementError,
-            innerOpts.classError,
-            // $FlowFixMe
-            innerOpts.positionMethod
+            options.elementError,
+            options.classError,
+            options.positionMethod
           );
         }
 
@@ -149,7 +176,7 @@ function PrettyFormError() {
         }
 
         // focusing on first errrored input
-        if ( invalids.length > 0 && innerOpts.focusErrorOnClick ) {
+        if ( invalids.length > 0 && options.focusErrorOnClick ) {
           invalids[ 0 ].focus();
         }
       });
@@ -174,7 +201,7 @@ function PrettyFormError() {
       // seting user props or default
       // and adding click handler
       innerOpts = _setOpts( options );
-      _clickHandlerNodeList( tempElem );
+      _clickHandlerNodeList( tempElem, innerOpts );
     }
   };
 }
