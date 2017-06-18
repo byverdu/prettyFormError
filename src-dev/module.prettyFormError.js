@@ -27,14 +27,16 @@ function PrettyFormError() {
    * @param {IprettyError} options Object implementing IprettyError
    * @returns {void}
    */
-  function _setOpts( options: IprettyError ) {
-    const tempFadeOpt = {fadeOut: true, fadeOutOpts: ''};
+  function _setOpts( options: IprettyError ): IprettyError {
+    const tempFadeOpt = {fadeOut: false, fadeOutOpts: ''};
+    const tempMulti = {enabled: false, selector: '.multiCheckbox'};
     const callToAction = options.callToAction || 'button';
     const elementError = options.elementError || 'div';
     const classError = options.classError || 'prettyFormError';
     const positionMethod = _valuePositonChecker( options.positionMethod );
     const focusErrorOnClick = options.focusErrorOnClick || true;
     const fadeOutError = options.fadeOutError || tempFadeOpt;
+    const multiCheckbox = options.multiCheckbox || tempMulti;
 
     return {
       callToAction,
@@ -42,7 +44,8 @@ function PrettyFormError() {
       classError,
       positionMethod,
       focusErrorOnClick,
-      fadeOutError
+      fadeOutError,
+      multiCheckbox
     };
   }
 
@@ -120,13 +123,40 @@ function PrettyFormError() {
    * Adds CSS class with animation so error can fadeout
    * @returns {MutationObserver} mutation observer constructor
    */
-  function _fadeOutError(): MutationObserver {
+  function _fadeOutErrorConfig(): MutationObserver {
     return new MutationObserver( mutations => {
       mutations.forEach( mutation => {
         if ( mutation.addedNodes.length > 0 ) {
           ( mutation.addedNodes[ 0 ]: any ).classList.add( 'prettyFormError-fade' );
         }
       });
+    });
+  }
+
+  /**
+   * setup for multi checkboxes that needs validation
+   * @param {string} cssSelector common css selector for all checkboxes
+   * @returns {void}
+   */
+  function _multiCheckboxConfig( cssSelector: string ) {
+    const checkboxes = document.querySelectorAll( cssSelector );
+
+    function changeHandler() {
+      const checkedCount = document.querySelectorAll( `${cssSelector}:checked` ).length;
+
+      if ( checkedCount > 0 ) {
+        for ( let i = 0; i < checkboxes.length; i++ ) {
+          checkboxes[ i ].removeAttribute( 'required' );
+        }
+      } else {
+        for ( let i = 0; i < checkboxes.length; i++ ) {
+          checkboxes[ i ].setAttribute( 'required', 'required' );
+        }
+      }
+    }
+
+    [].forEach.call( checkboxes, input => {
+      input.addEventListener( 'change', changeHandler );
     });
   }
 
@@ -151,13 +181,13 @@ function PrettyFormError() {
         }
         // fading old errors
         if ( options.fadeOutError.fadeOut ) {
-          let observer = _fadeOutError();
+          let observer = _fadeOutErrorConfig();
           const config = { attributes: true, childList: true, characterData: true };
           observer.observe( element, config );
 
           setTimeout(() => {
             _removeOldErrors( element,  options.classError );
-          }, 5500 );
+          }, 6200 );
 
           // clearing observer
           if ( invalids.length === 0 && valids.length > 0 ) {
@@ -184,6 +214,11 @@ function PrettyFormError() {
         // focusing on first errrored input
         if ( invalids.length > 0 && options.focusErrorOnClick ) {
           invalids[ 0 ].focus();
+        }
+
+        // multiCheckbox configuration
+        if ( options.multiCheckbox.enabled ) {
+          _multiCheckboxConfig( options.multiCheckbox.selector );
         }
       });
     }
