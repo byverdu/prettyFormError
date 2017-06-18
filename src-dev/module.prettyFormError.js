@@ -6,8 +6,6 @@
  * @returns {Function} init(element, options)
  */
 function PrettyFormError() {
-  let innerOpts;
-
   /**
    * Assignement a default value and checking valid one for positionMethod prop
    * @param {string} [userValue='afterend'] user value
@@ -119,6 +117,20 @@ function PrettyFormError() {
   }
 
   /**
+   * Adds CSS class with animation so error can fadeout
+   * @returns {MutationObserver} mutation observer constructor
+   */
+  function _fadeOutError(): MutationObserver {
+    return new MutationObserver( mutations => {
+      mutations.forEach( mutation => {
+        if ( mutation.addedNodes.length > 0 ) {
+          ( mutation.addedNodes[ 0 ]: any ).classList.add( 'prettyFormError-fade' );
+        }
+      });
+    });
+  }
+
+  /**
    * Append click event for element within the form
    * @param {HTMLElement} element form element to apply
    * @param {*} options User options or defaults
@@ -132,7 +144,6 @@ function PrettyFormError() {
         event.preventDefault();
         const invalids = element.querySelectorAll( ':invalid' );
         const valids = element.querySelectorAll( ':valid' );
-        let observer;
 
         // removing old errors
         if ( !options.fadeOutError.fadeOut && document.querySelector( `.${options.classError}` )) {
@@ -140,18 +151,13 @@ function PrettyFormError() {
         }
         // fading old errors
         if ( options.fadeOutError.fadeOut ) {
-          observer = new MutationObserver( mutations => {
-            mutations.forEach( mutation => {
-              if ( mutation.addedNodes.length > 0 ) {
-                ( mutation.addedNodes[ 0 ]: any ).classList.add( 'prettyFormError-fade' );
-                setTimeout(() => {
-                  _removeOldErrors( element,  options.classError );
-                }, 5500 );
-              }
-            });
-          });
+          let observer = _fadeOutError();
           const config = { attributes: true, childList: true, characterData: true };
           observer.observe( element, config );
+
+          setTimeout(() => {
+            _removeOldErrors( element,  options.classError );
+          }, 5500 );
 
           // clearing observer
           if ( invalids.length === 0 && valids.length > 0 ) {
@@ -200,8 +206,7 @@ function PrettyFormError() {
 
       // seting user props or default
       // and adding click handler
-      innerOpts = _setOpts( options );
-      _clickHandlerNodeList( tempElem, innerOpts );
+      _clickHandlerNodeList( tempElem, _setOpts( options ));
     }
   };
 }
