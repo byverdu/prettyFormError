@@ -45,7 +45,7 @@ gulp.task( 'serve-docs', ['docs-sass', 'move-docs'], ( done ) => {
   }, done );
 });
 
-gulp.task( 'serve-es', [ 'type-check' ], ( done ) => {
+gulp.task( 'serve-es', [ 'type-check', 'build-es' ], ( done ) => {
   browserSync({
     open: false,
     port: 9000,

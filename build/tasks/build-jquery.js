@@ -6,7 +6,7 @@ const stripLine  = require( 'gulp-strip-line' );
 const paths = require( '../paths' );
 
 gulp.task( 'minify', () => {
-  gulp.src( paths.srcJs )
+  gulp.src( paths.srcJquery )
     .pipe( rename({ suffix: '.min' }))
     .pipe( sourcemaps.init())
     .pipe( minify())
@@ -15,12 +15,10 @@ gulp.task( 'minify', () => {
 });
 
 gulp.task( 'move-js', [ 'minify' ], () => {
-  gulp.src( paths.srcJs )
+  gulp.src( paths.srcJquery )
   .pipe( stripLine([
-    /^\/\*\s*global PrettyFormError \*\//,
+    /^\/\*\s*global IprettyError \*\//,
     /^\/\*\s* \*\//
   ]))
     .pipe( gulp.dest( paths.destJs ));
 });
-
-gulp.task( 'build-jquery', ['minify', 'move-js']);

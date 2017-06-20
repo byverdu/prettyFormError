@@ -5,10 +5,11 @@
  *  using vanilla JS
  * @returns {Function} init(element, options)
  */
+
 function PrettyFormError() {
   /**
    * Assignement a default value and checking valid one for positionMethod prop
-   * @param {string} [userValue] user value
+   * @param {string} [userValue='afterend'] user value
    * @returns {string} value for positionMethod prop
    */
   function _valuePositonChecker( userValue  = 'afterend' ) {
@@ -138,26 +139,18 @@ function PrettyFormError() {
    * @param {string} cssSelector common css selector for all checkboxes
    * @returns {void}
    */
-  function _multiCheckboxConfig( cssSelector ) {
-    const checkboxes = document.querySelectorAll( cssSelector );
+  function _changeHandler( checkboxes, cssSelector ) {
+    const checkedCount = document.querySelectorAll( `${cssSelector}:checked` ).length;
 
-    function changeHandler() {
-      const checkedCount = document.querySelectorAll( `${cssSelector}:checked` ).length;
-
-      if ( checkedCount > 0 ) {
-        for ( let i = 0; i < checkboxes.length; i++ ) {
-          checkboxes[ i ].removeAttribute( 'required' );
-        }
-      } else {
-        for ( let i = 0; i < checkboxes.length; i++ ) {
-          checkboxes[ i ].setAttribute( 'required', 'required' );
-        }
+    if ( checkedCount > 0 ) {
+      for ( let i = 0; i < checkboxes.length; i++ ) {
+        checkboxes[ i ].removeAttribute( 'required' );
+      }
+    } else {
+      for ( let i = 0; i < checkboxes.length; i++ ) {
+        checkboxes[ i ].setAttribute( 'required', 'required' );
       }
     }
-
-    [].forEach.call( checkboxes, input => {
-      input.addEventListener( 'change', changeHandler );
-    });
   }
 
   /**
@@ -218,7 +211,14 @@ function PrettyFormError() {
 
         // multiCheckbox configuration
         if ( options.multiCheckbox.enabled ) {
-          _multiCheckboxConfig( options.multiCheckbox.selector );
+          const selector = options.multiCheckbox.selector;
+          const checkboxes = document.querySelectorAll( selector );
+
+          [].forEach.call( checkboxes, input => {
+            input.addEventListener( 'change', () => {
+              _changeHandler( checkboxes, selector );
+            });
+          });
         }
       });
     }
@@ -245,3 +245,5 @@ function PrettyFormError() {
     }
   };
 }
+
+module.exports = PrettyFormError;

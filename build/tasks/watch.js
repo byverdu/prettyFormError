@@ -20,5 +20,5 @@ gulp.task( 'watch-docs', () => {
 });
 
 gulp.task( 'watch-es', () => {
-  gulp.watch( paths.watchEs, [ 'type-check', reload ], ).on( 'change', reportChange );
+  gulp.watch( paths.watchEs, [ 'type-check', 'build-es', reload ], ).on( 'change', reportChange );
 });
