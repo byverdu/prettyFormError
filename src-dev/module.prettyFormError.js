@@ -1,6 +1,8 @@
 // @flow
 /* global IprettyError */
 
+import { utils } from './utils';
+
 /** Global factory for PrettyFormError
  *  using vanilla JS
  * @returns {Function} init(element, options)

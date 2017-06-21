@@ -1,6 +1,6 @@
 /* global PrettyFormError, chai, sinon */
 import chai, { expect } from 'chai';
-import { utils } from '../src-dev/utils/module-es.js';
+import { utils } from '../src-dev/utils';
 import sinon from 'sinon';
 const sinonChai = require( 'sinon-chai' );
 chai.use( sinonChai );
