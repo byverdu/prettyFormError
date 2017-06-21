@@ -7,7 +7,7 @@
     "build": "./node_modules/.bin/flow-remove-types src-dev/ -p -d src/",
     "flow": "flow",
     "prepublish": "npm run build",
-    "test": "gulp tests"
+    "test": "mocha --compilers babel-register --watch test/utilsSpec.js"
   },
   "babel": {
     "presets": [
@@ -58,6 +58,8 @@
     "gulp-watch": "^4.3.10",
     "mocha": "^3.1.2",
     "require-dir": "^0.3.1",
+    "sinon": "^2.3.5",
+    "sinon-chai": "^2.11.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   },

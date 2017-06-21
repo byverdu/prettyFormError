@@ -136,6 +136,7 @@ function PrettyFormError() {
 
   /**
    * setup for multi checkboxes that needs validation
+   * @param {string} checkboxes NodeList to iterate through
    * @param {string} cssSelector common css selector for all checkboxes
    * @returns {void}
    */
