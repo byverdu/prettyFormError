@@ -9,49 +9,6 @@ import { utils } from './utils';
  */
 
 function PrettyFormError() {
-  /**
-   * Assignement a default value and checking valid one for positionMethod prop
-   * @param {string} [userValue='afterend'] user value
-   * @returns {string} value for positionMethod prop
-   */
-  function _valuePositonChecker( userValue: string  = 'afterend' ): string {
-    const notFound = [ 'beforebegin', 'afterend' ].indexOf( userValue.toLowerCase()) === -1;
-
-    if ( notFound ) {
-      console.warn( 'positionMethod prop value should be "beforebegin" or "afterend", a default "afterend" value has been assigned' );
-    }
-    return notFound ?
-      'afterend' :
-      userValue.toLowerCase();
-  }
-
-  /** Setting defualt properties values if user
-   *  doesn't specify them
-   * @param {IprettyError} options Object implementing IprettyError
-   * @returns {void}
-   */
-  function _setOpts( options: IprettyError ): IprettyError {
-    const tempFadeOpt = {fadeOut: false, fadeOutOpts: ''};
-    const tempMulti = {enabled: false, selector: '.multiCheckbox'};
-    const callToAction = options.callToAction || 'button';
-    const elementError = options.elementError || 'div';
-    const classError = options.classError || 'prettyFormError';
-    const positionMethod = _valuePositonChecker( options.positionMethod );
-    const focusErrorOnClick = options.focusErrorOnClick || true;
-    const fadeOutError = options.fadeOutError || tempFadeOpt;
-    const multiCheckbox = options.multiCheckbox || tempMulti;
-
-    return {
-      callToAction,
-      elementError,
-      classError,
-      positionMethod,
-      focusErrorOnClick,
-      fadeOutError,
-      multiCheckbox
-    };
-  }
-
   /** Converts actual element into array
    * @param {HTMLElement} element Element/s selected by user
    * @returns {Array<HTMLElement>} Elements into an array
@@ -230,7 +187,7 @@ function PrettyFormError() {
   return {
     init: (
       element: any,
-      options: IprettyError | Object = {}
+      options: IprettyError
  ) => {
       const isHTMLElement = element instanceof Element ||
         element instanceof NodeList ||
@@ -244,7 +201,7 @@ function PrettyFormError() {
 
       // seting user props or default
       // and adding click handler
-      _clickHandlerNodeList( tempElem, _setOpts( options ));
+      _clickHandlerNodeList( tempElem, utils._setOpts( options ));
     }
   };
 }
