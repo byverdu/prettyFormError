@@ -9,97 +9,7 @@ import { utils } from './utils';
  */
 
 function PrettyFormError() {
-  /**
-   * Assignement a default value and checking valid one for positionMethod prop
-   * @param {string} [userValue='afterend'] user value
-   * @returns {string} value for positionMethod prop
-   */
-  function _valuePositonChecker( userValue  = 'afterend' ) {
-    const notFound = [ 'beforebegin', 'afterend' ].indexOf( userValue.toLowerCase()) === -1;
-
-    if ( notFound ) {
-      console.warn( 'positionMethod prop value should be "beforebegin" or "afterend", a default "afterend" value has been assigned' );
-    }
-    return notFound ?
-      'afterend' :
-      userValue.toLowerCase();
-  }
-
-  /** Setting defualt properties values if user
-   *  doesn't specify them
-   * @param {IprettyError} options Object implementing IprettyError
-   * @returns {void}
-   */
-  function _setOpts( options ) {
-    const tempFadeOpt = {fadeOut: false, fadeOutOpts: ''};
-    const tempMulti = {enabled: false, selector: '.multiCheckbox'};
-    const callToAction = options.callToAction || 'button';
-    const elementError = options.elementError || 'div';
-    const classError = options.classError || 'prettyFormError';
-    const positionMethod = _valuePositonChecker( options.positionMethod );
-    const focusErrorOnClick = options.focusErrorOnClick || true;
-    const fadeOutError = options.fadeOutError || tempFadeOpt;
-    const multiCheckbox = options.multiCheckbox || tempMulti;
-
-    return {
-      callToAction,
-      elementError,
-      classError,
-      positionMethod,
-      focusErrorOnClick,
-      fadeOutError,
-      multiCheckbox
-    };
-  }
-
-  /** Converts actual element into array
-   * @param {HTMLElement} element Element/s selected by user
-   * @returns {Array<HTMLElement>} Elements into an array
-   */
-  function _convertToArray( element ) {
-    return ( element instanceof Element ) ?
-      [element] :
-      element;
-  }
-
-
-  /** Romoves old errors displayed in screen
-   * @param {EventTarget} element Current form that is validated
-   * @param {string} cssSelector css class name to serach and delete
-   * @return {void}
-   */
-  function _removeOldErrors( element, cssSelector ) {
-    if ( element ) {
-      const oldErrors = element.querySelectorAll( `.${cssSelector}` );
-      [].forEach.call( oldErrors, ( error ) => {
-        error.remove();
-      });
-    }
-  }
-
-  /**
-   * Creates HTML to hold the error for all invalid inputs
-   * @param {NodeList<HTMLElement>} invalids Invalid inputs for actual submited form
-   * @param {string} element User or default element defined for error
-   * @param {string} classError User or default css class for error
-   * @param {string} positionMethod User or default css class for error
-   * @return {void}
-   */
-  function _createErrorElement(
-    invalids,
-    element,
-    classError,
-    positionMethod
-  ) {
-    [].forEach.call( invalids, ( invalid ) => {
-      const tempElem = document.createElement( element );
-      tempElem.textContent = invalid.validationMessage;
-      tempElem.classList.add( `${classError}` );
-      invalid.insertAdjacentElement( positionMethod, tempElem );
-    });
-  }
-
-  /**
+    /**
    * Applies click handler for collection
    * @param {*} elements Array of HTMLElements
    * @param {*} options User options or defaults
@@ -108,51 +18,6 @@ function PrettyFormError() {
   function _clickHandlerNodeList( elements, options ) {
     for ( let i = 0; i < elements.length; i++ ) {
       _onClickHandler( elements[ i ], options );
-    }
-  }
-
-  /**
-   * Set inputs values as empty string for those that are valid
-   * @param {NodeList<HTMLElement>} valids Valids inputs when form is submitted
-   * @return {void}
-   */
-  function _clearValidInputs( valids ) {
-    [].forEach.call( valids, ( valid ) => {
-      valid.value = '';
-    });
-  }
-
-  /**
-   * Adds CSS class with animation so error can fadeout
-   * @returns {MutationObserver} mutation observer constructor
-   */
-  function _fadeOutErrorConfig() {
-    return new MutationObserver( mutations => {
-      mutations.forEach( mutation => {
-        if ( mutation.addedNodes.length > 0 ) {
-          ( mutation.addedNodes[ 0 ] ).classList.add( 'prettyFormError-fade' );
-        }
-      });
-    });
-  }
-
-  /**
-   * setup for multi checkboxes that needs validation
-   * @param {string} checkboxes NodeList to iterate through
-   * @param {string} cssSelector common css selector for all checkboxes
-   * @returns {void}
-   */
-  function _changeHandler( checkboxes, cssSelector ) {
-    const checkedCount = document.querySelectorAll( `${cssSelector}:checked` ).length;
-
-    if ( checkedCount > 0 ) {
-      for ( let i = 0; i < checkboxes.length; i++ ) {
-        checkboxes[ i ].removeAttribute( 'required' );
-      }
-    } else {
-      for ( let i = 0; i < checkboxes.length; i++ ) {
-        checkboxes[ i ].setAttribute( 'required', 'required' );
-      }
     }
   }
 
@@ -173,16 +38,16 @@ function PrettyFormError() {
 
         // removing old errors
         if ( !options.fadeOutError.fadeOut && document.querySelector( `.${options.classError}` )) {
-          _removeOldErrors( element,  options.classError );
+          utils._removeOldErrors( element,  options.classError );
         }
         // fading old errors
         if ( options.fadeOutError.fadeOut ) {
-          let observer = _fadeOutErrorConfig();
+          let observer = utils._fadeOutErrorConfig();
           const config = { attributes: true, childList: true, characterData: true };
           observer.observe( element, config );
 
           setTimeout(() => {
-            _removeOldErrors( element,  options.classError );
+            utils._removeOldErrors( element,  options.classError );
           }, 6200 );
 
           // clearing observer
@@ -194,7 +59,7 @@ function PrettyFormError() {
 
         // adding new errors
         if ( invalids.length > 0 ) {
-          _createErrorElement(
+          utils._createErrorElement(
             invalids,
             options.elementError,
             options.classError,
@@ -204,7 +69,7 @@ function PrettyFormError() {
 
         // clearing valid inputs
         if ( invalids.length === 0 && valids.length > 0 ) {
-          _clearValidInputs( valids );
+          utils._clearValidInputs( valids );
         }
 
         // focusing on first errrored input
@@ -219,7 +84,7 @@ function PrettyFormError() {
 
           [].forEach.call( checkboxes, input => {
             input.addEventListener( 'change', () => {
-              _changeHandler( checkboxes, selector );
+              utils._changeHandler( checkboxes, selector );
             });
           });
         }
@@ -230,7 +95,7 @@ function PrettyFormError() {
   return {
     init: (
       element,
-      options = {}
+      options
  ) => {
       const isHTMLElement = element instanceof Element ||
         element instanceof NodeList ||
@@ -239,12 +104,12 @@ function PrettyFormError() {
 
       // seting default element for empty case
       isHTMLElement ?
-        tempElem = _convertToArray( element ) :
+        tempElem = utils._convertToArray( element ) :
         tempElem = document.querySelectorAll( 'form' );
 
       // seting user props or default
       // and adding click handler
-      _clickHandlerNodeList( tempElem, _setOpts( options ));
+      _clickHandlerNodeList( tempElem, utils._setOpts( options ));
     }
   };
 }
