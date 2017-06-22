@@ -6,7 +6,7 @@ const paths = require( '../paths' );
 
 const mochaOpts = {
   compilers: 'js:babel-core/register',
-  globals: ['document']
+  globals: ['browser']
 };
 
 gulp.task( 'build-utils', ['type-check'], () => {

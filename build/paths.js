@@ -24,7 +24,7 @@ module.exports = {
   destDocs: `./${srcDocs}/`,
   srcTestUtils: `${srcTest}/utilsSpec.js`,
   watchDocs: [`./${srcDocs}/*`, `./${srcDir}/docs.scss`],
-  srcMocha: [ `./${srcTest}`, './' ],
+  srcMocha: [ `./${srcTest}`, './', `./${srcDir}` ],
   watchMocha: [`./${srcTest}/*`, `./${srcDev}/**/*.js`],
   watchEs: [`./${srcDev}/*`, `./${srcDir}/index.html`],
   watchDev: [`${srcDev}/*.js`, `${srcDir}/prettyFormError.scss`],
