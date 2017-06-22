@@ -1,5 +1,5 @@
-
-
+/* global IprettyError */
+/* @flow */
 // prettyError jQuery plugin
 
 ;( function( $, window, document, undefined ) { // eslint-disable-line
@@ -7,7 +7,7 @@
   var dataKey = 'plugin_' + pluginName;
 
   // utils
-  function createErrorsForInvalid( invalid, options                  ) {
+  function createErrorsForInvalid( invalid, options: IprettyError ) {
     return $.each( invalid, function( index, value ) {
       var errors = $( '<' + options.elementError + '>' )
         .addClass( options.classError )
@@ -18,7 +18,7 @@
   }
 
   // Plugin constructor
-  var Plugin = function( element, options                  ) {
+  var Plugin = function( element, options: IprettyError ) {
     this.element = $( element );
     this.options = {
       multiCheckbox: {
@@ -37,7 +37,7 @@
   };
 
   Plugin.prototype = {
-    init: function( options                  ) {
+    init: function( options: IprettyError ) {
       // user options checker for positionMethod
       // to avoid breaking the plugin initialization
       if ( options !== undefined &&
@@ -63,7 +63,7 @@
 
     // workaround to validate the multiple
     // checkboxes that at least one value is required
-    multiCheckboxConfig: function( options                  ) {
+    multiCheckboxConfig: function( options: IprettyError ) {
       var allCheckboxes = $( options.multiCheckbox.selector );
       allCheckboxes
         .change( function() {
@@ -76,7 +76,7 @@
     },
 
     // button click handler
-    handleClickCallToAction: function( element, options                  ) {
+    handleClickCallToAction: function( element, options: IprettyError ) {
       var btn = element.find( options.callToAction );
 
       btn.on( 'click', function( event ) {

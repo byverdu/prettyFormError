@@ -6,7 +6,9 @@ const srcDev = './src-dev';
 const srcDocs = './docs';
 
 module.exports = {
-  srcJs: `${srcDir}/prettyFormError.js`,
+  srcJquery: `${srcDir}/jquery.prettyFormError.js`,
+  srcEs: `${srcDir}/module.prettyFormError.js`,
+  bundleOutput: 'module.prettyFormError',
   destJs: destDir,
   srcSass: `${srcDir}/prettyFormError.scss`,
   destSass: destDir,
@@ -20,10 +22,11 @@ module.exports = {
   destSassDocs: './docs',
   srcDocs: `${destDir}/*.min.*`,
   destDocs: `./${srcDocs}/`,
+  srcTestUtils: `${srcTest}/utilsSpec.js`,
   watchDocs: [`./${srcDocs}/*`, `./${srcDir}/docs.scss`],
-  srcMocha: [ `./${srcTest}`, './' ],
-  watchMocha: [`./${srcTest}/*`, `./${srcDev}/*.js`],
+  srcMocha: [ `./${srcTest}`, './', `./${srcDir}` ],
+  watchMocha: [`./${srcTest}/*`, `./${srcDev}/**/*.js`],
   watchEs: [`./${srcDev}/*`, `./${srcDir}/index.html`],
   watchDev: [`${srcDev}/*.js`, `${srcDir}/prettyFormError.scss`],
-  processCommand: './node_modules/.bin/flow-remove-types src-dev/ -d src/'
+  processCommand: './node_modules/.bin/flow-remove-types -p src-dev/ -d src/'
 };
