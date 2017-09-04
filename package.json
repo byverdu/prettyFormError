@@ -15,6 +15,7 @@
       "flow"
     ]
   },
+  "style": "dist/prettyFormError.min.css",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/byverdu/prettyFormError.git"

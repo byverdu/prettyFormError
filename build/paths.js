@@ -6,7 +6,6 @@ const srcDev = './src-dev';
 const srcDocs = './docs';
 
 module.exports = {
-  srcJquery: `${srcDir}/jquery.prettyFormError.js`,
   srcEs: `${srcDir}/module.prettyFormError.js`,
   bundleOutput: 'module.prettyFormError',
   destJs: destDir,
