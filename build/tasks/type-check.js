@@ -3,8 +3,8 @@ const childProcess = require( 'child_process' );
 const paths = require( '../paths' );
 var flowBin = require( 'flow-bin' );
 
-gulp.task( 'type-check', () => {
-  childProcess.execFile( flowBin, ['check'], ( flowErr, flowStdout, flowStderr ) => {
+gulp.task( 'type-check', [ 'clean' ], () => {
+  return childProcess.execFile( flowBin, ['check'], ( flowErr, flowStdout, flowStderr ) => {
     if ( flowErr ) {
       console.log( flowStdout );
       return;

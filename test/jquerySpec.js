@@ -9,6 +9,7 @@
       jQueryMock = $( '.errored-form' ).prettyFormError();
     });
     it( 'is defined', function() {
+      console.log(jQueryMock)
       expect( $.fn ).to.have.property( 'prettyFormError' );
     });
     it( 'returns an array within the selectors', function() {

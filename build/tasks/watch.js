@@ -26,3 +26,17 @@ gulp.task( 'watch-docs', () => {
 gulp.task( 'watch-es', () => {
   gulp.watch( paths.watchEs, [ 'type-check', 'build-es', reload ], ).on( 'change', reportChange );
 });
+
+
+// const gulp = require( 'gulp' );
+// const paths = require( '../paths' );
+// const reload = require( 'browser-sync' ).reload;
+
+// // outputs changes to files to the console
+// function reportChange( event ) {
+//   console.log( `File ${event.path} was ${event.type} \nrunning tasks...` );
+// }
+
+// gulp.task( 'watch', () => {
+//   gulp.watch( paths.srcPath, [ 'build-html', 'build-scss', reload ]).on( 'change', reportChange );
+// });

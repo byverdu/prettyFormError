@@ -3,7 +3,7 @@ const stripLine  = require( 'gulp-strip-line' );
 
 gulp.task( 'clean-src', ['build-css'], () => {
   return gulp
-    .src( 'dit/prettyFormError.js' )
+    .src( 'dist/prettyFormError.js' )
     .pipe( stripLine([
       /^\/\*\s*global PrettyFormError \*\//,
       /^\/\*\s* \*\//

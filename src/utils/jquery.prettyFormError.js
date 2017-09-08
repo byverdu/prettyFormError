@@ -1,6 +1,4 @@
 /* global IprettyError */
-/* @flow */
-// prettyError jQuery plugin
 
 ( function( factory ) {
   'use strict';
