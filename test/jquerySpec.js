@@ -21,12 +21,8 @@
     });
     describe( 'Interaction', function() {
       beforeEach( function() {
-        // console.log(jQueryMock)
         jQueryMock.find( '#email' ).val( 'test@blah.es' );
         $( '.prettyErrorBtn' )[ 0 ].click();
-      });
-      afterEach( function() {
-        jQueryMock.find( '#email' ).val( '' );
       });
       it( 'retrieves the invalid inputs field when the form is submited', function() {
         expect( $( '.errored-form :invalid' ).not( 'fieldset' ))

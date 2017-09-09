@@ -30,6 +30,18 @@ function _optionsConfig( opts: any ): IprettyError {
   };
 }
 
+function _getInvalidElems( elem: HTMLElement ): Array<HTMLElement> {
+  // fieldset elements also receive the validity pseudo-selector
+  var invalids = elem.querySelectorAll( ':invalid:not(fieldset)' );
+  var notValidated = [];
+  [].forEach.call( invalids, function( invalid: HTMLInputElement ) {
+    if ( !invalid.validity.valid ) {
+      notValidated.push( invalid );
+    }
+  });
+  return notValidated;
+}
+
 
 function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
   this.options = _optionsConfig( opts );
@@ -56,30 +68,28 @@ function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
   }
 
   function _clickHandler( elem: HTMLElement ) {
-    var invalids = elem.querySelectorAll( ':invalid' );
     var caller = elem.querySelector( options.callToAction );
     if ( caller ) {
-      caller.onclick = function() {
+      caller.addEventListener( 'click', function() {
+        var invalids = _getInvalidElems( elem );
+
         // Deleting old errors
         if ( document.querySelector( '.' + options.classError )) {
           _removeOldErrors( elem );
         }
         [].forEach.call( invalids, function ( invalid: HTMLInputElement ) {
-          // fieldset elements also receive the validity pseudo-selector
-          if ( invalid.nodeName !== 'FIELDSET' ) {
-            _createErrorElement(
-              options.elementError,
-              invalid,
-              options.positionMethod
-            );
-          }
+          _createErrorElement(
+            options.elementError,
+            invalid,
+            options.positionMethod
+          );
         });
 
         // focusing on first errrored input
         if ( invalids.length > 0 && options.focusErrorOnClick ) {
           invalids[ 0 ].focus();
         }
-      };
+      });
     }
   }
 
