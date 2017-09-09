@@ -1,8 +1,13 @@
 /* global IprettyError */
-/* @flow */
-// prettyError jQuery plugin
 
-;( function( $, window, document, undefined ) { // eslint-disable-line
+( function( factory ) {
+  'use strict';
+  if ( typeof module === 'object' && typeof module.exports === 'object' ) {
+    factory( require( 'jquery' ), window, document ); // CommonJS
+  } else {
+    factory( jQuery, window, document ); // Browser globals
+  }
+})( function( jQuery, window, document ) {
   var pluginName = 'prettyFormError';
   var dataKey = 'plugin_' + pluginName;
 
@@ -114,4 +119,4 @@
       }
     });
   };
-}( jQuery, window, document ));
+});

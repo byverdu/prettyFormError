@@ -1,4 +1,4 @@
-// 
+// @flow
 /* global IprettyError */
 
 /**
@@ -6,7 +6,7 @@
  * @param {string} [userValue='afterend'] user value
  * @returns {string} value for positionMethod prop
  */
-const _valuePositonChecker = ( userValue = 'afterend' ) => {
+const _valuePositonChecker = ( userValue: string = 'afterend' ) => {
   const notFound = [ 'beforebegin', 'afterend' ].indexOf( userValue.toLowerCase()) === -1;
   if ( notFound ) {
     console.warn( 'positionMethod prop value should be "beforebegin" or "afterend", a default "afterend" value has been assigned' );
@@ -22,7 +22,7 @@ export const utils = {
    * @param {IprettyError} options Object implementing IprettyError
    * @returns {void}
     */
-  _setOpts: ( options = {}) => {
+  _setOpts: ( options: any = {}): IprettyError => {
     const tempFadeOpt = {fadeOut: false, fadeOutOpts: ''};
     const tempMulti = {enabled: false, selector: '.multiCheckbox'};
     const callToAction = options.callToAction || 'button';
@@ -48,7 +48,7 @@ export const utils = {
    * @param {HTMLElement} element Element/s selected by user
    * @returns {Array<HTMLElement>} Elements into an array
    */
-  _convertToArray: ( element ) => {
+  _convertToArray: ( element: any ): Array<HTMLElement> => {
     return ( element instanceof Element ) ?
       [element] :
       element;
@@ -59,10 +59,10 @@ export const utils = {
    * @param {string} cssSelector css class name to serach and delete
    * @return {void}
    */
-  _removeOldErrors: ( element, cssSelector ) => {
+  _removeOldErrors: ( element: HTMLElement, cssSelector: string ): void => {
     if ( element ) {
       const oldErrors = element.querySelectorAll( `.${cssSelector}` );
-      [].forEach.call( oldErrors, ( error ) => {
+      [].forEach.call( oldErrors, ( error: HTMLElement ) => {
         error.remove();
       });
     }
@@ -77,12 +77,12 @@ export const utils = {
    * @return {void}
    */
   _createErrorElement: (
-    invalids,
-    element,
-    classError,
-    positionMethod
-  ) => {
-    [].forEach.call( invalids, ( invalid ) => {
+    invalids: NodeList<HTMLElement>,
+    element: string,
+    classError: string,
+    positionMethod: 'beforebegin' | 'afterbegin' | 'beforeend' | 'afterend'
+  ): void => {
+    [].forEach.call( invalids, ( invalid: HTMLInputElement ) => {
       const tempElem = document.createElement( element );
       tempElem.textContent = invalid.validationMessage;
       tempElem.classList.add( `${classError}` );
@@ -95,8 +95,8 @@ export const utils = {
    * @param {NodeList<HTMLElement>} valids Valids inputs when form is submitted
    * @return {void}
    */
-  _clearValidInputs: ( valids ) => {
-    [].forEach.call( valids, ( valid ) => {
+  _clearValidInputs: ( valids: NodeList<HTMLElement> ): void => {
+    [].forEach.call( valids, ( valid: HTMLInputElement ) => {
       valid.value = '';
     });
   },
@@ -105,11 +105,11 @@ export const utils = {
    * Adds CSS class with animation so error can fadeout
    * @returns {MutationObserver} mutation observer constructor
    */
-  _fadeOutErrorConfig: () => {
+  _fadeOutErrorConfig: (): MutationObserver => {
     return new MutationObserver( mutations => {
       mutations.forEach( mutation => {
         if ( mutation.addedNodes.length > 0 ) {
-          ( mutation.addedNodes[ 0 ] ).classList.add( 'prettyFormError-fade' );
+          ( mutation.addedNodes[ 0 ]: any ).classList.add( 'prettyFormError-fade' );
         }
       });
     });
@@ -121,7 +121,7 @@ export const utils = {
    * @param {string} cssSelector common css selector for all checkboxes
    * @returns {void}
    */
-  _changeHandler: ( checkboxes, cssSelector ) => {
+  _changeHandler: ( checkboxes: NodeList<HTMLInputElement>, cssSelector: string ) => {
     const checkedCount = document.querySelectorAll( `${cssSelector}:checked` ).length;
 
     if ( checkedCount > 0 ) {
