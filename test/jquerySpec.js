@@ -21,6 +21,7 @@
     });
     describe( 'Interaction', function() {
       beforeEach( function() {
+        // console.log(jQueryMock)
         jQueryMock.find( '#email' ).val( 'test@blah.es' );
         $( '.prettyErrorBtn' )[ 0 ].click();
       });
@@ -75,7 +76,7 @@
           expect( defaultOptions.options )
             .to.have.property( 'positionMethod' )
             .that.is.a( 'String' )
-            .and.eq( 'after' );
+            .and.eq( 'afterend' );
         });
         it( 'contains an elementError property', function() {
           expect( defaultOptions.options )
@@ -115,7 +116,7 @@
           }
         });
         $( '.prettyErrorBtn-2' ).click();
-
+        console.log($( '.errored-form-2' ).data())
         expect( $( '.errored-form-2 span.myCustomName' ))
           .to.have.length( 7 );
       });

@@ -32,7 +32,8 @@ function _optionsConfig( opts: any ): IprettyError {
 
 
 function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
-  var options: IprettyError = _optionsConfig( opts );
+  this.options = _optionsConfig( opts );
+  var options: IprettyError = this.options;
 
   function _removeOldErrors( element: HTMLElement ) {
     if ( element ) {
@@ -44,18 +45,19 @@ function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
   }
 
   function _createErrorElement(
-    elemToAppend: HTMLInputElement,
+    elementError: string,
+    invalidElem: HTMLInputElement,
     positionMethod: Positions
   ) {
-    var div = document.createElement( 'div' );
+    var div = document.createElement( elementError );
     div.classList.add( options.classError );
-    div.textContent = elemToAppend.validationMessage;
-    elemToAppend.insertAdjacentElement( positionMethod, div );
+    div.textContent = invalidElem.validationMessage;
+    invalidElem.insertAdjacentElement( positionMethod, div );
   }
 
   function _clickHandler( elem: HTMLElement ) {
     var invalids = elem.querySelectorAll( ':invalid' );
-    var caller = elem.querySelector( 'button' );
+    var caller = elem.querySelector( options.callToAction );
     if ( caller ) {
       caller.onclick = function() {
         // Deleting old errors
@@ -63,11 +65,20 @@ function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
           _removeOldErrors( elem );
         }
         [].forEach.call( invalids, function ( invalid: HTMLInputElement ) {
-          _createErrorElement(
-            invalid,
-            options.positionMethod
-          );
+          // fieldset elements also receive the validity pseudo-selector
+          if ( invalid.nodeName !== 'FIELDSET' ) {
+            _createErrorElement(
+              options.elementError,
+              invalid,
+              options.positionMethod
+            );
+          }
         });
+
+        // focusing on first errrored input
+        if ( invalids.length > 0 && options.focusErrorOnClick ) {
+          invalids[ 0 ].focus();
+        }
       };
     }
   }
