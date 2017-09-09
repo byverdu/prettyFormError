@@ -3,7 +3,7 @@ const childProcess = require( 'child_process' );
 const paths = require( '../paths' );
 var flowBin = require( 'flow-bin' );
 
-gulp.task( 'type-check', () => {
+gulp.task( 'type-check', [ 'clean'], () => {
   return new Promise(( resolve ) => {
     const execFile = childProcess.execFile( flowBin, ['check']);
     execFile.stdout.on( 'data', ( data ) => {
