@@ -8,7 +8,7 @@ const paths = require( '../paths' );
 gulp.task( 'sass', () => {
   return gulp.src( paths.srcSass )
     .pipe( sass().on( 'error', sass.logError ))
-    .pipe( gulp.dest( paths.destSass ));
+    .pipe( gulp.dest( paths.destDir ));
 });
 
 gulp.task( 'css-minify', [ 'sass' ], () => {
@@ -17,7 +17,7 @@ gulp.task( 'css-minify', [ 'sass' ], () => {
     .pipe( rename({ suffix: '.min' }))
     .pipe( cssnano())
     .pipe( sourcemaps.write( '.' ))
-    .pipe( gulp.dest( paths.destCss ));
+    .pipe( gulp.dest( paths.destDir ));
 });
 
 gulp.task( 'build-css', ['sass', 'css-minify']);
