@@ -1,7 +1,9 @@
+type Positions = 'beforebegin' | 'afterbegin' | 'beforeend' | 'afterend';
+
 interface IprettyError {
   classError: string;
   elementError: string;
-  positionMethod: string | 'beforebegin' | 'afterbegin' | 'beforeend' | 'afterend';
+  positionMethod: Positions;
   multiCheckbox: {
     enabled: boolean;
     selector: string;
@@ -11,6 +13,7 @@ interface IprettyError {
     fadeOut: boolean;
     fadeOutOpts: string
   };
+  focusErrorOnClick: boolean;
 }
 
 export type { IprettyError };

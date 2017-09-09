@@ -5,7 +5,7 @@ const sourcemaps = require( 'gulp-sourcemaps' );
 const paths = require( '../paths' );
 const stripCode = require( 'gulp-strip-code' );
 
-gulp.task( 'build-js', [ 'type-check' ],  () => {
+gulp.task( 'build-js', [ 'type-check-build' ],  () => {
   gulp.src( paths.srcJs )
   .pipe( uglify({ mangle: true }))
   .pipe( sourcemaps.init({ loadMaps: true }))
