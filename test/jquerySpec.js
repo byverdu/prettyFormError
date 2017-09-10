@@ -24,9 +24,6 @@
         jQueryMock.find( '#email' ).val( 'test@blah.es' );
         $( '.prettyErrorBtn' )[ 0 ].click();
       });
-      afterEach( function() {
-        jQueryMock.find( '#email' ).val( '' );
-      });
       it( 'retrieves the invalid inputs field when the form is submited', function() {
         expect( $( '.errored-form :invalid' ).not( 'fieldset' ))
           .to.have.length( 3 );
@@ -75,7 +72,7 @@
           expect( defaultOptions.options )
             .to.have.property( 'positionMethod' )
             .that.is.a( 'String' )
-            .and.eq( 'after' );
+            .and.eq( 'afterend' );
         });
         it( 'contains an elementError property', function() {
           expect( defaultOptions.options )
@@ -115,7 +112,7 @@
           }
         });
         $( '.prettyErrorBtn-2' ).click();
-
+        console.log($( '.errored-form-2' ).data())
         expect( $( '.errored-form-2 span.myCustomName' ))
           .to.have.length( 7 );
       });

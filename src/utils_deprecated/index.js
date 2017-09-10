@@ -1,6 +1,3 @@
-// @flow
-/* global IprettyError */
-
 /**
  * Assignement a default value and checking valid one for positionMethod prop
  * @param {string} [userValue='afterend'] user value

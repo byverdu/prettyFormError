@@ -1,5 +1,4 @@
-// 
-/* global IprettyError */
+ /* global IprettyError */
 
 import { utils } from './utils';
 
