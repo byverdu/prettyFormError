@@ -2,6 +2,11 @@
 /* @flow */
 /* global IprettyError Positions */
 /* end-dev-code */
+/** Setting defualt properties values if user
+ *  doesn't specify them
+ * @param {IprettyError} opts Object implementing IprettyError
+ * @returns {IprettyError} Default plugin config
+  */
 function _optionsConfig( opts: any ): IprettyError {
   var innerOpts = opts || {};
   var positionMethod;
@@ -30,6 +35,12 @@ function _optionsConfig( opts: any ): IprettyError {
   };
 }
 
+
+/**
+ * Filters the invalid errors
+ * @param {HTMLElement} elem parent element, the for itself
+ * @returns {Array<HTMLElement>} Invalid form elements
+ */
 function _getInvalidElems( elem: HTMLElement ): Array<HTMLElement> {
   // fieldset elements also receive the validity pseudo-selector
   var invalids = elem.querySelectorAll( ':invalid:not(fieldset)' );
@@ -43,6 +54,13 @@ function _getInvalidElems( elem: HTMLElement ): Array<HTMLElement> {
 }
 
 
+/**
+ Global factory for PrettyFormErrorInstance
+ *  using vanilla JS
+ * @param {string} selector CSS selector, should be a form
+ * @param {IprettyError} opts possible user options
+ * @return {void}
+ */
 function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
   this.options = _optionsConfig( opts );
   var options: IprettyError = this.options;
@@ -56,6 +74,13 @@ function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
     }
   }
 
+  /**
+   * Creates HTML to hold the error for all invalid inputs
+   * @param {string} elementError Name tag to create for the error
+   * @param {HTMLInputElement} invalidElem Form element to validate
+   * @param {Positions} positionMethod position to place the generated markup
+   * @return {void}
+   */
   function _createErrorElement(
     elementError: string,
     invalidElem: HTMLInputElement,
@@ -67,6 +92,11 @@ function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
     invalidElem.insertAdjacentElement( positionMethod, div );
   }
 
+   /**
+   * Add click eventlistener
+   * @param {HTMLElement} elem Form element
+   * @return {void}
+   */
   function _clickHandler( elem: HTMLElement ) {
     var caller = elem.querySelector( options.callToAction );
     if ( caller ) {
