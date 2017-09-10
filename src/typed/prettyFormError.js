@@ -109,6 +109,7 @@ function prettyFormError( elem: string, options: IprettyError ): PrettyFormError
   return new PrettyFormErrorInstance( elem, options );
 }
 
+// jQuery setup
 if ( typeof jQuery !== 'undefined' ) {
   $.fn.prettyFormError = function( options ) {
     var pluginName = 'prettyFormError';
@@ -119,4 +120,9 @@ if ( typeof jQuery !== 'undefined' ) {
       }
     });
   };
+}
+
+// Browser setup
+if ( !( 'prettyFormError' in window )) {
+  window.prettyFormError = prettyFormError;
 }
