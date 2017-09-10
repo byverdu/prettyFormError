@@ -112,7 +112,6 @@
           }
         });
         $( '.prettyErrorBtn-2' ).click();
-        console.log($( '.errored-form-2' ).data())
         expect( $( '.errored-form-2 span.myCustomName' ))
           .to.have.length( 7 );
       });

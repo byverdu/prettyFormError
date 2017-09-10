@@ -53,6 +53,28 @@ function _getInvalidElems( elem: HTMLElement ): Array<HTMLElement> {
   return notValidated;
 }
 
+/**
+   * setup for multi checkboxes that needs validation
+   * @param {string} checkboxes NodeList to iterate through
+   * @param {string} cssSelector common css selector for all checkboxes
+   * @returns {void}
+   */
+function _changeHandler(
+  checkboxes: NodeList<any>,
+  cssSelector: string
+): void {
+  var checkedCount = document.querySelectorAll( cssSelector + ':checked' ).length;
+
+  if ( checkedCount > 0 ) {
+    for ( let i = 0; i < checkboxes.length; i++ ) {
+      checkboxes[ i ].removeAttribute( 'required' );
+    }
+  } else {
+    for ( let i = 0; i < checkboxes.length; i++ ) {
+      checkboxes[ i ].setAttribute( 'required', 'required' );
+    }
+  }
+}
 
 /**
  Global factory for PrettyFormErrorInstance
@@ -119,6 +141,18 @@ function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
         if ( invalids.length > 0 && options.focusErrorOnClick ) {
           invalids[ 0 ].focus();
         }
+
+        // multiCheckbox configuration
+        if ( options.multiCheckbox.enabled ) {
+          var checkElem = options.multiCheckbox.selector;
+          var checkboxes = document.querySelectorAll( checkElem );
+
+          [].forEach.call( checkboxes, function( input: HTMLInputElement ) {
+            input.addEventListener( 'change', function() {
+              _changeHandler( checkboxes, checkElem );
+            });
+          });
+        }
       });
     }
   }
@@ -129,7 +163,7 @@ function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
       _clickHandler( element );
     });
   } else {
-    $.each( $( selector ), function ( index, item ) {
+    $.each( $( selector ), function( index, item ) {
       _clickHandler( item );
     });
   }
