@@ -11,7 +11,7 @@ interface IprettyError {
   callToAction: string;
   fadeOutError: {
     fadeOut: boolean;
-    fadeOutOpts: string
+    timer: number
   };
   focusErrorOnClick: boolean;
 }

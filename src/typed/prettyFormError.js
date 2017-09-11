@@ -14,14 +14,25 @@ function _optionsConfig( opts: any ): IprettyError {
   var callToAction = innerOpts.callToAction || 'button';
   var elementError = innerOpts.elementError || 'div';
   var focusErrorOnClick = innerOpts.focusErrorOnClick || true;
-  var tempFadeOpt = {fadeOut: false, fadeOutOpts: ''};
+  var tempFadeOpt = {fadeOut: false, timer: 0};
   var tempMulti = {enabled: false, selector: '.multiCheckbox'};
   var fadeOutError = innerOpts.fadeOutError || tempFadeOpt;
   var multiCheckbox = innerOpts.multiCheckbox || tempMulti;
+
+  // selecting default position
   if ( 'positionMethod' in innerOpts ) {
     positionMethod = innerOpts.positionMethod  === 'after' ? 'afterend' : 'beforebegin';
   } else {
     positionMethod = innerOpts.positionMethod  = 'afterend';
+  }
+
+  // safe checker for setTimeout
+  if ( isNaN( Number( fadeOutError.timer ))) {
+    var message = 'fadeOutError.timer options is not a number';
+    console.error( message );
+    fadeOutError.timer = 6000;
+  } else {
+    fadeOutError.timer = Number( fadeOutError.timer );
   }
 
   return {
@@ -114,6 +125,19 @@ function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
     invalidElem.insertAdjacentElement( positionMethod, div );
   }
 
+    /**
+   * Adds CSS class with animation so error can fadeout
+   * @returns {MutationObserver} mutation observer constructor
+   */
+  function _fadeOutErrorConfig(): MutationObserver {
+    return new MutationObserver( function( mutations ) {
+      mutations.forEach( function( mutation ) {
+        if ( mutation.addedNodes.length > 0 ) {
+          ( mutation.addedNodes[ 0 ]: any ).classList.add( 'prettyFormError-fade' );
+        }
+      });
+    });
+  }
    /**
    * Add click eventlistener
    * @param {HTMLElement} elem Form element
@@ -122,36 +146,57 @@ function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
   function _clickHandler( elem: HTMLElement ) {
     var caller = elem.querySelector( options.callToAction );
     if ( caller ) {
-      caller.addEventListener( 'click', function() {
+      caller.addEventListener( 'click', function( event: MouseEvent ) {
         var invalids = _getInvalidElems( elem );
 
-        // Deleting old errors
-        if ( document.querySelector( '.' + options.classError )) {
-          _removeOldErrors( elem );
-        }
-        [].forEach.call( invalids, function ( invalid: HTMLInputElement ) {
-          _createErrorElement(
-            options.elementError,
-            invalid,
-            options.positionMethod
-          );
-        });
+        if ( invalids.length > 1 ) {
+          // Deleting old errors
+          if ( document.querySelector( '.' + options.classError )) {
+            _removeOldErrors( elem );
+          }
 
-        // focusing on first errrored input
-        if ( invalids.length > 0 && options.focusErrorOnClick ) {
-          invalids[ 0 ].focus();
-        }
-
-        // multiCheckbox configuration
-        if ( options.multiCheckbox.enabled ) {
-          var checkElem = options.multiCheckbox.selector;
-          var checkboxes = document.querySelectorAll( checkElem );
-
-          [].forEach.call( checkboxes, function( input: HTMLInputElement ) {
-            input.addEventListener( 'change', function() {
-              _changeHandler( checkboxes, checkElem );
-            });
+          // create errors
+          [].forEach.call( invalids, function ( invalid: HTMLInputElement ) {
+            _createErrorElement(
+              options.elementError,
+              invalid,
+              options.positionMethod
+            );
           });
+
+          // focusing on first errrored input
+          if ( options.focusErrorOnClick && invalids.length > 0 ) {
+            invalids[ 0 ].focus();
+          }
+
+          // fading old errors
+          if ( options.fadeOutError.fadeOut ) {
+            let observer = _fadeOutErrorConfig();
+            const config = { attributes: true, childList: true, characterData: true };
+            observer.observe( elem, config );
+
+            setTimeout(() => {
+              _removeOldErrors( elem );
+            }, options.fadeOutError.timer );
+
+            // clearing observer
+            if ( invalids.length === 0 ) {
+              observer.disconnect();
+              observer = null;
+            }
+          }
+
+          // multiCheckbox configuration
+          if ( options.multiCheckbox.enabled ) {
+            var checkElem = options.multiCheckbox.selector;
+            var checkboxes = document.querySelectorAll( checkElem );
+
+            [].forEach.call( checkboxes, function( input: HTMLInputElement ) {
+              input.addEventListener( 'change', function() {
+                _changeHandler( checkboxes, checkElem );
+              });
+            });
+          }
         }
       });
     }
