@@ -88,7 +88,7 @@ describe( 'prettyFormError javascript plugin', function() {
         expect( defaultOptions2 )
           .to.have.property( 'fadeOutError' )
           .that.is.an( 'Object' )
-          .and.eql({fadeOut: false, fadeOutOpts: ''});
+          .and.eql({fadeOut: false, timer: 0});
       });
     });
   });

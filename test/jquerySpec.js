@@ -96,7 +96,7 @@
           expect( defaultOptions.options )
             .to.have.property( 'fadeOutError' )
             .that.is.an( 'Object' )
-            .and.eql({fadeOut: false, fadeOutOpts: ''});
+            .and.eql({fadeOut: false, timer: 0});
         });
       });
       it( 'can be configured', function() {
@@ -105,14 +105,13 @@
           elementError: 'span',
           callToAction: '.prettyErrorBtn-2',
           focusErrorOnClick: false,
-          fadeOutError: {fadeOut: true, fadeOutOpts: 6000},
+          fadeOutError: {fadeOut: true, timer: 'xoxo'},
           multiCheckbox: {
             enabled: true,
             selector: '.multiCheckbox'
           }
         });
         $( '.prettyErrorBtn-2' ).click();
-        console.log($( '.errored-form-2' ).data())
         expect( $( '.errored-form-2 span.myCustomName' ))
           .to.have.length( 7 );
       });
