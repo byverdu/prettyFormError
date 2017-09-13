@@ -7,12 +7,10 @@ function reportChange( event ) {
   console.log( `File ${event.path} was ${event.type} \nrunning tasks...` );
 }
 
-gulp.task( 'watch', () => {
-  gulp.watch( paths.srcJs, [ 'minify', 'move-js', 'move-docs',reload ]).on( 'change', reportChange );
+gulp.task( 'watch-test', () => {
+  gulp.watch( paths.watchMocha, [ 'type-check', reload ], ).on( 'change', reportChange );
+});
 
-  gulp.watch( paths.srcSass, [ 'sass', 'css-minify', reload ]).on( 'change', reportChange );
-
-  gulp.watch( paths.watchMocha, reload ).on( 'change', reportChange );
-
-  gulp.watch( paths.watchDocs, [ 'move-docs', 'docs-sass', reload] ).on( 'change', reportChange );
+gulp.task( 'watch-docs', () => {
+  gulp.watch( paths.watchDocs, [ 'move-docs', 'docs-sass', reload]).on( 'change', reportChange );
 });

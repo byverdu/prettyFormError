@@ -1,5 +1,5 @@
 /* dev-code */
-/*  */
+/* @flow */
 /* global IprettyError Positions */
 /* end-dev-code */
 /** Setting default properties values if user
@@ -7,7 +7,7 @@
  * @param {IprettyError} opts Object implementing IprettyError
  * @returns {IprettyError} Default plugin config
   */
-function _optionsConfig( opts ) {
+function _optionsConfig( opts: any ): IprettyError {
   var innerOpts = opts || {};
   var positionMethod;
   var classError = innerOpts.classError || 'prettyFormError';
@@ -52,11 +52,11 @@ function _optionsConfig( opts ) {
  * @param {HTMLElement} elem parent element, the for itself
  * @returns {Array<HTMLElement>} Invalid form elements
  */
-function _getInvalidElems( elem ) {
+function _getInvalidElems( elem: HTMLElement ): Array<HTMLElement> {
   // fieldset elements also receive the validity pseudo-selector
   var invalids = elem.querySelectorAll( ':invalid:not(fieldset)' );
   var notValidated = [];
-  [].forEach.call( invalids, function( invalid ) {
+  [].forEach.call( invalids, function( invalid: HTMLInputElement ) {
     if ( !invalid.validity.valid ) {
       notValidated.push( invalid );
     }
@@ -71,9 +71,9 @@ function _getInvalidElems( elem ) {
    * @returns {void}
    */
 function _changeHandler(
-  checkboxes,
-  cssSelector
-) {
+  checkboxes: NodeList<any>,
+  cssSelector: string
+): void {
   var checkedCount = document.querySelectorAll( cssSelector + ':checked' ).length;
 
   if ( checkedCount > 0 ) {
@@ -94,7 +94,7 @@ function _changeHandler(
  * @param {string} selector form element
  * @return {void}
  */
-function _showErrorForInvalidSelector( collection, selector ) {
+function _showErrorForInvalidSelector( collection: any, selector: string ): void {
   if ( collection.length ===  0 ) {
     var message = 'I couldn\'t fine any DOM element for the selector ' + '"' + selector + '"';
     console.warn( message );
@@ -108,11 +108,11 @@ function _showErrorForInvalidSelector( collection, selector ) {
  * @param {IprettyError} opts possible user options
  * @return {void}
  */
-function PrettyFormErrorInstance( selector, opts ) {
+function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
   this.options = _optionsConfig( opts );
-  var options = this.options;
+  var options: IprettyError = this.options;
 
-  function _removeOldErrors( element ) {
+  function _removeOldErrors( element: HTMLElement ) {
     if ( element ) {
       var oldErrors = element.querySelectorAll( '.' + options.classError );
       [].forEach.call( oldErrors, function( error ) {
@@ -129,9 +129,9 @@ function PrettyFormErrorInstance( selector, opts ) {
    * @return {void}
    */
   function _createErrorElement(
-    elementError,
-    invalidElem,
-    positionMethod
+    elementError: string,
+    invalidElem: HTMLInputElement,
+    positionMethod: Positions
   ) {
     var div = document.createElement( elementError );
     div.classList.add( options.classError );
@@ -143,11 +143,11 @@ function PrettyFormErrorInstance( selector, opts ) {
    * Adds CSS class with animation so error can fadeout
    * @returns {MutationObserver} mutation observer constructor
    */
-  function _fadeOutErrorConfig() {
+  function _fadeOutErrorConfig(): MutationObserver {
     return new MutationObserver( function( mutations ) {
       mutations.forEach( function( mutation ) {
         if ( mutation.addedNodes.length > 0 ) {
-          ( mutation.addedNodes[ 0 ] ).classList.add( 'prettyFormError-fade' );
+          ( mutation.addedNodes[ 0 ]: any ).classList.add( 'prettyFormError-fade' );
         }
       });
     });
@@ -158,10 +158,10 @@ function PrettyFormErrorInstance( selector, opts ) {
    * @param {HTMLElement} formElem Form element
    * @return {void}
    */
-  function _clickHandler( formElem ) {
+  function _clickHandler( formElem: HTMLFormElement ) {
     var caller = formElem.querySelector( options.callToAction );
     if ( caller ) {
-      caller.addEventListener( 'click', function( event ) {
+      caller.addEventListener( 'click', function( event: MouseEvent ) {
         // prevent trigger default browser error messages
         event.preventDefault();
 
@@ -172,7 +172,7 @@ function PrettyFormErrorInstance( selector, opts ) {
         }
 
         // create errors
-        [].forEach.call( invalids, function ( invalid ) {
+        [].forEach.call( invalids, function ( invalid: HTMLInputElement ) {
           _createErrorElement(
             options.elementError,
             invalid,
@@ -207,7 +207,7 @@ function PrettyFormErrorInstance( selector, opts ) {
           var checkElem = options.multiCheckbox.selector;
           var checkboxes = document.querySelectorAll( checkElem );
 
-          [].forEach.call( checkboxes, function( input ) {
+          [].forEach.call( checkboxes, function( input: HTMLInputElement ) {
             input.addEventListener( 'change', function() {
               _changeHandler( checkboxes, checkElem );
             });
@@ -217,7 +217,7 @@ function PrettyFormErrorInstance( selector, opts ) {
           // clearing field values
           var valids = formElem.querySelectorAll( ':valid' );
 
-          [].forEach.call( valids, function( valid ) {
+          [].forEach.call( valids, function( valid: HTMLInputElement ) {
             valid.value = '';
           });
           // submiting the form when there's 0 invalid fields
@@ -248,7 +248,7 @@ function PrettyFormErrorInstance( selector, opts ) {
  * @param {IprettyError} options IprettyError
  * @returns {PrettyFormErrorInstance} new instance
  */
-function prettyFormError( formElem, options ) {
+function prettyFormError( formElem: string, options: IprettyError ): PrettyFormErrorInstance {
   return new PrettyFormErrorInstance( formElem, options );
 }
 

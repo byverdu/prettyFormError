@@ -1,0 +1,8 @@
+[ignore]
+.*/node_modules
+[include]
+
+[libs]
+jquery_v3.x.x
+prettyFormError
+[options]

@@ -2,12 +2,13 @@ const gulp = require( 'gulp' );
 const browserSync = require( 'browser-sync' );
 const paths = require( '../paths' );
 
-gulp.task( 'serve', [ 'build' ], ( done ) => {
+gulp.task( 'serve-test', ['type-check'], ( done ) => {
   browserSync({
     open: false,
     port: 9000,
+    reloadDelay: 2000,
     server: {
-      baseDir: [ paths.srcServe, './docs/' ],
+      baseDir: paths.srcMocha,
       middleware( req, res, next ) {
         res.setHeader( 'Access-Control-Allow-Origin', '*' );
         next();
@@ -16,7 +17,7 @@ gulp.task( 'serve', [ 'build' ], ( done ) => {
   }, done );
 });
 
-gulp.task( 'serve-docs', [ 'build-docs' ], ( done ) => {
+gulp.task( 'serve-docs', ['docs-sass', 'move-docs'], ( done ) => {
   browserSync({
     open: false,
     port: 9000,

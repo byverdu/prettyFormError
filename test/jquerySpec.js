@@ -5,50 +5,47 @@
   var jQueryMock;
 
   describe( 'prettyFormError jQuery plugin', function() {
-    before(function() {
+    before( function() {
       jQueryMock = $( '.errored-form' ).prettyFormError();
     });
     it( 'is defined', function() {
       expect( $.fn ).to.have.property( 'prettyFormError' );
     });
     it( 'returns an array within the selectors', function() {
-      expect( jQueryMock ).to.have.length.least(1);
+      expect( jQueryMock ).to.have.length.least( 1 );
     });
     it( 'can be chainable', function() {
       jQueryMock.addClass( 'noMore' );
-      expect( jQueryMock.attr( 'class') )
+      expect( jQueryMock.attr( 'class' ))
         .to.contain( 'noMore' );
     });
     describe( 'Interaction', function() {
-      beforeEach(function() {
-        jQueryMock.find('#email').val('test@blah.es');
-        $('.prettyErrorBtn')[0].click();
-      });
-      afterEach(function() {
-        jQueryMock.find('#email').val('');
+      beforeEach( function() {
+        jQueryMock.find( '#email' ).val( 'test@blah.es' );
+        $( '.prettyErrorBtn' )[ 0 ].click();
       });
       it( 'retrieves the invalid inputs field when the form is submited', function() {
-        expect( $('.errored-form :invalid').not('fieldset') )
+        expect( $( '.errored-form :invalid' ).not( 'fieldset' ))
           .to.have.length( 3 );
       });
       it( 'appends a div to each error', function() {
-        expect( $('.errored-form .prettyFormError') )
+        expect( $( '.errored-form .prettyFormError' ))
           .to.have.length( 3 );
       });
       it( 'with the corresponding text error', function() {
-        jQueryMock.find('#email').val('lol@gmail.');
-        $('.prettyErrorBtn')[0].click();
+        jQueryMock.find( '#email' ).val( 'lol@gmail.' );
+        $( '.prettyErrorBtn' )[ 0 ].click();
 
-        expect( $('.prettyFormError')[0].textContent )
+        expect( $( '.prettyFormError' )[ 0 ].textContent )
           .to.be.eq( "'.' is used at a wrong position in 'gmail.'." );
       });
       it( 'sets focus to the first element with error', function() {
         expect( document.activeElement )
-          .to.have.property('name').and.eq('telephone');
+          .to.have.property( 'name' ).and.eq( 'telephone' );
       });
     });
     describe( 'Plugin configuration', function() {
-      describe('Default options', function() {
+      describe( 'Default options', function() {
         var defaultOptions;
         before( function() {
           defaultOptions = jQueryMock.data( 'plugin_prettyFormError' );
@@ -62,8 +59,8 @@
           var multiCheckbox = defaultOptions.options.multiCheckbox;
           expect( multiCheckbox )
             .to.be.an( 'Object' );
-          expect( multiCheckbox ).to.have.deep.property( 'enabled' ).and.is.a('Boolean');
-          expect( multiCheckbox ).to.have.deep.property( 'selector', '.multiCheckbox');
+          expect( multiCheckbox ).to.have.deep.property( 'enabled' ).and.is.a( 'Boolean' );
+          expect( multiCheckbox ).to.have.deep.property( 'selector', '.multiCheckbox' );
         });
         it( 'contains a classError property', function() {
           expect( defaultOptions.options )
@@ -75,7 +72,7 @@
           expect( defaultOptions.options )
             .to.have.property( 'positionMethod' )
             .that.is.a( 'String' )
-            .and.eq( 'after' );
+            .and.eq( 'afterend' );
         });
         it( 'contains an elementError property', function() {
           expect( defaultOptions.options )
@@ -99,25 +96,24 @@
           expect( defaultOptions.options )
             .to.have.property( 'fadeOutError' )
             .that.is.an( 'Object' )
-            .and.eql( {fadeOut: false} );
+            .and.eql({fadeOut: false, timer: 0});
         });
       });
       it( 'can be configured', function() {
-        $('.errored-form-2').prettyFormError({
+        $( '.errored-form-2' ).prettyFormError({
           classError: 'myCustomName',
           elementError: 'span',
           callToAction: '.prettyErrorBtn-2',
           focusErrorOnClick: false,
-          fadeOutError: {fadeOut: true, fadeOutOpts: 6000},
+          fadeOutError: {fadeOut: true, timer: 'xoxo'},
           multiCheckbox: {
             enabled: true,
             selector: '.multiCheckbox'
           }
         });
-        $('.prettyErrorBtn-2').click();
-
-        expect($('.errored-form-2 span.myCustomName'))
-          .to.have.length(7);
+        $( '.prettyErrorBtn-2' ).click();
+        expect( $( '.errored-form-2 span.myCustomName' ))
+          .to.have.length( 7 );
       });
     });
   });

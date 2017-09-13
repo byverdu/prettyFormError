@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="prettyFormError.css">
+  <style>
+    form {
+      margin: 55px;
+    }
+  </style>
+</head>
+<body>
+  <form class="form">
+    <label for="name">Name 1</label>
+    <input id="name" type="text" required />
+    <label for="mail">mail 1</label>
+    <input id="mail" type="email" required />
+    <button>Click me!</button>
+  </form>
+  <form class="form">
+    <label for="name">Name 2</label>
+    <input id="name" type="text" required />
+    <label for="mail">mail 2</label>
+    <input id="mail" type="email" required />
+    <button>Click me!</button>
+  </form>
+  <form class="form-2">
+    <label for="name">Name 3</label>
+    <input id="name" type="text" required />
+    <label for="mail">mail 3</label>
+    <input id="mail" type="email" required />
+    <button>Click me!</button>
+  </form>
+  <script src="./module.prettyFormError.js"></script>
+  <script>
+    document.addEventListener( 'DOMContentLoaded', (event) => {
+      const x = new PrettyFormError();
+      console.log(x);
+      x.init(document.querySelectorAll('.form'));
+      x.init(document.querySelector('.form-2'), {elementError: 'span'});
+    });
+  </script>
+</body>
+</html>
