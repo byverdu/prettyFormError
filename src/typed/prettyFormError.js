@@ -2,7 +2,7 @@
 /* @flow */
 /* global IprettyError Positions */
 /* end-dev-code */
-/** Setting defualt properties values if user
+/** Setting default properties values if user
  *  doesn't specify them
  * @param {IprettyError} opts Object implementing IprettyError
  * @returns {IprettyError} Default plugin config
@@ -87,6 +87,20 @@ function _changeHandler(
   }
 }
 
+
+/**
+ * Throws warn to console if user is targetting an empty selector
+ * @param {*} collection of HTMLElements or Jquery
+ * @param {string} selector form element
+ * @return {void}
+ */
+function _showErrorForInvalidSelector( collection: any, selector: string ): void {
+  if ( collection.length ===  0 ) {
+    var message = 'I couldn\'t fine any DOM element for the selector ' + '"' + selector + '"';
+    console.warn( message );
+  }
+}
+
 /**
  Global factory for PrettyFormErrorInstance
  *  using vanilla JS
@@ -125,7 +139,7 @@ function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
     invalidElem.insertAdjacentElement( positionMethod, div );
   }
 
-    /**
+  /**
    * Adds CSS class with animation so error can fadeout
    * @returns {MutationObserver} mutation observer constructor
    */
@@ -138,65 +152,76 @@ function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
       });
     });
   }
+
    /**
    * Add click eventlistener
-   * @param {HTMLElement} elem Form element
+   * @param {HTMLElement} formElem Form element
    * @return {void}
    */
-  function _clickHandler( elem: HTMLElement ) {
-    var caller = elem.querySelector( options.callToAction );
+  function _clickHandler( formElem: HTMLFormElement ) {
+    var caller = formElem.querySelector( options.callToAction );
     if ( caller ) {
       caller.addEventListener( 'click', function( event: MouseEvent ) {
-        var invalids = _getInvalidElems( elem );
+        // prevent trigger default browser error messages
+        event.preventDefault();
 
-        if ( invalids.length > 1 ) {
-          // Deleting old errors
-          if ( document.querySelector( '.' + options.classError )) {
-            _removeOldErrors( elem );
+        var invalids = _getInvalidElems( formElem );
+        // Deleting old errors
+        if ( document.querySelector( '.' + options.classError )) {
+          _removeOldErrors( formElem );
+        }
+
+        // create errors
+        [].forEach.call( invalids, function ( invalid: HTMLInputElement ) {
+          _createErrorElement(
+            options.elementError,
+            invalid,
+            options.positionMethod
+          );
+        });
+
+        // focusing on first errrored input
+        if ( options.focusErrorOnClick && invalids.length > 0 ) {
+          invalids[ 0 ].focus();
+        }
+
+        // fading old errors
+        if ( options.fadeOutError.fadeOut ) {
+          let observer = _fadeOutErrorConfig();
+          const config = { attributes: true, childList: true, characterData: true };
+          observer.observe( formElem, config );
+
+          setTimeout(() => {
+            _removeOldErrors( formElem );
+          }, options.fadeOutError.timer );
+
+          // clearing observer
+          if ( invalids.length === 0 ) {
+            observer.disconnect();
+            observer = null;
           }
+        }
 
-          // create errors
-          [].forEach.call( invalids, function ( invalid: HTMLInputElement ) {
-            _createErrorElement(
-              options.elementError,
-              invalid,
-              options.positionMethod
-            );
-          });
+        // multiCheckbox configuration
+        if ( options.multiCheckbox.enabled ) {
+          var checkElem = options.multiCheckbox.selector;
+          var checkboxes = document.querySelectorAll( checkElem );
 
-          // focusing on first errrored input
-          if ( options.focusErrorOnClick && invalids.length > 0 ) {
-            invalids[ 0 ].focus();
-          }
-
-          // fading old errors
-          if ( options.fadeOutError.fadeOut ) {
-            let observer = _fadeOutErrorConfig();
-            const config = { attributes: true, childList: true, characterData: true };
-            observer.observe( elem, config );
-
-            setTimeout(() => {
-              _removeOldErrors( elem );
-            }, options.fadeOutError.timer );
-
-            // clearing observer
-            if ( invalids.length === 0 ) {
-              observer.disconnect();
-              observer = null;
-            }
-          }
-
-          // multiCheckbox configuration
-          if ( options.multiCheckbox.enabled ) {
-            var checkElem = options.multiCheckbox.selector;
-            var checkboxes = document.querySelectorAll( checkElem );
-
-            [].forEach.call( checkboxes, function( input: HTMLInputElement ) {
-              input.addEventListener( 'change', function() {
-                _changeHandler( checkboxes, checkElem );
-              });
+          [].forEach.call( checkboxes, function( input: HTMLInputElement ) {
+            input.addEventListener( 'change', function() {
+              _changeHandler( checkboxes, checkElem );
             });
-          }
+          });
+        }
+        if ( invalids.length === 0 ) {
+          // clearing field values
+          var valids = formElem.querySelectorAll( ':valid' );
+
+          [].forEach.call( valids, function( valid: HTMLInputElement ) {
+            valid.value = '';
+          });
+          // submiting the form when there's 0 invalid fields
+          formElem.submit();
         }
       });
     }
@@ -204,18 +229,27 @@ function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
 
   if ( typeof jQuery === 'undefined' ) {
     var elem = document.querySelectorAll( selector );
+    _showErrorForInvalidSelector( elem, selector );
     [].forEach.call( elem, function( element ) {
       _clickHandler( element );
     });
   } else {
-    $.each( $( selector ), function( index, item ) {
+    var $elem = $( selector );
+    _showErrorForInvalidSelector( $elem, selector );
+    $.each( $elem, function( index, item ) {
       _clickHandler( item );
     });
   }
 }
 
-function prettyFormError( elem: string, options: IprettyError ): PrettyFormErrorInstance {
-  return new PrettyFormErrorInstance( elem, options );
+/**
+ * Public method
+ * @param {string} formElem css selector to target the form
+ * @param {IprettyError} options IprettyError
+ * @returns {PrettyFormErrorInstance} new instance
+ */
+function prettyFormError( formElem: string, options: IprettyError ): PrettyFormErrorInstance {
+  return new PrettyFormErrorInstance( formElem, options );
 }
 
 // jQuery setup
@@ -234,4 +268,9 @@ if ( typeof jQuery !== 'undefined' ) {
 // Browser setup
 if ( !( 'prettyFormError' in window )) {
   window.prettyFormError = prettyFormError;
+}
+
+// CommonJS support
+if ( typeof module === 'object' && typeof module.exports === 'object' ) {
+  module.exports = prettyFormError;
 }
