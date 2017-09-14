@@ -46,7 +46,6 @@ function _optionsConfig( opts: any ): IprettyError {
   };
 }
 
-
 /**
  * Filters the invalid errors
  * @param {HTMLElement} elem parent element, the for itself
@@ -77,11 +76,11 @@ function _changeHandler(
   var checkedCount = document.querySelectorAll( cssSelector + ':checked' ).length;
 
   if ( checkedCount > 0 ) {
-    for ( let i = 0; i < checkboxes.length; i++ ) {
+    for ( var i = 0; i < checkboxes.length; i++ ) {
       checkboxes[ i ].removeAttribute( 'required' );
     }
   } else {
-    for ( let i = 0; i < checkboxes.length; i++ ) {
+    for ( var i = 0; i < checkboxes.length; i++ ) {
       checkboxes[ i ].setAttribute( 'required', 'required' );
     }
   }
@@ -187,11 +186,11 @@ function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
 
         // fading old errors
         if ( options.fadeOutError.fadeOut ) {
-          let observer = _fadeOutErrorConfig();
+          var observer = _fadeOutErrorConfig();
           const config = { attributes: true, childList: true, characterData: true };
           observer.observe( formElem, config );
 
-          setTimeout(() => {
+          setTimeout( function() {
             _removeOldErrors( formElem );
           }, options.fadeOutError.timer );
 
