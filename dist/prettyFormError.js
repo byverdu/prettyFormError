@@ -19,7 +19,7 @@ function _optionsConfig( opts ) {
   if ( 'positionMethod' in innerOpts ) {
     positionMethod = innerOpts.positionMethod  === 'after' ? 'afterend' : 'beforebegin';
   } else {
-    positionMethod = innerOpts.positionMethod  = 'afterend';
+    positionMethod = 'afterend';
   }
 
   // safe checker for setTimeout

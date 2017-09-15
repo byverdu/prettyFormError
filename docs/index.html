@@ -85,13 +85,22 @@
       <div class="col-sm-12 col-md-10">
         <div class="prettyErrorDemo__usage">
           <h2 id="settings" class="prettyErrorDemo__usage--title">How to use the plugin</h2>
-          <div>
-            <a href="https://github.com/byverdu/prettyFormError/tree/master/dist">Here you can find all the compiled files.</a> You will need to add <code>prettyFormError.min.js</code>, <code>prettyFormError.min.css</code> and <code>jQuery</code> on your html file.
+          <p>
+            The easiest way is to install the plugin is using npm: 
+            <pre><code class="shell">npm install pretty-form-error --save<br>npm install jquery --save # if using jquery</code></pre>
 
-            <pre><code class="html">&lt;html&gt;&lt;script src="https://code.jquery.com/jquery-3.1.1.js" /&gt;&lt;script src="prettyFormError.min.js" /&gt;&lt;link rel="stylesheet" href="prettyFormError.min.css" media="screen"&gt;</code
-              ></pre>
-              And then you only need to call the plugin within your jQuery selector.
-              <pre><code class="javascript">$('myFormSelector').prettyFormError();</code></pre>
+            Then you should require your plugin inside your file and use a bundler (Browserify) to be able to use it in the front end.
+          </p>
+          <p>
+            If you are not using <code>npm</code> the easiest way is adding the files using the unpkg CDN.
+          </p>
+          <pre><code class="html">&lt;html&gt;&lt;script src="https://code.jquery.com/jquery-3.1.1.js" /&gt; &lt;!-- Add jquery only if using it --&gt; &lt;script src="https://unpkg.com/pretty-form-error@1.0.2/dist/prettyFormError.min.js" /&gt;&lt;link rel="stylesheet" href="https://unpkg.com/pretty-form-error@1.0.2/dist/prettyFormError.css" media="screen"&gt;</code
+            ></pre>
+          <div>
+            <p>If you don't trust CDN's, <a href="https://github.com/byverdu/prettyFormError/tree/master/dist">Here you can find all the compiled files.</a> You will need to add <code>prettyFormError.min.js</code>, <code>prettyFormError.min.css</code> and <code>jQuery</code> on your html file.</p>
+
+              And then you only need to call the plugin within selector and some optional properties inside an object.
+              <pre><code class="javascript">/* plain javascript */<br> prettyFormError('myFormSelector', opts); <br><br> /* jquery example */ <br>$('myFormSelector').prettyFormError(opts);</code></pre>
             </div>
             <div>
               The plugin is initialized with the following default options:
@@ -134,14 +143,14 @@
                 positionMethod[String]
               </h3>
               <p>
-                JQuery method used for positioning the error, <code>.after()</code> or <code>.before()</code>.
+                Where do you want to display the error, <code>                  after</code> or <code>before</code> the errored input.
               </p>
             </div>
 
             <div class="prettyErrorDemo__usage--option">
               <h3 class="prettyErrorDemo__usage--subtitle">elementError[String]</h3>
               <p>
-                HTML element that you want to use for wrap the errors.
+                HTML element that you want to use to wrap the errors.
               </p>
             </div>
 
@@ -165,17 +174,16 @@
 
             <div class="prettyErrorDemo__usage--option">
               <h3 class="prettyErrorDemo__usage--subtitle">
-                fadeOutError[Object]
+                fadeOutError[Number]
               </h3>
               <p>
                 By default the error message will persist on the screen, if you want to fadeout the error enable this option.
-                <code>fadeOutOpts</code> accepts same options than the default <code>fadeOut()</code>
-                <a href="http://api.jquery.com/fadeout/">jQuery method</a>
+                <code>fadeOutOpts</code> accepts a number that would be the miliseconds passed to a setTimeout
               </p>
               <pre><code class="javascript">{
   fadeOutError: {
     fadeOut: true,
-    fadeOutOpts: [String, Number or Object]
+    fadeOutOpts: [Number]
   }
 }</code></pre>
 
@@ -192,27 +200,21 @@
               <legend>Settings for demo</legend>
               <div class="form-check">
                 <label for="fadeOutError" class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="fadeOutError" id="fadeOutError">
+                  <input class="form-check-input" type="checkbox" name="optionsForm" id="fadeOutError">
                   fadeOutError
                 </label>
               </div>
               <div class="form-group" id="timeFadeOut">
                 <label for="time">Options fadeOutError</label>
-                <input class="form-control" type="text" name="time" id="time" placeholder="String, Number or an Objet with options...">
+                <input class="form-control" type="text" name="optionsForm" id="timer" placeholder="Number">
               </div>
               <div class="form-group">
                 <label for="elementError">elementError</label>
-                <input class="form-control" type="text" name="elementError" id="elementError" placeholder="HTML element...">
+                <input class="form-control" type="text" name="optionsForm" id="elementError" placeholder="HTML element...">
               </div>
               <div class="form-group">
                 <label for="positionMethod">positionMethod</label>
-                <input class="form-control" type="text" name="positionMethod" id="positionMethod" placeholder="before or after...">
-              </div>
-              <div class="form-check">
-                <label for="focusErrorOnClick" class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="focusErrorOnClick" id="focusErrorOnClick">
-                  Disable focusErrorOnClick
-                </label>
+                <input class="form-control" type="text" name="optionsForm" id="positionMethod" placeholder="before or after...">
               </div>
             </fieldset>
             <input class="btn btn-outline-success btn-block" type="submit" value="Submit">
