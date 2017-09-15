@@ -34,9 +34,18 @@ This is how your error messages will look after using this plugin.
 `jQuery` :smile:
 
 # How to use the plugin
-> All compiled files can be found under `/dist/**`
 
-You will need `prettyFormError.min.js` and `prettyFormError.min.css`.
+You will only need `prettyFormError.min.js` and `prettyFormError.min.css`.
+
+You can grab them on unpkg CDN and use like this:
+
+```xml
+<link rel="stylesheet" href="https://unpkg.com/pretty-form-error@1.0.2/dist/prettyFormError.css" media="screen">
+<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<script src="https://unpkg.com/pretty-form-error@1.0.2/dist/prettyFormError.min.js"></script>  
+```
+
+or found them under `/dist/**` folder and use it like this:
 
 ```xml
 <link rel="stylesheet" href="prettyFormError.min.css" media="screen">
@@ -44,9 +53,18 @@ You will need `prettyFormError.min.js` and `prettyFormError.min.css`.
 <script src="prettyFormError.min.js"></script>  
 ```
 
-It is really simple, just get select your form with jQuery and call the prettyFormError method.
+or use npm to install the plugin and require the module within your project.
 
-`$('myFormSelector').prettyFormError();`
+It is really simple to use it, just select your form with plain JS or jQuery and call the prettyFormError method.
+
+```js
+// plain Js
+prettyFormError('myFormSelector', optionalOpts);
+
+// jQuery version
+$('myFormSelector').prettyFormError(optionalOpts);
+```
+
 
 # Plugin Options.
 
@@ -96,7 +114,7 @@ Use this option if you need to validate a group of checkboxes.
 Name for the css class used for the error messages.
 
 #### positionMethod[String]
-JQuery method used for positioning the error, `.after()` or `.before()`.
+Where do you want to display the error, `after` or `before` the errored input.
 
 #### elementError[String]
 HTML element that you want to use for wrap the errors.
@@ -110,19 +128,19 @@ Use `false` if you want to disable this otpion.
 #### fadeOutError[Object]
 By default the error message will persist on the screen, if you want to fadeout the error enable this option.
 
-`fadeOutOpts` accepts same options than the default `fadeOut()` [jQuery method](http://api.jquery.com/fadeout/)
+`timer` is in miliseconds. 
 
 ```javascript
 {
   fadeOutError: {
     fadeOut: true,
-    fadeOutOpts: [String, Number or Object]
+    timer: [Number]
   }
 }
 ```
 
 ## ToDo
 
-1. [ ] Make package compatible with CommmoJS
-1. [ ] Add more ways to display the error messages.
+1. [ x ] Make package compatible with CommmoJS
+1. [ x ] Add more ways to display the error messages.
 1. [ ] Add more styles / themes
