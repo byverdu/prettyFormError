@@ -80,8 +80,8 @@ function _changeHandler(
       checkboxes[ i ].removeAttribute( 'required' );
     }
   } else {
-    for ( var i = 0; i < checkboxes.length; i++ ) {
-      checkboxes[ i ].setAttribute( 'required', 'required' );
+    for ( var j = 0; j < checkboxes.length; j++ ) {
+      checkboxes[ j ].setAttribute( 'required', 'required' );
     }
   }
 }
@@ -101,15 +101,14 @@ function _showErrorForInvalidSelector( collection: any, selector: string ): void
 }
 
 /**
- Global factory for PrettyFormErrorInstance
+ Global factory for prettyFormErrorInstance
  *  using vanilla JS
  * @param {string} selector CSS selector, should be a form
  * @param {IprettyError} opts possible user options
  * @return {void}
  */
-function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
-  this.options = _optionsConfig( opts );
-  var options: IprettyError = this.options;
+function prettyFormErrorInstance( selector: string, opts: IprettyError ): void {
+  var options: IprettyError = _optionsConfig( opts );
 
   function _removeOldErrors( element: HTMLElement ) {
     if ( element ) {
@@ -160,7 +159,7 @@ function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
   function _clickHandler( formElem: HTMLFormElement ) {
     var caller = formElem.querySelector( options.callToAction );
     if ( caller ) {
-      caller.addEventListener( 'click', function( event: MouseEvent ) {
+      caller.addEventListener( 'click', function clickOnce( event: MouseEvent ) {
         // prevent trigger default browser error messages
         event.preventDefault();
 
@@ -222,6 +221,9 @@ function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
           // submiting the form when there's 0 invalid fields
           formElem.submit();
         }
+
+        // Run the eventlistener just once
+        event.target.removeEventListener( 'click', clickOnce );
       });
     }
   }
@@ -245,10 +247,10 @@ function PrettyFormErrorInstance( selector: string, opts: IprettyError ): void {
  * Public method
  * @param {string} formElem css selector to target the form
  * @param {IprettyError} options IprettyError
- * @returns {PrettyFormErrorInstance} new instance
+ * @returns {prettyFormErrorInstance} new instance
  */
-function prettyFormError( formElem: string, options: IprettyError ): PrettyFormErrorInstance {
-  return new PrettyFormErrorInstance( formElem, options );
+function prettyFormError( formElem: string, options: IprettyError ): any {
+  prettyFormErrorInstance( formElem, options );
 }
 
 // jQuery setup

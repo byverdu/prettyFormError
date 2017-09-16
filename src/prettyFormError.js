@@ -80,8 +80,8 @@ function _changeHandler(
       checkboxes[ i ].removeAttribute( 'required' );
     }
   } else {
-    for ( var i = 0; i < checkboxes.length; i++ ) {
-      checkboxes[ i ].setAttribute( 'required', 'required' );
+    for ( var j = 0; j < checkboxes.length; j++ ) {
+      checkboxes[ j ].setAttribute( 'required', 'required' );
     }
   }
 }
@@ -101,15 +101,14 @@ function _showErrorForInvalidSelector( collection, selector ) {
 }
 
 /**
- Global factory for PrettyFormErrorInstance
+ Global factory for prettyFormErrorInstance
  *  using vanilla JS
  * @param {string} selector CSS selector, should be a form
  * @param {IprettyError} opts possible user options
  * @return {void}
  */
-function PrettyFormErrorInstance( selector, opts ) {
-  this.options = _optionsConfig( opts );
-  var options = this.options;
+function prettyFormErrorInstance( selector, opts ) {
+  var options = _optionsConfig( opts );
 
   function _removeOldErrors( element ) {
     if ( element ) {
@@ -160,7 +159,7 @@ function PrettyFormErrorInstance( selector, opts ) {
   function _clickHandler( formElem ) {
     var caller = formElem.querySelector( options.callToAction );
     if ( caller ) {
-      caller.addEventListener( 'click', function( event ) {
+      caller.addEventListener( 'click', function clickOnce( event ) {
         // prevent trigger default browser error messages
         event.preventDefault();
 
@@ -222,6 +221,9 @@ function PrettyFormErrorInstance( selector, opts ) {
           // submiting the form when there's 0 invalid fields
           formElem.submit();
         }
+
+        // Run the eventlistener just once
+        event.target.removeEventListener( 'click', clickOnce );
       });
     }
   }
@@ -245,10 +247,10 @@ function PrettyFormErrorInstance( selector, opts ) {
  * Public method
  * @param {string} formElem css selector to target the form
  * @param {IprettyError} options IprettyError
- * @returns {PrettyFormErrorInstance} new instance
+ * @returns {prettyFormErrorInstance} new instance
  */
 function prettyFormError( formElem, options ) {
-  return new PrettyFormErrorInstance( formElem, options );
+  prettyFormErrorInstance( formElem, options );
 }
 
 // jQuery setup
