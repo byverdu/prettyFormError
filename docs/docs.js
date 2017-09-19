@@ -15,16 +15,26 @@ document.addEventListener( 'DOMContentLoaded', function() {
   document.querySelector( '#optionsForm' )
     .addEventListener( 'submit', function( event ) {
       event.preventDefault();
+      var oldErrors = document.querySelectorAll( '*[class*=prettyFormError]' );
       var inputs = document.querySelectorAll( 'input[name=optionsForm]' );
       var optionsPlugin = {};
 
+      [].forEach.call( oldErrors, function( error ) {
+        error.remove();
+      });
       [].forEach.call( inputs, function( field ) {
-        if ( field.value !== '' && field.value !== 'on' ) {
+        if ( field.type === 'text' && field.value !== '' ) {
           optionsPlugin[ field.id ] = field.value;
           field.value = '';
         }
-        if ( field.value === 'on' ) {
+        if ( field.type === 'checkbox' ) {
           optionsPlugin[ field.id ] = field.checked;
+          field.checked = false;
+        }
+        if ( field.type === 'radio' ) {
+          if ( field.id === 'classError' && field.checked ) {
+            optionsPlugin[ field.id ] = field.value;
+          }
           field.checked = false;
         }
       });

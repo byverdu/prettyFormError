@@ -108,7 +108,8 @@ function _showErrorForInvalidSelector( collection, selector ) {
  * @return {void}
  */
 function prettyFormErrorInstance( selector, opts ) {
-  var options = _optionsConfig( opts );
+  this.options = _optionsConfig( opts );
+  var options = _optionsConfig( this.options );
 
   function _removeOldErrors( element ) {
     if ( element ) {
@@ -170,7 +171,7 @@ function prettyFormErrorInstance( selector, opts ) {
         }
 
         // create errors
-        [].forEach.call( invalids, function ( invalid ) {
+        [].forEach.call( invalids, function( invalid ) {
           _createErrorElement(
             options.elementError,
             invalid,
@@ -250,7 +251,7 @@ function prettyFormErrorInstance( selector, opts ) {
  * @returns {prettyFormErrorInstance} new instance
  */
 function prettyFormError( formElem, options ) {
-  prettyFormErrorInstance( formElem, options );
+  return new prettyFormErrorInstance( formElem, options );
 }
 
 // jQuery setup
