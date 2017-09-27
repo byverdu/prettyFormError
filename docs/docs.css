@@ -30,6 +30,9 @@ a {
   right: 0;
   opacity: .8; }
 
+.img-container {
+  display: flex; }
+
 .figure {
   width: 50%;
   box-shadow: 0px 0px 1px;

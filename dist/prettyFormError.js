@@ -97,14 +97,19 @@ function _showErrorForInvalidSelector( collection, selector ) {
 }
 
 /**
- Global factory for prettyFormErrorInstance
+ Global factory for PrettyFormErrorInstance
  *  using vanilla JS
  * @param {string} selector CSS selector, should be a form
  * @param {IprettyError} opts possible user options
  * @return {void}
  */
-function prettyFormErrorInstance( selector, opts ) {
-  var options = _optionsConfig( opts );
+function PrettyFormErrorInstance( selector, opts ) {
+  this.options = _optionsConfig( opts );
+  var options = this.options;
+
+  // Custom Evnent to inform a new instance is been created so
+  // the click event listener can be removed
+  document.dispatchEvent( new CustomEvent( 'instance-created' ));
 
   function _removeOldErrors( element ) {
     if ( element ) {
@@ -147,6 +152,76 @@ function prettyFormErrorInstance( selector, opts ) {
     });
   }
 
+  /**
+   * Callback passed to eventListener
+   * @param {HTMLFormElement} formElem form element
+   * @param {MouseEvent} event click event on button
+   * @return {void}
+   */
+  function _clickCallback( formElem, event ) {
+    // prevent trigger default browser error messages
+    event.preventDefault();
+
+    var invalids = _getInvalidElems( formElem );
+    // Deleting old errors
+    if ( document.querySelector( '.' + options.classError )) {
+      _removeOldErrors( formElem );
+    }
+
+    // create errors
+    [].forEach.call( invalids, function( invalid ) {
+      _createErrorElement(
+        options.elementError,
+        invalid,
+        options.positionMethod
+      );
+    });
+
+    // focusing on first errrored input
+    if ( options.focusErrorOnClick && invalids.length > 0 ) {
+      invalids[ 0 ].focus();
+    }
+
+    // fading old errors
+    if ( options.fadeOutError.fadeOut ) {
+      var observer = _fadeOutErrorConfig();
+      const config = { attributes: true, childList: true, characterData: true };
+      observer.observe( formElem, config );
+
+      setTimeout( function() {
+        _removeOldErrors( formElem );
+      }, options.fadeOutError.timer );
+
+      // clearing observer
+      if ( invalids.length === 0 ) {
+        observer.disconnect();
+        observer = null;
+      }
+    }
+
+    // multiCheckbox configuration
+    if ( options.multiCheckbox.enabled ) {
+      var checkElem = options.multiCheckbox.selector;
+      var checkboxes = document.querySelectorAll( checkElem );
+
+      [].forEach.call( checkboxes, function( input ) {
+        input.addEventListener( 'change', function() {
+          _changeHandler( checkboxes, checkElem );
+        });
+      });
+    }
+    if ( invalids.length === 0 ) {
+      // clearing field values
+      var valids = formElem.querySelectorAll( ':valid' );
+
+      [].forEach.call( valids, function( valid ) {
+        valid.value = '';
+      });
+      // submiting the form when there's 0 invalid fields
+      formElem.submit();
+    }
+  }
+
    /**
    * Add click eventlistener
    * @param {HTMLElement} formElem Form element
@@ -154,77 +229,14 @@ function prettyFormErrorInstance( selector, opts ) {
    */
   function _clickHandler( formElem ) {
     var caller = formElem.querySelector( options.callToAction );
+    var callee = _clickCallback.bind( event, formElem );
     if ( caller ) {
-      // Run the eventlistener just once
-      caller.addEventListener( 'click', function clickOnce( event ) {
-        event.target.removeEventListener( 'click', clickOnce );
-        // $FlowFixMe
-        document.addEventListener( 'invalid', function( event2 ) {
-          event2.preventDefault();
-        });
-        
-        // prevent trigger default browser error messages
-        event.preventDefault();
-
-        var invalids = _getInvalidElems( formElem );
-        // Deleting old errors
-        if ( document.querySelector( '.' + options.classError )) {
-          _removeOldErrors( formElem );
-        }
-
-        // create errors
-        [].forEach.call( invalids, function ( invalid ) {
-          _createErrorElement(
-            options.elementError,
-            invalid,
-            options.positionMethod
-          );
-        });
-
-        // focusing on first errrored input
-        if ( options.focusErrorOnClick && invalids.length > 0 ) {
-          invalids[ 0 ].focus();
-        }
-
-        // fading old errors
-        if ( options.fadeOutError.fadeOut ) {
-          var observer = _fadeOutErrorConfig();
-          var config = { attributes: true, childList: true, characterData: true };
-          observer.observe( formElem, config );
-
-          setTimeout( function() {
-            // _removeOldErrors( formElem );
-          }, options.fadeOutError.timer );
-
-          // clearing observer
-          if ( invalids.length === 0 ) {
-            observer.disconnect();
-            observer = null;
-          }
-        }
-
-        // multiCheckbox configuration
-        if ( options.multiCheckbox.enabled ) {
-          var checkElem = options.multiCheckbox.selector;
-          var checkboxes = document.querySelectorAll( checkElem );
-
-          [].forEach.call( checkboxes, function( input ) {
-            input.addEventListener( 'change', function() {
-              _changeHandler( checkboxes, checkElem );
-            });
-          });
-        }
-        if ( invalids.length === 0 ) {
-          // clearing field values
-          var valids = formElem.querySelectorAll( ':valid' );
-
-          [].forEach.call( valids, function( valid ) {
-            valid.value = '';
-          });
-          // submiting the form when there's 0 invalid fields
-          formElem.submit();
+      document.addEventListener( 'instance-created', function() {
+        if ( caller ) {
+          caller.removeEventListener( 'click', callee );
         }
       });
+      caller.addEventListener( 'click', callee );
     }
   }
 
@@ -247,10 +259,10 @@ function prettyFormErrorInstance( selector, opts ) {
  * Public method
  * @param {string} formElem css selector to target the form
  * @param {IprettyError} options IprettyError
- * @returns {prettyFormErrorInstance} new instance
+ * @returns {PrettyFormErrorInstance} new instance
  */
 function prettyFormError( formElem, options ) {
-  return prettyFormErrorInstance( formElem, options );
+  return new PrettyFormErrorInstance( formElem, options );
 }
 
 // jQuery setup
@@ -267,9 +279,9 @@ if ( typeof jQuery !== 'undefined' ) {
 }
 
 // Browser setup
-// if ( !( 'prettyFormError' in window )) {
-//   window.prettyFormError = prettyFormError;
-// }
+if ( !( 'prettyFormError' in window )) {
+  window.prettyFormError = prettyFormError;
+}
 
 // CommonJS support
 if ( typeof module === 'object' && typeof module.exports === 'object' ) {
