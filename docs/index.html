@@ -71,12 +71,26 @@
           <p>
             This is how your error messages will look after using this plugin.
           </p>
-          <figure class="figure">
-            <img src="./demo.png" class="figure-img img-fluid rounded" alt="prettyFormError result example">
-            <figcaption class="figure-caption">
-              Default styles
-            </figcaption>
-          </figure>
+          <div class="img-container">
+            <figure class="figure">
+              <figcaption class="figure-caption">
+                Default Theme
+              </figcaption>
+              <img src="./media/default_theme.png" class="figure-img img-fluid rounded" alt="prettyFormError result example">
+            </figure>
+            <figure class="figure">
+              <figcaption class="figure-caption">
+                Black Theme
+              </figcaption>
+              <img src="./media/black_theme.png" class="figure-img img-fluid rounded" alt="prettyFormError result example">
+            </figure>
+            <figure class="figure">
+              <figcaption class="figure-caption">
+                White Theme
+              </figcaption>
+              <img src="./media/white_theme.png" class="figure-img img-fluid rounded" alt="prettyFormError result example">
+            </figure>
+          </div>
         </div>
       </div>
     </div>
@@ -87,7 +101,7 @@
           <h2 id="settings" class="prettyErrorDemo__usage--title">How to use the plugin</h2>
           <p>
             The easiest way is to install the plugin is using npm: 
-            <pre><code class="shell">npm install pretty-form-error --save<br>npm install jquery --save # if using jquery</code></pre>
+            <pre><code class="javascript">npm install pretty-form-error --save<br>npm install jquery --save // if using jquery</code></pre>
 
             Then you should require your plugin inside your file and use a bundler (Browserify) to be able to use it in the front end.
           </p>
@@ -135,7 +149,7 @@
               <h3 class="prettyErrorDemo__usage--subtitle">
                 classError[String]
               </h3>
-              <p>Name for the css class used for the error messages.</p>
+              <p>Name for the css class used for the error messages. The default one is <code>prettyFormError</code> but you could also use <code>prettyFormError-black</code> or <code>prettyFormError-white</code></p>
             </div>
 
             <div class="prettyErrorDemo__usage--option">
@@ -197,7 +211,7 @@
         <div class="prettyErrorDemo__settings">
           <form id="optionsForm" class="form-group">
             <fieldset class="form-group">
-              <legend>Settings for demo</legend>
+              <legend>Settings for demo, <span style="color: orange"> select some values in order to see the plugin working</span></legend>
               <div class="form-check">
                 <label for="fadeOutError" class="form-check-label">
                   <input class="form-check-input" type="checkbox" name="optionsForm" id="fadeOutError">
