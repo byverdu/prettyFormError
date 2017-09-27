@@ -37,7 +37,7 @@
         $( '.prettyErrorBtn' )[ 0 ].click();
 
         expect( $( '.prettyFormError' )[ 0 ].textContent )
-          .to.be.eq( 'Please fill in this field.' );
+          .to.be.eq( 'Please match the format requested.' );
       });
       it( 'sets focus to the first element with error', function() {
         expect( document.activeElement )

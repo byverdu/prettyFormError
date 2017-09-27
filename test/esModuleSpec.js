@@ -28,7 +28,7 @@ describe( 'prettyFormError javascript plugin', function() {
       document.querySelector( '.prettyErrorBtn' ).click();
 
       expect( document.querySelector( '.prettyFormError' ).textContent )
-        .to.be.eq( "Please fill in this field." );
+        .to.be.eq( "Please match the format requested." );
     });
     xit( 'sets focus to the first element with error', function() {
       expect( document.activeElement )
