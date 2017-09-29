@@ -42,9 +42,9 @@ You will only need `prettyFormError.min.js` and `prettyFormError.min.css`.
 You can grab them on unpkg CDN and use it like this:
 
 ```xml
-<link rel="stylesheet" href="https://unpkg.com/pretty-form-error@latest_version/dist/prettyFormError.css" media="screen">
+<link rel="stylesheet" href="https://unpkg.com/pretty-form-error@2.0.0/dist/prettyFormError.css" media="screen">
 <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
-<script src="https://unpkg.com/pretty-form-error@latest_version/dist/prettyFormError.min.js"></script>  
+<script src="https://unpkg.com/pretty-form-error@2.0.0/dist/prettyFormError.min.js"></script>  
 ```
 
 or found them under `/dist/**` folder and use it like this:
