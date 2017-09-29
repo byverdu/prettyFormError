@@ -1,10 +1,10 @@
 {
   "name": "pretty-form-error",
   "version": "2.0.0",
-  "description": "jQuery plugin that makes pretty the form errors in all browsers by applying same styles",
+  "description": "Javascript plugin that makes pretty the form errors in all browsers by applying the same styles",
   "main": "index.js",
   "scripts": {
-    "build": "./node_modules/.bin/flow-remove-types src-dev/ -p -d src/",
+    "build": "./node_modules/.bin/flow-remove-types -p src/typed -d src/",
     "flow": "flow",
     "prepublish": "npm run build",
     "test": "echo \"see setup.md for gulp tasks :)\""
