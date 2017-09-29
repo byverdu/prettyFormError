@@ -27,22 +27,24 @@ To solve this issue you need to add/remove the `required` attribute programmatic
 This is how your error messages will look after using this plugin.
 
 <p align="center">
-  <img src="https://github.com/byverdu/prettyFormError/raw/master/docs/demo.png" alt="demo image" width="400">
+  <img src="https://github.com/byverdu/prettyFormError/raw/master/docs/default_theme.png" alt="demo image" width="400">
+  <img src="https://github.com/byverdu/prettyFormError/raw/master/docs/black_theme.png" alt="demo image" width="400">
+  <img src="https://github.com/byverdu/prettyFormError/raw/master/docs/white_theme.png" alt="demo image" width="400">
 </p>
 
 ### Dependencies
-`jQuery` :smile:
+`jQuery` or not :smile:
 
 # How to use the plugin
 
 You will only need `prettyFormError.min.js` and `prettyFormError.min.css`.
 
-You can grab them on unpkg CDN and use like this:
+You can grab them on unpkg CDN and use it like this:
 
 ```xml
-<link rel="stylesheet" href="https://unpkg.com/pretty-form-error@1.0.2/dist/prettyFormError.css" media="screen">
+<link rel="stylesheet" href="https://unpkg.com/pretty-form-error@latest_version/dist/prettyFormError.css" media="screen">
 <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
-<script src="https://unpkg.com/pretty-form-error@1.0.2/dist/prettyFormError.min.js"></script>  
+<script src="https://unpkg.com/pretty-form-error@latest_version/dist/prettyFormError.min.js"></script>  
 ```
 
 or found them under `/dist/**` folder and use it like this:
@@ -54,6 +56,12 @@ or found them under `/dist/**` folder and use it like this:
 ```
 
 or use npm to install the plugin and require the module within your project.
+
+```javascript
+const prerttyError = require( 'pretty-form-error' );
+
+prettyFormError( 'form', {options});
+```
 
 It is really simple to use it, just select your form with plain JS or jQuery and call the prettyFormError method.
 
