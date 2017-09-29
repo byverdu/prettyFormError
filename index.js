@@ -1,3 +1,3 @@
-var prettyFormError = require( './dist/prettyFormErrorFormError.min.js' );
+var prettyFormError = require( './dist/prettyFormError.min.js' );
 
 module.exports = prettyFormError;
