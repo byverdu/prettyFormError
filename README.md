@@ -27,9 +27,9 @@ To solve this issue you need to add/remove the `required` attribute programmatic
 This is how your error messages will look after using this plugin.
 
 <p align="center">
-  <img src="https://github.com/byverdu/prettyFormError/raw/master/docs/default_theme.png" alt="demo image" width="400">
-  <img src="https://github.com/byverdu/prettyFormError/raw/master/docs/black_theme.png" alt="demo image" width="400">
-  <img src="https://github.com/byverdu/prettyFormError/raw/master/docs/white_theme.png" alt="demo image" width="400">
+  <img src="https://github.com/byverdu/prettyFormError/raw/master/docs/media/default_theme.png" alt="demo image" width="400">
+  <img src="https://github.com/byverdu/prettyFormError/raw/master/docs/media/black_theme.png" alt="demo image" width="400">
+  <img src="https://github.com/byverdu/prettyFormError/raw/master/docs/media/white_theme.png" alt="demo image" width="400">
 </p>
 
 ### Dependencies
