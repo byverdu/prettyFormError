@@ -27,9 +27,9 @@ To solve this issue you need to add/remove the `required` attribute programmatic
 This is how your error messages will look after using this plugin.
 
 <p align="center">
-  <img src="https://github.com/byverdu/prettyFormError/raw/master/docs/media/default_theme.png" alt="demo image" width="400">
-  <img src="https://github.com/byverdu/prettyFormError/raw/master/docs/media/black_theme.png" alt="demo image" width="400">
-  <img src="https://github.com/byverdu/prettyFormError/raw/master/docs/media/white_theme.png" alt="demo image" width="400">
+  <img src="https://github.com/byverdu/prettyFormError/raw/master/docs/media/default_theme.png" alt="demo image" width="250">
+  <img src="https://github.com/byverdu/prettyFormError/raw/master/docs/media/black_theme.png" alt="demo image" width="250">
+  <img src="https://github.com/byverdu/prettyFormError/raw/master/docs/media/white_theme.png" alt="demo image" width="250">
 </p>
 
 ### Dependencies
@@ -119,7 +119,7 @@ Use this option if you need to validate a group of checkboxes.
 ```
 
 #### classError[String]
-Name for the css class used for the error messages.
+Name for the css class used for the error messages. The default one is `prettyFormError` but you could also use `prettyFormError-black` or `prettyFormError-white`
 
 #### positionMethod[String]
 Where do you want to display the error, `after` or `before` the errored input.
