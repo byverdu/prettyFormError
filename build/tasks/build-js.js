@@ -4,17 +4,19 @@ const rename = require( 'gulp-rename' );
 const sourcemaps = require( 'gulp-sourcemaps' );
 const paths = require( '../paths' );
 const stripCode = require( 'gulp-strip-code' );
+const pump = require( 'pump' );
 
-gulp.task( 'build-js', [ 'type-check-build' ],  () => {
-  gulp.src( paths.srcJs )
-  .pipe( uglify({ mangle: true }))
-  .pipe( sourcemaps.init({ loadMaps: true }))
-  .pipe( rename({
-    basename: paths.minifiedOutput,
-    suffix: '.min'
-  }))
-  .pipe( sourcemaps.write( './' ))
-    .pipe( gulp.dest( paths.destDir ));
+gulp.task( 'build-js', [ 'type-check-build' ],  ( callback ) => {
+  pump([
+    gulp.src( paths.srcJs ),
+    uglify({ mangle: true }),
+    sourcemaps.init({ loadMaps: true }),
+    rename({
+      basename: paths.minifiedOutput,
+      suffix: '.min'
+    }),
+    sourcemaps.write( './' ),
+    gulp.dest( paths.destDir )], callback );
 });
 
 gulp.task( 'move-js', [ 'build-js' ], () => {

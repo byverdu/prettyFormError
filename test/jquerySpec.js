@@ -26,18 +26,18 @@
       });
       it( 'retrieves the invalid inputs field when the form is submited', function() {
         expect( $( '.errored-form :invalid' ).not( 'fieldset' ))
-          .to.have.length( 3 );
+        .to.have.length( 3 );
       });
       it( 'appends a div to each error', function() {
         expect( $( '.errored-form .prettyFormError' ))
-          .to.have.length( 3 );
+        .to.have.length( 3 );
       });
       it( 'with the corresponding text error', function() {
-        jQueryMock.find( '#email' ).val( 'lol@gmail.' );
+        jQueryMock.find( 'input[name=telephone]' ).val( 'xoxo' );
         $( '.prettyErrorBtn' )[ 0 ].click();
 
         expect( $( '.prettyFormError' )[ 0 ].textContent )
-          .to.be.eq( "'.' is used at a wrong position in 'gmail.'." );
+          .to.be.eq( 'Please match the format requested.' );
       });
       it( 'sets focus to the first element with error', function() {
         expect( document.activeElement )
@@ -51,6 +51,7 @@
           defaultOptions = jQueryMock.data( 'plugin_prettyFormError' );
         });
         it( 'are defined and is an Object', function() {
+          console.log( defaultOptions )
           expect( defaultOptions )
             .to.have.property( 'options' )
             .that.is.an( 'Object' );

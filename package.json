@@ -2,7 +2,7 @@
   "name": "pretty-form-error",
   "version": "1.0.2",
   "description": "jQuery plugin that makes pretty the form errors in all browsers by applying same styles",
-  "main": "index.html",
+  "main": "index.js",
   "scripts": {
     "build": "./node_modules/.bin/flow-remove-types src-dev/ -p -d src/",
     "flow": "flow",
@@ -56,6 +56,7 @@
     "gulp-uglify": "^2.0.0",
     "gulp-watch": "^4.3.10",
     "mocha": "^3.1.2",
+    "pump": "^1.0.2",
     "require-dir": "^0.3.1",
     "sinon": "^2.3.5",
     "sinon-chai": "^2.11.0"

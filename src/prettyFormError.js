@@ -23,7 +23,7 @@ function _optionsConfig( opts ) {
   if ( 'positionMethod' in innerOpts ) {
     positionMethod = innerOpts.positionMethod  === 'after' ? 'afterend' : 'beforebegin';
   } else {
-    positionMethod = innerOpts.positionMethod  = 'afterend';
+    positionMethod = 'afterend';
   }
 
   // safe checker for setTimeout
@@ -45,7 +45,6 @@ function _optionsConfig( opts ) {
     fadeOutError: fadeOutError
   };
 }
-
 
 /**
  * Filters the invalid errors
@@ -77,12 +76,12 @@ function _changeHandler(
   var checkedCount = document.querySelectorAll( cssSelector + ':checked' ).length;
 
   if ( checkedCount > 0 ) {
-    for ( let i = 0; i < checkboxes.length; i++ ) {
+    for ( var i = 0; i < checkboxes.length; i++ ) {
       checkboxes[ i ].removeAttribute( 'required' );
     }
   } else {
-    for ( let i = 0; i < checkboxes.length; i++ ) {
-      checkboxes[ i ].setAttribute( 'required', 'required' );
+    for ( var j = 0; j < checkboxes.length; j++ ) {
+      checkboxes[ j ].setAttribute( 'required', 'required' );
     }
   }
 }
@@ -111,6 +110,10 @@ function _showErrorForInvalidSelector( collection, selector ) {
 function PrettyFormErrorInstance( selector, opts ) {
   this.options = _optionsConfig( opts );
   var options = this.options;
+
+  // Custom Evnent to inform a new instance is been created so
+  // the click event listener can be removed
+  document.dispatchEvent( new CustomEvent( 'instance-created' ));
 
   function _removeOldErrors( element ) {
     if ( element ) {
@@ -153,6 +156,76 @@ function PrettyFormErrorInstance( selector, opts ) {
     });
   }
 
+  /**
+   * Callback passed to eventListener
+   * @param {HTMLFormElement} formElem form element
+   * @param {MouseEvent} event click event on button
+   * @return {void}
+   */
+  function _clickCallback( formElem, event ) {
+    // prevent trigger default browser error messages
+    event.preventDefault();
+
+    var invalids = _getInvalidElems( formElem );
+    // Deleting old errors
+    if ( document.querySelector( '.' + options.classError )) {
+      _removeOldErrors( formElem );
+    }
+
+    // create errors
+    [].forEach.call( invalids, function( invalid ) {
+      _createErrorElement(
+        options.elementError,
+        invalid,
+        options.positionMethod
+      );
+    });
+
+    // focusing on first errrored input
+    if ( options.focusErrorOnClick && invalids.length > 0 ) {
+      invalids[ 0 ].focus();
+    }
+
+    // fading old errors
+    if ( options.fadeOutError.fadeOut ) {
+      var observer = _fadeOutErrorConfig();
+      const config = { attributes: true, childList: true, characterData: true };
+      observer.observe( formElem, config );
+
+      setTimeout( function() {
+        _removeOldErrors( formElem );
+      }, options.fadeOutError.timer );
+
+      // clearing observer
+      if ( invalids.length === 0 ) {
+        observer.disconnect();
+        observer = null;
+      }
+    }
+
+    // multiCheckbox configuration
+    if ( options.multiCheckbox.enabled ) {
+      var checkElem = options.multiCheckbox.selector;
+      var checkboxes = document.querySelectorAll( checkElem );
+
+      [].forEach.call( checkboxes, function( input ) {
+        input.addEventListener( 'change', function() {
+          _changeHandler( checkboxes, checkElem );
+        });
+      });
+    }
+    if ( invalids.length === 0 ) {
+      // clearing field values
+      var valids = formElem.querySelectorAll( ':valid' );
+
+      [].forEach.call( valids, function( valid ) {
+        valid.value = '';
+      });
+      // submiting the form when there's 0 invalid fields
+      formElem.submit();
+    }
+  }
+
    /**
    * Add click eventlistener
    * @param {HTMLElement} formElem Form element
@@ -160,70 +233,14 @@ function PrettyFormErrorInstance( selector, opts ) {
    */
   function _clickHandler( formElem ) {
     var caller = formElem.querySelector( options.callToAction );
+    var callee = _clickCallback.bind( event, formElem );
     if ( caller ) {
-      caller.addEventListener( 'click', function( event ) {
-        // prevent trigger default browser error messages
-        event.preventDefault();
-
-        var invalids = _getInvalidElems( formElem );
-        // Deleting old errors
-        if ( document.querySelector( '.' + options.classError )) {
-          _removeOldErrors( formElem );
-        }
-
-        // create errors
-        [].forEach.call( invalids, function ( invalid ) {
-          _createErrorElement(
-            options.elementError,
-            invalid,
-            options.positionMethod
-          );
-        });
-
-        // focusing on first errrored input
-        if ( options.focusErrorOnClick && invalids.length > 0 ) {
-          invalids[ 0 ].focus();
-        }
-
-        // fading old errors
-        if ( options.fadeOutError.fadeOut ) {
-          let observer = _fadeOutErrorConfig();
-          const config = { attributes: true, childList: true, characterData: true };
-          observer.observe( formElem, config );
-
-          setTimeout(() => {
-            _removeOldErrors( formElem );
-          }, options.fadeOutError.timer );
-
-          // clearing observer
-          if ( invalids.length === 0 ) {
-            observer.disconnect();
-            observer = null;
-          }
-        }
-
-        // multiCheckbox configuration
-        if ( options.multiCheckbox.enabled ) {
-          var checkElem = options.multiCheckbox.selector;
-          var checkboxes = document.querySelectorAll( checkElem );
-
-          [].forEach.call( checkboxes, function( input ) {
-            input.addEventListener( 'change', function() {
-              _changeHandler( checkboxes, checkElem );
-            });
-          });
-        }
-        if ( invalids.length === 0 ) {
-          // clearing field values
-          var valids = formElem.querySelectorAll( ':valid' );
-
-          [].forEach.call( valids, function( valid ) {
-            valid.value = '';
-          });
-          // submiting the form when there's 0 invalid fields
-          formElem.submit();
+      document.addEventListener( 'instance-created', function() {
+        if ( caller ) {
+          caller.removeEventListener( 'click', callee );
         }
       });
+      caller.addEventListener( 'click', callee );
     }
   }
 

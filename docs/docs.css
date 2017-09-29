@@ -28,7 +28,11 @@ a {
   position: fixed;
   top: 0;
   right: 0;
-  opacity: .8; }
+  opacity: .8;
+  z-index: 1; }
+
+.img-container {
+  display: flex; }
 
 .figure {
   width: 50%;

@@ -1,4 +1,6 @@
-.prettyFormError {
+.prettyFormError,
+.prettyFormError-white,
+.prettyFormError-black {
   background: #EA5B5B;
   border-radius: 15px;
   box-shadow: 1px 2px 1px #232b2b, -1px -1px 2px #232b2b;
@@ -10,13 +12,26 @@
   text-align: center;
   padding: 5px;
   position: relative; }
-  .prettyFormError-fade {
-    opacity: 0;
-    animation: fadeOut 6s ease-in-out 0s 1 normal none; }
-  .prettyFormError:before {
+  .prettyFormError:before,
+  .prettyFormError-white:before,
+  .prettyFormError-black:before {
     content: "\2718";
     font-size: 13px;
     margin: 0 5px; }
+
+.prettyFormError-white {
+  background: ghostwhite;
+  color: #ea5b5b;
+  box-shadow: 1px 2px 6px #ea5b5b, -1px -1px 2px #ea5b5b; }
+
+.prettyFormError-black {
+  background: black;
+  color: white;
+  box-shadow: 1px 2px 6px #ea5b5b, -1px -1px 2px #ea5b5b; }
+
+.prettyFormError-fade {
+  opacity: 0;
+  animation: fadeOut 6s ease-in-out 0s 1 normal none; }
 
 @keyframes fadeOut {
   from {

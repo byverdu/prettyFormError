@@ -17,7 +17,7 @@
 
 <body>
   <a href="https://github.com/byverdu/prettyFormError" target="_blank" class="github-corner" aria-label="View source on Github">
-  <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#EFEFEF; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+  <svg width="80" height="80" viewBox="0 0 250 250" style="z-index: 333 ;fill:#151513; color:#EFEFEF; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
   <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
   <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
   <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
@@ -71,12 +71,26 @@
           <p>
             This is how your error messages will look after using this plugin.
           </p>
-          <figure class="figure">
-            <img src="./demo.png" class="figure-img img-fluid rounded" alt="prettyFormError result example">
-            <figcaption class="figure-caption">
-              Default styles
-            </figcaption>
-          </figure>
+          <div class="img-container">
+            <figure class="figure">
+              <figcaption class="figure-caption">
+                Default Theme
+              </figcaption>
+              <img src="./media/default_theme.png" class="figure-img img-fluid rounded" alt="prettyFormError result example">
+            </figure>
+            <figure class="figure">
+              <figcaption class="figure-caption">
+                Black Theme
+              </figcaption>
+              <img src="./media/black_theme.png" class="figure-img img-fluid rounded" alt="prettyFormError result example">
+            </figure>
+            <figure class="figure">
+              <figcaption class="figure-caption">
+                White Theme
+              </figcaption>
+              <img src="./media/white_theme.png" class="figure-img img-fluid rounded" alt="prettyFormError result example">
+            </figure>
+          </div>
         </div>
       </div>
     </div>
@@ -85,13 +99,22 @@
       <div class="col-sm-12 col-md-10">
         <div class="prettyErrorDemo__usage">
           <h2 id="settings" class="prettyErrorDemo__usage--title">How to use the plugin</h2>
-          <div>
-            <a href="https://github.com/byverdu/prettyFormError/tree/master/dist">Here you can find all the compiled files.</a> You will need to add <code>prettyFormError.min.js</code>, <code>prettyFormError.min.css</code> and <code>jQuery</code> on your html file.
+          <p>
+            The easiest way is to install the plugin is using npm: 
+            <pre><code class="javascript">npm install pretty-form-error --save<br>npm install jquery --save // if using jquery</code></pre>
 
-            <pre><code class="html">&lt;html&gt;&lt;script src="https://code.jquery.com/jquery-3.1.1.js" /&gt;&lt;script src="prettyFormError.min.js" /&gt;&lt;link rel="stylesheet" href="prettyFormError.min.css" media="screen"&gt;</code
-              ></pre>
-              And then you only need to call the plugin within your jQuery selector.
-              <pre><code class="javascript">$('myFormSelector').prettyFormError();</code></pre>
+            Then you should require your plugin inside your file and use a bundler (Browserify) to be able to use it in the front end.
+          </p>
+          <p>
+            If you are not using <code>npm</code> the easiest way is adding the files using the unpkg CDN.
+          </p>
+          <pre><code class="html">&lt;html&gt;&lt;link rel="stylesheet" href="https://unpkg.com/pretty-form-error@1.0.2/dist/prettyFormError.css" media="screen"&gt;&lt;script src="https://code.jquery.com/jquery-3.1.1.js" /&gt; &lt;!-- Add jquery only if using it --&gt; &lt;script src="https://unpkg.com/pretty-form-error@1.0.2/dist/prettyFormError.min.js" /&gt;</code
+            ></pre>
+          <div>
+            <p>If you don't trust CDN's, <a href="https://github.com/byverdu/prettyFormError/tree/master/dist">Here you can find all the compiled files.</a> You will need to add <code>prettyFormError.min.js</code>, <code>prettyFormError.min.css</code> and <code>jQuery</code> on your html file.</p>
+
+              And then you only need to call the plugin within selector and some optional properties inside an object.
+              <pre><code class="javascript">/* plain javascript */<br> prettyFormError('myFormSelector', opts); <br><br> /* jquery example */ <br>$('myFormSelector').prettyFormError(opts);</code></pre>
             </div>
             <div>
               The plugin is initialized with the following default options:
@@ -126,7 +149,7 @@
               <h3 class="prettyErrorDemo__usage--subtitle">
                 classError[String]
               </h3>
-              <p>Name for the css class used for the error messages.</p>
+              <p>Name for the css class used for the error messages. The default one is <code>prettyFormError</code> but you could also use <code>prettyFormError-black</code> or <code>prettyFormError-white</code></p>
             </div>
 
             <div class="prettyErrorDemo__usage--option">
@@ -134,14 +157,14 @@
                 positionMethod[String]
               </h3>
               <p>
-                JQuery method used for positioning the error, <code>.after()</code> or <code>.before()</code>.
+                Where do you want to display the error, <code>                  after</code> or <code>before</code> the errored input.
               </p>
             </div>
 
             <div class="prettyErrorDemo__usage--option">
               <h3 class="prettyErrorDemo__usage--subtitle">elementError[String]</h3>
               <p>
-                HTML element that you want to use for wrap the errors.
+                HTML element that you want to use to wrap the errors.
               </p>
             </div>
 
@@ -165,17 +188,16 @@
 
             <div class="prettyErrorDemo__usage--option">
               <h3 class="prettyErrorDemo__usage--subtitle">
-                fadeOutError[Object]
+                fadeOutError[Number]
               </h3>
               <p>
                 By default the error message will persist on the screen, if you want to fadeout the error enable this option.
-                <code>fadeOutOpts</code> accepts same options than the default <code>fadeOut()</code>
-                <a href="http://api.jquery.com/fadeout/">jQuery method</a>
+                <code>fadeOutOpts</code> accepts a number that would be the miliseconds passed to a setTimeout
               </p>
               <pre><code class="javascript">{
   fadeOutError: {
     fadeOut: true,
-    fadeOutOpts: [String, Number or Object]
+    fadeOutOpts: [Number]
   }
 }</code></pre>
 
@@ -189,31 +211,40 @@
         <div class="prettyErrorDemo__settings">
           <form id="optionsForm" class="form-group">
             <fieldset class="form-group">
-              <legend>Settings for demo</legend>
+              <legend>Settings for demo.</legend>
               <div class="form-check">
                 <label for="fadeOutError" class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="fadeOutError" id="fadeOutError">
+                  <input class="form-check-input" type="checkbox" name="optionsForm" id="fadeOutError">
                   fadeOutError
                 </label>
               </div>
               <div class="form-group" id="timeFadeOut">
                 <label for="time">Options fadeOutError</label>
-                <input class="form-control" type="text" name="time" id="time" placeholder="String, Number or an Objet with options...">
+                <input class="form-control" type="text" name="optionsForm" id="timer" placeholder="Number">
               </div>
               <div class="form-group">
                 <label for="elementError">elementError</label>
-                <input class="form-control" type="text" name="elementError" id="elementError" placeholder="HTML element...">
+                <input class="form-control" type="text" name="optionsForm" id="elementError" placeholder="HTML element...">
               </div>
               <div class="form-group">
                 <label for="positionMethod">positionMethod</label>
-                <input class="form-control" type="text" name="positionMethod" id="positionMethod" placeholder="before or after...">
+                <input class="form-control" type="text" name="optionsForm" id="positionMethod" placeholder="before or after...">
               </div>
               <div class="form-check">
-                <label for="focusErrorOnClick" class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="focusErrorOnClick" id="focusErrorOnClick">
-                  Disable focusErrorOnClick
-                </label>
-              </div>
+                  <h4>Themes</h4>
+                  <label class="form-check-label">
+                    <input checked id="classError" type="radio" name="optionsForm" value="prettyFormError" class="form-check-input">
+                    Default
+                  </label>
+                  <label class="form-check-label">
+                    <input id="classError" type="radio" name="optionsForm" value="prettyFormError-white" class="form-check-input">
+                    White
+                  </label>
+                  <label class="form-check-label">
+                    <input id="classError" type="radio" name="optionsForm" value="prettyFormError-black" class="form-check-input">
+                    Black
+                  </label>
+                </div>
             </fieldset>
             <input class="btn btn-outline-success btn-block" type="submit" value="Submit">
           </form>
