@@ -51,7 +51,6 @@
           defaultOptions = jQueryMock.data( 'plugin_prettyFormError' );
         });
         it( 'are defined and is an Object', function() {
-          console.log( defaultOptions )
           expect( defaultOptions )
             .to.have.property( 'options' )
             .that.is.an( 'Object' );

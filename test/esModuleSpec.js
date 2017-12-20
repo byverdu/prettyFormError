@@ -91,5 +91,41 @@ describe( 'prettyFormError javascript plugin', function() {
           .and.eql({fadeOut: false, timer: 0});
       });
     });
+    describe( 'User options', function() {
+      var userOptions = {
+        classError: 'userClass',
+        elementError: 'userElem',
+        positionMethod: 'userPosition',
+        multiCheckbox: {
+          enabled: 'userEnabled',
+          selector: '.userEnabledClass'
+        },
+        callToAction: 'userEnabledBtn',
+        focusErrorOnClick: false,
+        fadeOutError: {
+          fadeOut: true,
+          timer: 696969
+        }
+      };
+      var userPretty = prettyFormError( '.errored-form', userOptions ).options;
+      it( 'classError has changed', function() {
+        expect( userPretty.classError ).to.eq( 'userClass' );
+      });
+      it( 'elementError has changed', function() {
+        expect( userPretty.elementError ).to.eq( 'userElem' );
+      });
+      it( 'positionMethod has changed', function() {
+        expect( userPretty.positionMethod ).to.eq( 'beforebegin' );
+      });
+      it( 'multiCheckbox has changed', function() {
+        expect( userPretty.multiCheckbox.enabled ).to.eq( false );
+      });
+      it( 'callToAction has changed', function() {
+        expect( userPretty.callToAction ).to.eq( 'userEnabledBtn' );
+      });
+      it( 'focusErrorOnClick has changed', function() {
+        expect( userPretty.focusErrorOnClick ).to.eq( false );
+      });
+    });
   });
 });

@@ -13,11 +13,18 @@ function _optionsConfig( opts: any ): IprettyError {
   var classError = innerOpts.classError || 'prettyFormError';
   var callToAction = innerOpts.callToAction || 'button';
   var elementError = innerOpts.elementError || 'div';
-  var focusErrorOnClick = innerOpts.focusErrorOnClick || true;
+  var focusErrorOnClick = 'focusErrorOnClick' in innerOpts ? innerOpts.focusErrorOnClick : true;
   var tempFadeOpt = {fadeOut: false, timer: 0};
   var tempMulti = {enabled: false, selector: '.multiCheckbox'};
   var fadeOutError = innerOpts.fadeOutError || tempFadeOpt;
-  var multiCheckbox = innerOpts.multiCheckbox || tempMulti;
+  var multiCheckbox;
+
+  // selecting default multichecbox
+  if ( 'multiCheckbox' in innerOpts && typeof innerOpts.multiCheckbox.enabled === 'boolean' ) {
+    multiCheckbox = innerOpts.multiCheckbox;
+  } else {
+    multiCheckbox = tempMulti;
+  }
 
   // selecting default position
   if ( 'positionMethod' in innerOpts ) {
