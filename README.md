@@ -42,9 +42,9 @@ You will only need `prettyFormError.min.js` and `prettyFormError.min.css`.
 You can grab them on unpkg CDN and use it like this:
 
 ```xml
-<link rel="stylesheet" href="https://unpkg.com/pretty-form-error@2.0.2/dist/prettyFormError.css" media="screen">
+<link rel="stylesheet" href="https://unpkg.com/pretty-form-error@check_latest_version/dist/prettyFormError.css" media="screen">
 <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
-<script src="https://unpkg.com/pretty-form-error@2.0.2/dist/prettyFormError.min.js"></script>  
+<script src="https://unpkg.com/pretty-form-error@check_latest_version/dist/prettyFormError.min.js"></script>  
 ```
 
 or found them under `/dist/**` folder and use it like this:
@@ -73,6 +73,65 @@ prettyFormError('myFormSelector', optionalOpts);
 $('myFormSelector').prettyFormError(optionalOpts);
 ```
 
+#### How to use it with React
+
+```js
+class App extends PureComponent {
+  componentDidMount() {
+    const prettyErrorOptions = {
+      classError: 'prettyFormError-black'
+    }
+    prettyError( 'form', prettyErrorOptions );
+  }
+  render() {
+    return(
+      <Fragment>
+        <h1>prettyForm in React</h1>
+        <form>
+          <input type="text" required/>
+          <button>Click</button>
+        </form>
+      </Fragment>
+    );
+  }
+}
+```
+
+#### How to use it with Angular
+
+```js
+angular.module('playground', [])
+  .directive('prettyForm', function () {
+    // Create a directive
+    return {
+      restrict: 'A',
+      link: function (scope, element, attrs) {
+        prettyFormError('form', scope.prettyErrorOptions);
+      }
+    };
+  })
+  .controller('prettyFormCtrl', function ( $scope ) {
+    $scope.title = 'prettyForm in Angular';
+    $scope.prettyErrorOptions = {
+      classError: 'prettyFormError-black'
+    };
+  });
+```
+
+```xml
+<body ng-app="playground">
+  <section ng-controller="prettyFormCtrl">
+    <h1>
+      {{title}}
+    </h1>
+    <!-- Use the directive -->
+    <form pretty-form>
+      <input required type="text" />
+      <button>Submit</button>
+    </form>
+  </section>
+</body>
+```
 
 # Plugin Options.
 
