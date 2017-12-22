@@ -1,6 +1,6 @@
 {
   "name": "pretty-form-error",
-  "version": "2.0.3",
+  "version": "2.0.5",
   "description": "Javascript plugin that makes pretty the form errors in all browsers by applying the same styles",
   "main": "index.js",
   "scripts": {
